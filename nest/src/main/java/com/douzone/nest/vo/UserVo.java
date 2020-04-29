@@ -2,4 +2,84 @@ package com.douzone.nest.vo;
 
 public class UserVo {
 
+	private Long userNo;			// 회원번호
+	private String userRegdate;		// 가입일
+	private String userEmail;		// 이메일
+	private String userName;		// 이름
+	private String userPassword;	// 비밀번호
+	private String userNumber;		// 전화번호
+	private String userBirth;		// 생년월일
+	private String userTitle;		// 직함
+	private String userDept;		// 부서
+	private String userTimezone;	// 시간설정
+	private String userPhoto;		// 프로필사진
+	
+	public Long getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(Long userNo) {
+		this.userNo = userNo;
+	}
+	public String getUserRegdate() {
+		return userRegdate;
+	}
+	public void setUserRegdate(String userRegdate) {
+		this.userRegdate = userRegdate;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
+	public String getUserNumber() {
+		return userNumber;
+	}
+	public void setUserNumber(String userNumber) {
+		this.userNumber = userNumber;
+	}
+	public String getUserBirth() {
+		return userBirth;
+	}
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
+	}
+	public String getUserTitle() {
+		return userTitle;
+	}
+	public void setUserTitle(String userTitle) {
+		this.userTitle = userTitle;
+	}
+	public String getUserDept() {
+		return userDept;
+	}
+	public void setUserDept(String userDept) {
+		this.userDept = userDept;
+	}
+	public String getUserTimezone() {
+		return userTimezone;
+	}
+	public void setUserTimezone(String userTimezone) {
+		this.userTimezone = userTimezone;
+	}
+	public String getUserPhoto() {
+		return userPhoto;
+	}
+	public void setUserPhoto(String userPhoto) {
+		this.userPhoto = userPhoto;
+	}
+	
+	
 }
