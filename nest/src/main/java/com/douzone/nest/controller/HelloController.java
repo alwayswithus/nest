@@ -1,12 +1,24 @@
 package com.douzone.nest.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.douzone.nest.service.ProjectService;
+import com.douzone.nest.vo.ProjectVo;
+
+@CrossOrigin(origins = {"http://localhost:3000"})
 @Controller
 public class HelloController {
-
+	
+	@Autowired
+	private ProjectService projectService;
+	
 	@RequestMapping({"","/"})
 	public String hello() {
 		return "/index.jsp";
@@ -21,9 +33,11 @@ public class HelloController {
 	public String hello02() {
 		return "";
 	}
-
+	
 	@RequestMapping("/dashboard")
 	public String hello03() {
+		List<ProjectVo> proVo = projectService.SelectProject();
+		System.out.println(proVo);
 		return "";
 	}
 	

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootConfiguration
 @EnableAutoConfiguration
-@ComponentScan("com.douzone.nest.controller")
+@ComponentScan({"com.douzone.nest.controller, com.douzone.nest.service, com.douzone.nest.repository"})
 public class BootApplication {
 
 	public static void main(String[] args) {
