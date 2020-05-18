@@ -124,7 +124,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
+				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
 					<warSourceDirectory>src/main/webapp</warSourceDirectory>
 				</configuration>
