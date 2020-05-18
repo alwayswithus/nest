@@ -142,8 +142,8 @@
 				<configuration>
 					<url>http://192.168.1.223:8080/nest/text</url>
 					<path>/nest</path>
-					<username>nest</username>
-					<password>nest</password>
+					<username>admin</username>
+					<password>admin</password>
 				</configuration>
 			</plugin>
 		</plugins>
