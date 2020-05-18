@@ -12,7 +12,7 @@ import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.ProjectService;
 import com.douzone.nest.vo.ProjectVo;
 
-@CrossOrigin(origins = {"http://localhost:3000"})
+//@CrossOrigin(origins = {"http://localhost:3000"})
 @Controller
 public class HelloController {
 	
