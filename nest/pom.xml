@@ -125,7 +125,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>BootApplication</mainClass>
+							<mainClass>com.douzone.nest.BootApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
