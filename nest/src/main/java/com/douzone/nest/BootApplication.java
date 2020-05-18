@@ -3,7 +3,7 @@ package com.douzone.nest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-//import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
 
 
@@ -16,7 +16,7 @@ public class BootApplication {
 		SpringApplication.run(BootApplication.class, args);
 	}
 
-//	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-//		return builder.sources(BootApplication.class); 
-//	}
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(BootApplication.class); 
+	}
 }
