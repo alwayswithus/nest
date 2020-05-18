@@ -14,8 +14,8 @@ public class ProjectRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<ProjectVo> SelectProject() {
-		return sqlSession.selectList("project.SelectPro");
+	public List<ProjectVo> selectProject() {
+		return sqlSession.selectList("project.selectPro");
 	}
 
 }

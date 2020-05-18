@@ -14,8 +14,8 @@ public class ProjectService {
 	@Autowired
 	private ProjectRepository projectRepository;
 
-	public List<ProjectVo> SelectProject() {
-		return projectRepository.SelectProject();
+	public List<ProjectVo> selectProject() {
+		return projectRepository.selectProject();
 	}
 
 }

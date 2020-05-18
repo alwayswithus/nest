@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +36,7 @@ public class HelloController {
 	
 	@GetMapping("/dashboard")
 	public JsonResult hello03() {
-		List<ProjectVo> proVo = projectService.SelectProject();
+		List<ProjectVo> proVo = projectService.selectProject();
 		System.out.println(proVo);
 		return JsonResult.success(proVo);
 	}
