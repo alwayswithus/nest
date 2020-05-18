@@ -3,17 +3,17 @@ package com.douzone.nest.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.ProjectService;
 import com.douzone.nest.vo.ProjectVo;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
-@RestController
+@Controller
 public class HelloController {
 	
 	@Autowired
@@ -21,7 +21,7 @@ public class HelloController {
 	
 	@RequestMapping({"","/"})
 	public String hello() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/pwfind")
@@ -34,11 +34,16 @@ public class HelloController {
 		return "";
 	}
 	
-	@GetMapping("/dashboard")
-	public JsonResult hello03() {
-		List<ProjectVo> proVo = projectService.selectProject();
-		System.out.println(proVo);
-		return JsonResult.success(proVo);
+//	@GetMapping("/dashboard")
+//	public JsonResult hello03() {
+//		List<ProjectVo> proVo = projectService.selectProject();
+//		System.out.println(proVo);
+//		return JsonResult.success(proVo);
+//	}
+	
+	@RequestMapping("/dashboard")
+	public String hello03() {
+		return "";
 	}
 	
 	@RequestMapping("/profile")
