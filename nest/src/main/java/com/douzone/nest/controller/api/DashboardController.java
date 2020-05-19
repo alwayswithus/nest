@@ -13,11 +13,12 @@ import com.douzone.nest.vo.ProjectVo;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
+
 public class DashboardController {
 	@Autowired
 	private ProjectService projectService;
 	
-	@GetMapping("/dashboard/api")
+	@GetMapping("/api/dashboard")
 	public JsonResult dashboard() {
 		List<ProjectVo> proVo = projectService.selectProject();
 		System.out.println(proVo);
