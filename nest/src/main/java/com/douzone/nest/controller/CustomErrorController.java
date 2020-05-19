@@ -9,7 +9,7 @@ public class CustomErrorController implements ErrorController {
 
 	@RequestMapping("/error")
 	public String handleError() {
-		return "/index.jsp";
+		return "index";
 	}
 
 	@Override
