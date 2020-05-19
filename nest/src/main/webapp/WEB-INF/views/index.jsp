@@ -17,8 +17,8 @@
       content="Web site created using create-react-app"
     />
 <%--     <link rel="apple-touch-icon" href="${pageContext.servletContext.contextPath }/logo192.png" />
-    <link rel="manifest" href="${pageContext.servletContext.contextPath }/manifest.json" /> --%>
-    <script src="https://kit.fontawesome.com/81c2c05f29.js" crossorigin="anonymous"></script>
+    <link rel="manifest" href="${pageContext.servletContext.contextPath }/manifest.json" /> 
+    <script src="https://kit.fontawesome.com/81c2c05f29.js" crossorigin="anonymous"></script> --%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>

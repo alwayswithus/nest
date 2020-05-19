@@ -116,7 +116,7 @@
 
 
 	<build>
-		<finalName>${artifactId}</finalName>
+		<finalName>nest</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<resources>
 			<resource>
