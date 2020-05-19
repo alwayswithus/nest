@@ -12,7 +12,7 @@ import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.ProjectService;
 import com.douzone.nest.vo.ProjectVo;
 
-//@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @Controller
 public class HelloController {
 	
@@ -34,12 +34,12 @@ public class HelloController {
 //		return "";
 //	}
 	
-//	@GetMapping("/dashboard")
-//	public JsonResult hello03() {
-//		List<ProjectVo> proVo = projectService.selectProject();
-//		System.out.println(proVo);
-//		return JsonResult.success(proVo);
-//	}
+	@GetMapping("/dashboard")
+	public JsonResult hello03() {
+		List<ProjectVo> proVo = projectService.selectProject();
+		System.out.println(proVo);
+		return JsonResult.success(proVo);
+	}
 	
 //	@RequestMapping("/dashboard")
 //	public String hello03() {
