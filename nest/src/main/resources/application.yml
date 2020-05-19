@@ -9,10 +9,10 @@ spring:
 spring:
 
    # mvc
-   mvc:
-      view:
-         prefix: /WEB-INF/views/
-         suffix: .jsp
+#   mvc:
+#      view:
+#         prefix: /WEB-INF/views/
+#         suffix: .jsp
          
    # http
    http:

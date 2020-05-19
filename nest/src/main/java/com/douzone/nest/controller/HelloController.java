@@ -11,66 +11,66 @@ public class HelloController {
 	@RequestMapping({"","/"})
 	public String hello() {
 		System.out.println("!!!!!!!!");
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/pwfind")
 	public String hello01() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/signup")
 	public String hello02() {
-		return "index";
+		return "/index.jsp";
 	}
 
 	@RequestMapping("/dashboard")
 	public String hello03() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/profile")
 	public String hello04() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/profileset")
 	public String hello05() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/notification")
 	public String hello06() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/setting")
 	public String hello07() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/comment")
 	public String hello08() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/file")
 	public String hello09() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/projectset")
 	public String hello10() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/kanbanMain")
 	public String hello11() {
-		return "index";
+		return "/index.jsp";
 	}
 	
 	@RequestMapping("/gantt")
 	public String hello12() {
-		return "index";
+		return "/index.jsp";
 	}
 }
