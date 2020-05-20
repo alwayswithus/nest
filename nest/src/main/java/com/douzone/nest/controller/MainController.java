@@ -6,71 +6,61 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @Controller
-public class HelloController {
+public class MainController {
 	
 	@RequestMapping({"","/"})
-	public String hello() {
-		System.out.println("!!!!!!!!");
-		return "index";
-	}
-	
-	@RequestMapping("/pwfind")
-	public String hello01() {
-		return "index";
-	}
-	
-	@RequestMapping("/signup")
-	public String hello02() {
+	public String main() {
 		return "index";
 	}
 
+
 	@RequestMapping("/dashboard")
-	public String hello03() {
+	public String dashboard() {
 		return "index";
 	}
 	
 	@RequestMapping("/profile")
-	public String hello04() {
+	public String profile() {
 		return "index";
 	}
 	
 	@RequestMapping("/profileset")
-	public String hello05() {
+	public String profileset() {
 		return "index";
 	}
 	
 	@RequestMapping("/notification")
-	public String hello06() {
+	public String notification() {
 		return "index";
 	}
 	
 	@RequestMapping("/setting")
-	public String hello07() {
+	public String setting() {
 		return "index";
 	}
 	
 	@RequestMapping("/comment")
-	public String hello08() {
+	public String comment() {
 		return "index";
 	}
 	
 	@RequestMapping("/file")
-	public String hello09() {
+	public String file() {
 		return "index";
 	}
 	
 	@RequestMapping("/projectset")
-	public String hello10() {
+	public String projectset() {
 		return "index";
 	}
 	
 	@RequestMapping("/kanbanMain")
-	public String hello11() {
+	public String kanbanMain() {
 		return "index";
 	}
 	
 	@RequestMapping("/gantt")
-	public String hello12() {
+	public String gantt() {
 		return "index";
 	}
 }
