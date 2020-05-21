@@ -6,10 +6,10 @@
 		select project_no as projectNo,
 			   project_title as projectTitle,
 			   project_desc as projectDesc,
-			   project_start as projectStart,
-			   project_end as projectEnd,
+			   date_format(project_start, '%Y-%m-%d %H:%i') as projectStart,
+			   date_format(project_end, '%Y-%m-%d %H:%i') as projectEnd,
 			   project_state as projectState 
-	    from project
+	    from project;
  		]]> 
 	</select>
 </mapper>
