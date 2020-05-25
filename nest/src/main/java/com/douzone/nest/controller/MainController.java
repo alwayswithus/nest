@@ -63,4 +63,14 @@ public class MainController {
 	public String gantt() {
 		return "index";
 	}
+	
+	@RequestMapping("/errors")
+	public String errors() {
+		return "index";
+	}
+	
+	@RequestMapping("/calendar")
+	public String calendar() {
+		return "index";
+	}
 }
