@@ -11,6 +11,7 @@
 	<mappers>
 		<mapper resource="mybatis/mappers/project.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />
+		<mapper resource="mybatis/mappers/taglist.xml" />
 	</mappers>
 
 </configuration>
