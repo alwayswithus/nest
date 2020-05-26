@@ -1,9 +1,10 @@
 package com.douzone.nest.vo;
 
 public class TagListVo {
+  
 	private Long tagNo; // 태그번호
 	private String tagName; // 태그이름
-	private String tagColor; // 태그이름
+	private String tagColor; // 태그색상
 	private Long taskNo; // 업무번호
 
 	public Long getTagNo() {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="taglist">
+	<select id="selectTagList" resultType="taglistvo">
+	<![CDATA[
+		select tag_no as tagNo,
+			   tag_name as tagName,
+			   tag_color as tagColor
+	    from taglist;
+ 		]]> 
+	</select>
+	
+	<insert id="insertTagList" parameterType="taglistvo">
+   <![CDATA[
+      insert into taglist values(null, #{tagName}, #{tagColor})
+      ]]>
+       <selectKey keyProperty = "tagNo" resultType="long" order="AFTER">
+		select last_insert_id()
+	</selectKey>
+   </insert>
+   
+   <delete id="deleteTagList" parameterType="taglistvo">
+      <![CDATA[
+         delete from taglist where tag_no = #{tagNo}
+      ]]>
+   </delete>
+</mapper>
