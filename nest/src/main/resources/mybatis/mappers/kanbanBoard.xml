@@ -1,15 +1,70 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="project">
-	<select id="selectPro" resultType="projectvo">
+<mapper namespace="kanbanBoard">
+
+	<select id="selectAllTaskList" resultType="tasklistvo">
 	<![CDATA[
-		select project_no as projectNo,
-			   project_title as projectTitle,
-			   project_desc as projectDesc,
-			   date_format(project_start, '%Y-%m-%d %H:%i') as projectStart,
-			   date_format(project_end, '%Y-%m-%d %H:%i') as projectEnd,
-			   project_state as projectState 
-	    from project;
+		select tl.tasklist_no as tasklistNo, tl.tasklist_name as tasklistName
+		from project p
+		join tasklist tl on(p.project_no = tl.project_no)
+		where p.project_no = #{projectNo}
+		order by tl.tasklist_order desc
  		]]>
 	</select>
+
+	<select id="selectTasks" resultType="taskvo">
+	<![CDATA[
+	select task_no taskNo,
+			task_start taskStart,
+			task_end taskEnd,
+			task_point taskPoint,
+			task_label taskLabel,
+			task_state taskState,
+			task_contents taskContents,
+			task_order taskOrder,
+			tasklist_no tasklistNo,
+			project_no projectNo
+	from task
+	where tasklist_no = #{taskListNo}
+    order by task_order desc
+ 		]]>
+	</select>
+	
+	<select id="selectCheckList" resultType="checklistvo">
+	<![CDATA[
+	select checklist_no checklistNo,
+			checklist_contents checklistContents,
+			checklist_state checklistState,
+			task_no taskNo
+	from checklist
+	where task_no = #{taskNo}
+ 		]]>
+	</select>
+	
+	<select id="selectTag" resultType="taglistvo">
+	<![CDATA[
+	select tl.tag_no tagNo, 
+			tt.task_no taskNo, 
+			tl.tag_name tagName, 
+			tl.tag_color tagColor
+	from tagtask tt 
+	join taglist tl using(tag_no)
+	where tt.task_no = #{taskNo}
+ 		]]>
+	</select>
+	
+	<select id="selectComments" resultType="commentvo">
+	<![CDATA[
+	select comment_no commentNo,
+			comment_regdate commentRegdate,
+			comment_contents commentContents,
+			comment_like commentLike,
+			user_no userNo,
+			task_no taskNo,
+			file_no fileNo
+	from comment
+	where task_no = #{taskNo}
+ 		]]>
+	</select>
+
 </mapper>
