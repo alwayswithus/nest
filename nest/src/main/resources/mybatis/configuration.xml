@@ -6,10 +6,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="projectvo" type="com.douzone.nest.vo.ProjectVo" />
-		<typeAlias alias= "taglistvo" type="com.douzone.nest.vo.TagListVo"/>
+		<typeAlias alias="uservo" type="com.douzone.nest.vo.UserVo" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/project.xml" />
+		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/taglist.xml" />
 	</mappers>
 

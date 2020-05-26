@@ -81,5 +81,11 @@ public class UserVo {
 		this.userPhoto = userPhoto;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", userName="
+				+ userName + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
+				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
+				+ ", userPhoto=" + userPhoto + "]";
+	}
 }
