@@ -58,9 +58,37 @@ public class KanbanBoardRepository {
 		return sqlSession.selectList("kanbanBoard.selectComments",taskNo);
 	}
 
-
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 리스트 정렬 번호 select 
+	 */
+	public Long selectTaskListOrderNo(Long projectNo) {
+		Long taskListOrderNo = sqlSession.selectOne("kanbanBoard.selectTaskListOrderNo", projectNo);
+		return taskListOrderNo;
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : taskList 추가
+	 */
+	public int taskListAdd(TaskListVo taskListVo) {
+		int result = sqlSession.insert("kanbanBoard.taskListAdd", taskListVo);
+		System.out.println(taskListVo);
+		return result;
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 복사
+	 */
 	public int taskCopy(TaskVo taskVo) {
 		return sqlSession.insert("kanbanBoard.taskCopy", taskVo);
 	}
+
+
+
+
+
+
 
 }

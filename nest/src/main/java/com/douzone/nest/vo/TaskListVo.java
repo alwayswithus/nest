@@ -1,40 +1,45 @@
 package com.douzone.nest.vo;
 
 public class TaskListVo {
-	private Long tasklistNo;	// 업무리스트 번호
-	private String tasklistName;// 업무리스트 이름
-//	private Long tasklistOrder; // 업무리스트 정렬번호
+	private Long taskListNo;	// 업무리스트 번호
+	private String taskListName;// 업무리스트 이름
+	private Long taskListOrder; // 업무리스트 정렬번호
 	
-//	private Long projectNo;		// 프로젝트 번호
+	private Long projectNo;		// 프로젝트 번호
 	
-	public Long getTasklistNo() {
-		return tasklistNo;
+	public Long getTaskListNo() {
+		return taskListNo;
 	}
-	public void setTasklistNo(Long tasklistNo) {
-		this.tasklistNo = tasklistNo;
+	public void setTaskListNo(Long taskListNo) {
+		this.taskListNo = taskListNo;
 	}
-	public String getTasklistName() {
-		return tasklistName;
+	public String getTaskListName() {
+		return taskListName;
 	}
-	public void setTasklistName(String tasklistName) {
-		this.tasklistName = tasklistName;
+	public void setTaskListName(String taskListName) {
+		this.taskListName = taskListName;
 	}
-//	public Long getTasklistOrder() {
-//		return tasklistOrder;
-//	}
-//	public void setTasklistOrder(Long tasklistOrder) {
-//		this.tasklistOrder = tasklistOrder;
-//	}
-//	public Long getProjectNo() {
-//		return projectNo;
-//	}
-//	public void setProjectNo(Long projectNo) {
-//		this.projectNo = projectNo;
-//	}
+	public Long getTaskListOrder() {
+		return taskListOrder;
+	}
+	public void setTaskListOrder(Long taskListOrder) {
+		this.taskListOrder = taskListOrder;
+	}
+	public Long getProjectNo() {
+		return projectNo;
+	}
+	public void setProjectNo(Long projectNo) {
+		this.projectNo = projectNo;
+	}
+	
 	@Override
 	public String toString() {
-		return "TaskListVo [tasklistNo=" + tasklistNo + ", tasklistName=" + tasklistName +"]";
+		return "TaskListVo [taskListNo=" + taskListNo + ", taskListName=" + taskListName + ", taskListOrder="
+				+ taskListOrder + ", projectNo=" + projectNo + "]";
 	}
+
+	
+
 	
 	
 }

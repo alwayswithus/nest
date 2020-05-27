@@ -2,80 +2,101 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kanbanBoard">
 
+	<!-- 테스크 리스트 select -->
 	<select id="selectAllTaskList" resultType="tasklistvo">
-	<![CDATA[
-		select tl.tasklist_no as tasklistNo, tl.tasklist_name as tasklistName
-		from project p
-		join tasklist tl on(p.project_no = tl.project_no)
-		where p.project_no = #{projectNo}
-		order by tl.tasklist_order desc
+		<![CDATA[
+			select tl.tasklist_no as tasklistNo, tl.tasklist_name as taskListName, tl.tasklist_order as tasklistOrder, tl.project_no projectNo
+			from project p
+			join tasklist tl on(p.project_no = tl.project_no)
+			where p.project_no = #{projectNo}
+			order by tl.tasklist_order
+		]]>
+	</select>
+
+	<!-- 테크스 select -->
+	<select id="selectTasks" resultType="taskvo">
+		<![CDATA[
+			select task_no taskNo,
+					date_format(task_start, '%Y-%m-%d') as taskStart,
+					date_format(task_end, '%Y-%m-%d') as taskEnd,
+					task_point taskPoint,
+					task_label taskLabel,
+					task_state taskState,
+					task_contents taskContents,
+					task_order taskOrder,
+					tasklist_no tasklistNo,
+					project_no projectNo
+			from task
+			where tasklist_no = #{taskListNo}
+		    order by task_order desc
+		]]>
+	</select>
+
+	<!-- 체크리스트 select -->
+	<select id="selectCheckList" resultType="checklistvo">
+		<![CDATA[
+			select checklist_no checklistNo,
+					checklist_contents checklistContents,
+					checklist_state checklistState,
+					task_no taskNo
+			from checklist
+			where task_no = #{taskNo}
  		]]>
 	</select>
 
-	<select id="selectTasks" resultType="taskvo">
-	<![CDATA[
-	select task_no taskNo,
-			date_format(task_start, '%Y-%m-%d') as taskStart,
-			date_format(task_end, '%Y-%m-%d') as taskEnd,
-			task_point taskPoint,
-			task_label taskLabel,
-			task_state taskState,
-			task_contents taskContents,
-			task_order taskOrder,
-			tasklist_no tasklistNo,
-			project_no projectNo
-	from task
-	where tasklist_no = #{taskListNo}
-    order by task_order desc
- 		]]>
-	</select>
-	
-	<select id="selectCheckList" resultType="checklistvo">
-	<![CDATA[
-	select checklist_no checklistNo,
-			checklist_contents checklistContents,
-			checklist_state checklistState,
-			task_no taskNo
-	from checklist
-	where task_no = #{taskNo}
- 		]]>
-	</select>
-	
+	<!-- 태그 select -->
 	<select id="selectTag" resultType="taglistvo">
-	<![CDATA[
-	select tl.tag_no tagNo, 
-			tt.task_no taskNo, 
-			tl.tag_name tagName, 
-			tl.tag_color tagColor
-	from tagtask tt 
-	join taglist tl using(tag_no)
-	where tt.task_no = #{taskNo}
- 		]]>
-	</select>
-	
-	<select id="selectComments" resultType="commentvo">
-	<![CDATA[
-	select comment_no commentNo,
-			comment_regdate commentRegdate,
-			comment_contents commentContents,
-			comment_like commentLike,
-			user_no userNo,
-			task_no taskNo,
-			file_no fileNo
-	from comment
-	where task_no = #{taskNo}
- 		]]>
-	</select>
-	
-	<!-- <insert id="taskCopy" parameterType="taskvo">
 		<![CDATA[
-			insert into taglist values(null, #{tagName}, #{tagColor})
+			select tl.tag_no tagNo, 
+					tt.task_no taskNo, 
+					tl.tag_name tagName, 
+					tl.tag_color tagColor
+			from tagtask tt 
+			join taglist tl using(tag_no)
+			where tt.task_no = #{taskNo}
+ 		]]>
+	</select>
+
+	<!-- 코멘트 select -->
+	<select id="selectComments" resultType="commentvo">
+		<![CDATA[
+			select comment_no commentNo,
+					comment_regdate commentRegdate,
+					comment_contents commentContents,
+					comment_like commentLike,
+					user_no userNo,
+					task_no taskNo,
+					file_no fileNo
+			from comment
+			where task_no = #{taskNo}
+ 		]]>
+	</select>
+
+	<!-- 테스크 리스트 정렬 번호 select -->
+	<select id="selectTaskListOrderNo" resultType="Long">
+		<![CDATA[
+            select max(tasklist_order)
+            from tasklist
+            where project_no = #{projectNo};
+		]]>	
+	</select>
+
+	<!-- 테스크 리스트 insert -->
+	<insert id="taskListAdd" parameterType="tasklistvo"> 
+		<![CDATA[ 
+			insert into tasklist values(null, #{taskListName}, #{taskListOrder}, #{projectNo});
 		]]>
-		<selectKey keyProperty = "tagNo" resultType="long" order="AFTER">
+		<selectKey keyProperty="taskListNo" resultType="long"
+			order="AFTER">
 			select last_insert_id()
-		</selectKey>			
-   </insert> -->
-	
-	
+		</selectKey>
+	</insert>
+
+	<!-- <insert id="taskCopy" parameterType="taskvo"> <![CDATA[ insert into 
+		taglist values(null, #{tagName}, #{tagColor}) ]]> <selectKey keyProperty 
+		= "tagNo" resultType="long" order="AFTER"> select last_insert_id() </selectKey> 
+		</insert> -->
+
+
 
 </mapper>
