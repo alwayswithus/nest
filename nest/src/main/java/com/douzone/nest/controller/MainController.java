@@ -2,7 +2,9 @@ package com.douzone.nest.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @Controller
@@ -31,11 +33,14 @@ public class MainController {
 	
 	@RequestMapping("/notification")
 	public String notification() {
+		System.out.println("!notification!!");
 		return "index";
 	}
 	
-	@RequestMapping("/setting")
+	@GetMapping("/kanbanMain/**")
+	@ResponseBody
 	public String setting() {
+		System.out.println("!!!!");
 		return "index";
 	}
 	
@@ -54,10 +59,10 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping("/kanbanMain")
-	public String kanbanMain() {
-		return "index";
-	}
+//	@RequestMapping("/kanbanMain")
+//	public String kanbanMain() {
+//		return "index";
+//	}
 	
 	@RequestMapping("/gantt")
 	public String gantt() {
