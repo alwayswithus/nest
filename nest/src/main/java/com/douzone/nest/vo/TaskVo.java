@@ -10,9 +10,6 @@ public class TaskVo {
 	private String taskContents;// 업무 내용
 	private Long taskOrder;		// 업무 정렬 번호
 	
-	private Long tasklistNo;	// 업무 리스트 번호
-	private Long projectNo;		// 프로젝트 번호
-	
 	public Long getTaskNo() {
 		return taskNo;
 	}
@@ -61,23 +58,12 @@ public class TaskVo {
 	public void setTaskOrder(Long taskOrder) {
 		this.taskOrder = taskOrder;
 	}
-	public Long getTasklistNo() {
-		return tasklistNo;
-	}
-	public void setTasklistNo(Long tasklistNo) {
-		this.tasklistNo = tasklistNo;
-	}
-	public Long getProjectNo() {
-		return projectNo;
-	}
-	public void setProjectNo(Long projectNo) {
-		this.projectNo = projectNo;
-	}
+
 	@Override
 	public String toString() {
 		return "TaskVo [taskNo=" + taskNo + ", taskStart=" + taskStart + ", taskEnd=" + taskEnd + ", taskPoint="
 				+ taskPoint + ", taskLabel=" + taskLabel + ", taskState=" + taskState + ", taskContents=" + taskContents
-				+ ", taskOrder=" + taskOrder + ", tasklistNo=" + tasklistNo + ", projectNo=" + projectNo + "]";
+				+ ", taskOrder=" + taskOrder + "]";
 	}
 	
 }

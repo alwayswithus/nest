@@ -15,8 +15,8 @@
 	<select id="selectTasks" resultType="taskvo">
 	<![CDATA[
 	select task_no taskNo,
-			task_start taskStart,
-			task_end taskEnd,
+			date_format(task_start, '%Y-%m-%d') as taskStart,
+			date_format(task_end, '%Y-%m-%d') as taskEnd,
 			task_point taskPoint,
 			task_label taskLabel,
 			task_state taskState,
@@ -66,5 +66,16 @@
 	where task_no = #{taskNo}
  		]]>
 	</select>
+	
+	<!-- <insert id="taskCopy" parameterType="taskvo">
+		<![CDATA[
+			insert into taglist values(null, #{tagName}, #{tagColor})
+		]]>
+		<selectKey keyProperty = "tagNo" resultType="long" order="AFTER">
+			select last_insert_id()
+		</selectKey>			
+   </insert> -->
+	
+	
 
 </mapper>
