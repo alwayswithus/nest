@@ -33,12 +33,10 @@ public class MainController {
 	
 	@RequestMapping("/notification")
 	public String notification() {
-		System.out.println("!notification!!");
 		return "index";
 	}
 	
-	@GetMapping("/kanbanMain/**")
-	@ResponseBody
+	@RequestMapping("/kanbanMain/**")
 	public String setting() {
 		System.out.println("!!!!");
 		return "index";
