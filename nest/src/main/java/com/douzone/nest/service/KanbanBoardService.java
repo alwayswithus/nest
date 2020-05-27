@@ -20,6 +20,10 @@ public class KanbanBoardService {
 	@Autowired
 	private KanbanBoardRepository kanbanBoardRepository;
 
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : taskList JSON 생성
+	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject selectKanbanBoard(Long projectNo) {
 		
@@ -109,6 +113,14 @@ public class KanbanBoardService {
 		obj.put("allTaskList", allTaskLsitJSONArray);
 
 		return obj;
+	}
+
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : task 복사
+	 */
+	public boolean taskCopy(TaskVo taskVo) {
+		return 1 == kanbanBoardRepository.taskCopy(taskVo);
 	}
 
 }

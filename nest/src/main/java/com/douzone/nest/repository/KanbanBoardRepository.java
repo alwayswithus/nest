@@ -58,4 +58,9 @@ public class KanbanBoardRepository {
 		return sqlSession.selectList("kanbanBoard.selectComments",taskNo);
 	}
 
+
+	public int taskCopy(TaskVo taskVo) {
+		return sqlSession.insert("kanbanBoard.taskCopy", taskVo);
+	}
+
 }
