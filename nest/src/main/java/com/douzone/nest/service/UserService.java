@@ -1,5 +1,9 @@
 package com.douzone.nest.service;
 
+import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,4 +23,28 @@ public class UserService {
 		return result;
 	}
 
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : user 전부 가져오기 
+	 */
+	@SuppressWarnings("unchecked")
+	public JSONObject getAllUser() {
+		// 메인 {}
+		JSONObject obj = new JSONObject();
+		
+		// allUser []
+		JSONArray allUserArray = new JSONArray();
+		List<UserVo> allUserList = userRepository.getAllUser();
+		for(UserVo userVo : allUserList) {
+			JSONObject user = new JSONObject();
+			user.put("userNo", userVo.getUserNo());
+			user.put("userName", userVo.getUserName());
+			user.put("userPhoto", userVo.getUserPhoto());
+			
+			allUserArray.add(user);
+		}
+		obj.put("allUser", allUserArray);
+		
+		return obj;
+	}
 }
