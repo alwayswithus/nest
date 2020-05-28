@@ -46,5 +46,11 @@ public class ProjectService {
 		
 		return obj;
 	}
-
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 프로젝트 추가
+	 */
+	public boolean projectAdd(ProjectVo projectVo) {
+		return projectRepository.projectAdd(projectVo) == 2;
+	}
 }

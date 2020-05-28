@@ -17,5 +17,18 @@ public class ProjectRepository {
 	public List<ProjectVo> selectProject() {
 		return sqlSession.selectList("project.selectPro");
 	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 프로젝트 추가
+	 */
+	public int projectAdd(ProjectVo projectVo) {
+		//int project = sqlSession.insert("project.projectAdd", projectVo);
+		
+		System.out.println(projectVo);
+		
+		//int userProject = sqlSession.insert("userproject.userProjectAdd", projectVo);
+		return 1 + 1;
+	}
 
 }

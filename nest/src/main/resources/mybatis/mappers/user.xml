@@ -10,4 +10,10 @@
 		    and user_password = #{userPassword }
 		]]>
 	</select>
+	<select id="getAllUser" parameterType="uservo" resultType="uservo">
+		<![CDATA[
+		select user_no as userNo, user_name as userName, user_email as userEmail, user_photo as userPhoto 
+		from user
+		]]>
+	</select>
 </mapper>

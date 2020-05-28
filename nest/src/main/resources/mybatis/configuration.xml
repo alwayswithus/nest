@@ -5,19 +5,21 @@
 
 <configuration>
 	<typeAliases>
-    <typeAlias alias="uservo" type="com.douzone.nest.vo.UserVo" />
+    	<typeAlias alias="uservo" type="com.douzone.nest.vo.UserVo" />
 		<typeAlias alias="projectvo" type="com.douzone.nest.vo.ProjectVo" />
 		<typeAlias alias="tasklistvo" type="com.douzone.nest.vo.TaskListVo" />
 		<typeAlias alias="taskvo" type="com.douzone.nest.vo.TaskVo" />
 		<typeAlias alias="checklistvo" type="com.douzone.nest.vo.CheckListVo" />
 		<typeAlias alias="taglistvo" type="com.douzone.nest.vo.TagListVo" />
 		<typeAlias alias="commentvo" type="com.douzone.nest.vo.CommentVo" />
+		<typeAlias alias="userprojectvo" type="com.douzone.nest.vo.UserProjectVo" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/project.xml" />
 		<mapper resource="mybatis/mappers/kanbanBoard.xml" />
-    <mapper resource="mybatis/mappers/user.xml" />
+    	<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/taglist.xml" />
+		<mapper resource="mybatis/mappers/userproject.xml" />
 	</mappers>
 
 </configuration>

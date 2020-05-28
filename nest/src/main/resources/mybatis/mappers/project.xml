@@ -12,4 +12,12 @@
 	    from project;
  		]]> 
 	</select>
+	<insert id="projectAdd" parameterType="projectvo">
+	<![CDATA[
+	insert into project values (null, #{projectNo}, #{projectTitle}, #{projectDesc}, #{projectStart}, #{projectEnd}, #{projectState})
+	]]>
+	<selectKey keyProperty="projectNo" resultType="long" order="AFTER">
+		select last_insert_id()
+	</selectKey>
+	</insert>
 </mapper>
