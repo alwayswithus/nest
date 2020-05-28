@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.douzone.nest.repository.KanbanBoardRepository;
 import com.douzone.nest.vo.CheckListVo;
 import com.douzone.nest.vo.CommentVo;
+import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskVo;
@@ -98,6 +99,25 @@ public class KanbanBoardService {
 					commentList.put("userNo",commentVo.getUserNo());
 					commentList.put("taskNo",commentVo.getTaskNo());
 					commentList.put("fileNo",commentVo.getFileNo());
+					
+					
+					JSONArray fileJSONArray = new JSONArray(); 
+					List<FileVo> fileList = kanbanBoardRepository.selectFileList(taskVo.getTaskNo());
+					for(FileVo fileVo : fileList) {
+						// 하나의 TaskList{}
+						JSONObject file = new JSONObject();
+						
+						file.put("fileNo",fileVo.getFileNo());
+						file.put("originName",fileVo.getOriginName());
+						file.put("changeName",fileVo.getChangeName());
+						file.put("filePath",fileVo.getFilePath());
+						file.put("fileRegdate",fileVo.getFileRegdate());
+						file.put("taskNo",fileVo.getTaskNo());
+						
+						fileJSONArray.add(file);
+					}
+					commentList.put("fileList", fileJSONArray);
+					
 					
 					commentsJSONArray.add(commentList);
 				}

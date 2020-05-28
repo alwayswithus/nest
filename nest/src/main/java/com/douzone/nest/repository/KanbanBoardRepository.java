@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.douzone.nest.vo.CheckListVo;
 import com.douzone.nest.vo.CommentVo;
+import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskVo;
@@ -57,6 +58,14 @@ public class KanbanBoardRepository {
 	public List<CommentVo> selectComments(Long taskNo) {
 		return sqlSession.selectList("kanbanBoard.selectComments",taskNo);
 	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 파일 select
+	 */
+	public List<FileVo> selectFileList(Long taskNo) {
+		return sqlSession.selectList("kanbanBoard.selectFile", taskNo);
+	}
 
 	/*
 	 * 작성자 : 최인효
@@ -84,6 +93,9 @@ public class KanbanBoardRepository {
 	public int taskCopy(TaskVo taskVo) {
 		return sqlSession.insert("kanbanBoard.taskCopy", taskVo);
 	}
+
+
+
 
 
 

@@ -12,6 +12,7 @@
 		<typeAlias alias="checklistvo" type="com.douzone.nest.vo.CheckListVo" />
 		<typeAlias alias="taglistvo" type="com.douzone.nest.vo.TagListVo" />
 		<typeAlias alias="commentvo" type="com.douzone.nest.vo.CommentVo" />
+		<typeAlias alias="filevo" type="com.douzone.nest.vo.FileVo" />
 		<typeAlias alias="userprojectvo" type="com.douzone.nest.vo.UserProjectVo" />
 	</typeAliases>
 	<mappers>
