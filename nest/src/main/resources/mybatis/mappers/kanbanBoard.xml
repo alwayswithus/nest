@@ -85,6 +85,24 @@
 			where task_no = #{taskNo};
  		]]>
 	</select>
+	
+	<!-- 업무 유저 select -->
+	<select id="selectMemberList" resultType="uservo">
+		<![CDATA[
+			select u.user_no userNo,
+					u.user_regdate userRegdate,
+					u.user_email userEmail,
+					u.user_name userName,
+					u.user_number userNumber,
+					u.user_birth userBirth,
+					u.user_title userTitle, 
+					u.user_dept userDept, 
+					u.user_photo userPhoto
+			from user u
+			join taskuser tu using(user_no)
+			where task_no = 81;
+ 		]]>
+	</select>
 
 	<!-- 테스크 리스트 정렬 번호 select -->
 	<select id="selectTaskListOrderNo" resultType="Long">

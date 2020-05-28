@@ -12,6 +12,7 @@ import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskVo;
+import com.douzone.nest.vo.UserVo;
 
 @Repository
 public class KanbanBoardRepository {
@@ -69,6 +70,14 @@ public class KanbanBoardRepository {
 
 	/*
 	 * 작성자 : 최인효
+	 * 설명 : 업무 포함 유저 select
+	 */
+	public List<UserVo> selectMemberList(Long taskNo) {
+		return sqlSession.selectList("kanbanBoard.selectMemberList",taskNo);
+	}
+	
+	/*
+	 * 작성자 : 최인효
 	 * 설명 : 테스크 리스트 정렬 번호 select 
 	 */
 	public Long selectTaskListOrderNo(Long projectNo) {
@@ -93,6 +102,9 @@ public class KanbanBoardRepository {
 	public int taskCopy(TaskVo taskVo) {
 		return sqlSession.insert("kanbanBoard.taskCopy", taskVo);
 	}
+
+
+
 
 
 
