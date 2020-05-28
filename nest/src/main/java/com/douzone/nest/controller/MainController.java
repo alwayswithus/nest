@@ -38,7 +38,6 @@ public class MainController {
 	
 	@RequestMapping("/kanbanMain/**")
 	public String setting() {
-		System.out.println("!!!!");
 		return "index";
 	}
 	

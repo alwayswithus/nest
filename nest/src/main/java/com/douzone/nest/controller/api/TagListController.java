@@ -23,7 +23,6 @@ public class TagListController {
 	@GetMapping("/api/taglist")
 	public JsonResult tagList() {
 		List<TagListVo> tagListVo = tagListService.selectTagList();
-		System.out.println(tagListVo);
 		
 		return JsonResult.success(tagListVo);
 	}
@@ -31,7 +30,6 @@ public class TagListController {
 	@PostMapping("/api/taglist/add")
 	public JsonResult tagListAdd(
 			@RequestBody TagListVo tagListVo) {
-		System.out.println(tagListVo);
 		boolean result = tagListService.tagInsert(tagListVo);
 		return JsonResult.success(result ? tagListVo : -1);
 	}
@@ -39,7 +37,6 @@ public class TagListController {
 	@DeleteMapping("/api/taglist/delete")
 	public JsonResult tagListDelete(
 			@RequestBody Long tagNo) {
-		System.out.println(tagNo);
 		boolean result = tagListService.tagDelete(tagNo);
 		return JsonResult.success(result ? tagNo : -1);
 	}
