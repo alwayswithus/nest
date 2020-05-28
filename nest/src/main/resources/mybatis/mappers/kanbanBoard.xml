@@ -60,15 +60,54 @@
 	<!-- 코멘트 select -->
 	<select id="selectComments" resultType="commentvo">
 		<![CDATA[
-			select comment_no commentNo,
-					comment_regdate commentRegdate,
-					comment_contents commentContents,
-					comment_like commentLike,
-					user_no userNo,
-					task_no taskNo,
-					file_no fileNo
-			from comment
+			select  a.comment_no commentNo,
+					a.comment_regdate commentRegdate,
+					a.comment_contents commentContents,
+					a.comment_like commentLike,
+					a.user_no userNo,
+					a.task_no taskNo,
+					a.file_no fileNo,
+			        b.user_name userName,
+			        b.user_photo userPhoto,
+			        c.origin_name originName,
+			        c.file_path filePath,
+			        c.file_regdate fileRegdate
+			from comment a
+			join user b on(a.user_no = b.user_no)
+			left join file c on(a.file_no = c.file_no)
+			where a.task_no = #{taskNo};
+ 		]]>
+	</select>
+
+	<!-- 파일 select -->
+	<select id="selectFile" resultType="filevo">
+		<![CDATA[
+			select file_no fileNo,
+				origin_name originName,
+				change_name changeName,
+				file_path filePath,
+				file_regdate fileRegdate,
+				task_no taskNo
+			from file
 			where task_no = #{taskNo}
+ 		]]>
+	</select>
+
+	<!-- 업무 유저 select -->
+	<select id="selectMemberList" resultType="uservo">
+		<![CDATA[
+			select u.user_no userNo,
+					u.user_regdate userRegdate,
+					u.user_email userEmail,
+					u.user_name userName,
+					u.user_number userNumber,
+					u.user_birth userBirth,
+					u.user_title userTitle, 
+					u.user_dept userDept, 
+					u.user_photo userPhoto
+			from user u
+			join taskuser tu using(user_no)
+			where task_no = 81
  		]]>
 	</select>
 
@@ -77,20 +116,47 @@
 		<![CDATA[
             select max(tasklist_order)
             from tasklist
-            where project_no = #{projectNo};
-		]]>	
+            where project_no = #{projectNo}
+		]]>
 	</select>
 
 	<!-- 테스크 리스트 insert -->
 	<insert id="taskListAdd" parameterType="tasklistvo"> 
 		<![CDATA[ 
-			insert into tasklist values(null, #{taskListName}, #{taskListOrder}, #{projectNo});
+			insert into tasklist values(null, #{taskListName}, #{taskListOrder}, #{projectNo})
 		]]>
 		<selectKey keyProperty="taskListNo" resultType="long"
 			order="AFTER">
 			select last_insert_id()
 		</selectKey>
 	</insert>
+
+	<!-- 테스크 리스트 delete -->
+	<insert id="taskListDelete" parameterType="tasklistvo"> 
+		<![CDATA[ 
+			delete from tasklist
+			where tasklist_no = #{taskListNo}
+		]]>
+	</insert>
+
+	<!-- 테스크 리스트 정렬 update -->
+	<update id="taskListReOrder" parameterType="taskListVo"> 
+		<![CDATA[
+			update tasklist
+			set tasklist_order = tasklist_order - 1
+			where tasklist_order > #{taskListOrder}
+			and project_no = #{projectNo}	
+		]]>
+	</update>
+
+	<!-- 테스크 리스트 이름 update -->
+	<update id="taskListEditName" parameterType="taskListVo"> 
+		<![CDATA[
+			update tasklist
+			set tasklist_name = #{taskListName}
+			where tasklist_no = #{taskListNo}
+		]]>
+	</update>
 
 	<!-- <insert id="taskCopy" parameterType="taskvo"> <![CDATA[ insert into 
 		taglist values(null, #{tagName}, #{tagColor}) ]]> <selectKey keyProperty 

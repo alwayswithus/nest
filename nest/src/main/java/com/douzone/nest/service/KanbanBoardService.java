@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import com.douzone.nest.repository.KanbanBoardRepository;
 import com.douzone.nest.vo.CheckListVo;
 import com.douzone.nest.vo.CommentVo;
+import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskVo;
+import com.douzone.nest.vo.UserVo;
 
 @Service
 public class KanbanBoardService {
@@ -22,7 +24,7 @@ public class KanbanBoardService {
 
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : taskList JSON 생성
+	 * 설명 : 테스크리스트 JSON 생성
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject selectKanbanBoard(Long projectNo) {
@@ -96,12 +98,54 @@ public class KanbanBoardService {
 					commentList.put("commentContents",commentVo.getCommentContents());
 					commentList.put("commentLike",commentVo.getCommentLike());
 					commentList.put("userNo",commentVo.getUserNo());
+					commentList.put("userName", commentVo.getUserName());
+					commentList.put("userPhoto", commentVo.getUserPhoto());
+					commentList.put("filePath", commentVo.getFilePath());
+					commentList.put("originName", commentVo.getOriginName());
+					commentList.put("fileRegDate", commentVo.getFileRegdate());
 					commentList.put("taskNo",commentVo.getTaskNo());
 					commentList.put("fileNo",commentVo.getFileNo());
 					
 					commentsJSONArray.add(commentList);
 				}
 				task.put("commentList", commentsJSONArray);
+				
+				JSONArray fileJSONArray = new JSONArray(); 
+				List<FileVo> fileList = kanbanBoardRepository.selectFileList(taskVo.getTaskNo());
+				for(FileVo fileVo : fileList) {
+					// 하나의 TaskList{}
+					JSONObject file = new JSONObject();
+					
+					file.put("fileNo",fileVo.getFileNo());
+					file.put("originName",fileVo.getOriginName());
+					file.put("changeName",fileVo.getChangeName());
+					file.put("filePath",fileVo.getFilePath());
+					file.put("fileRegdate",fileVo.getFileRegdate());
+					file.put("taskNo",fileVo.getTaskNo());
+					
+					fileJSONArray.add(file);
+				}
+				task.put("fileList", fileJSONArray);
+				
+				JSONArray memberJSONArray = new JSONArray(); 
+				List<UserVo> memberList = kanbanBoardRepository.selectMemberList(taskVo.getTaskNo());
+				for(UserVo memberVo : memberList) {
+					// 하나의 TaskList{}
+					JSONObject member = new JSONObject();
+					
+					member.put("userNo",memberVo.getUserNo());
+					member.put("userRegdate",memberVo.getUserRegdate());
+					member.put("userEmail",memberVo.getUserEmail());
+					member.put("userName",memberVo.getUserName());
+					member.put("userNumber",memberVo.getUserNumber());
+					member.put("userBirth",memberVo.getUserBirth());
+					member.put("userTitle",memberVo.getUserTitle());
+					member.put("userDept",memberVo.getUserDept());
+					member.put("userPhoto",memberVo.getUserPhoto());
+					
+					memberJSONArray.add(member);
+				}
+				task.put("memberList", memberJSONArray);
 				
 //				task.put("taskListNo", taskVo.getTaskListNo());
 //				task.put("projectNo", taskVo.getProjectNo());
@@ -119,21 +163,46 @@ public class KanbanBoardService {
 	
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : taskList 추가
+	 * 설명 : 테스크리스트 insert
 	 */
 	public boolean taskListAdd(TaskListVo taskListVo) {
 		Long taskListOrderNo = kanbanBoardRepository.selectTaskListOrderNo(taskListVo.getProjectNo());
 		taskListVo.setTaskListOrder(taskListOrderNo+1);
 		return 1 == kanbanBoardRepository.taskListAdd(taskListVo);
 	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 delete
+	 */
+	public boolean taskListDelete(TaskListVo taskListVo) {
+		 boolean result = 1 == kanbanBoardRepository.taskListDelete(taskListVo);
+		 if(result) {
+			 result = -1 != kanbanBoardRepository.taskListReOrder(taskListVo);
+		 }
+		return result;
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 이름 변경
+	 */
+	public boolean taskListEditName(TaskListVo taskListVo) {
+		 boolean result = 1 == kanbanBoardRepository.taskListEditName(taskListVo);
+		return result;
+	}
 
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : task 복사
+	 * 설명 : 테스크 복사
 	 */
 	public boolean taskCopy(TaskVo taskVo) {
 		return 1 == kanbanBoardRepository.taskCopy(taskVo);
 	}
+
+	
+
+
 
 
 

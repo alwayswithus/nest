@@ -8,9 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.douzone.nest.vo.CheckListVo;
 import com.douzone.nest.vo.CommentVo;
+import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskVo;
+import com.douzone.nest.vo.UserVo;
 
 @Repository
 public class KanbanBoardRepository {
@@ -57,7 +59,23 @@ public class KanbanBoardRepository {
 	public List<CommentVo> selectComments(Long taskNo) {
 		return sqlSession.selectList("kanbanBoard.selectComments",taskNo);
 	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 파일 select
+	 */
+	public List<FileVo> selectFileList(Long taskNo) {
+		return sqlSession.selectList("kanbanBoard.selectFile", taskNo);
+	}
 
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 업무 포함 유저 select
+	 */
+	public List<UserVo> selectMemberList(Long taskNo) {
+		return sqlSession.selectList("kanbanBoard.selectMemberList",taskNo);
+	}
+	
 	/*
 	 * 작성자 : 최인효
 	 * 설명 : 테스크 리스트 정렬 번호 select 
@@ -69,12 +87,34 @@ public class KanbanBoardRepository {
 	
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : taskList 추가
+	 * 설명 : 테스크리스트 insert
 	 */
 	public int taskListAdd(TaskListVo taskListVo) {
-		int result = sqlSession.insert("kanbanBoard.taskListAdd", taskListVo);
-		System.out.println(taskListVo);
-		return result;
+		return sqlSession.insert("kanbanBoard.taskListAdd", taskListVo);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 delete
+	 */
+	public int taskListDelete(TaskListVo taskListVo) {
+		return sqlSession.insert("kanbanBoard.taskListDelete", taskListVo);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테그리스트 정렬 update
+	 */
+	public int taskListReOrder(TaskListVo taskListVo) {
+		return sqlSession.insert("kanbanBoard.taskListReOrder", taskListVo);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 이름 변경
+	 */
+	public int taskListEditName(TaskListVo taskListVo) {
+		return sqlSession.insert("kanbanBoard.taskListEditName", taskListVo);
 	}
 	
 	/*
@@ -84,6 +124,21 @@ public class KanbanBoardRepository {
 	public int taskCopy(TaskVo taskVo) {
 		return sqlSession.insert("kanbanBoard.taskCopy", taskVo);
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

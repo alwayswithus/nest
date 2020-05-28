@@ -12,12 +12,28 @@
 	    from project;
  		]]> 
 	</select>
-	<insert id="projectAdd" parameterType="projectvo">
+	<insert id="insertProjectNotMember" parameterType="projectvo">
 	<![CDATA[
-	insert into project values (null, #{projectNo}, #{projectTitle}, #{projectDesc}, #{projectStart}, #{projectEnd}, #{projectState})
+	insert into project values (null, #{projectTitle}, #{projectDesc}, #{projectStart}, #{projectEnd}, #{projectState})
 	]]>
-	<selectKey keyProperty="projectNo" resultType="long" order="AFTER">
+	<selectKey keyProperty = "projectNo" resultType="long" order="AFTER">
 		select last_insert_id()
 	</selectKey>
+	</insert>
+	
+	<select id="selectUser" parameterType="long" resultType="uservo">
+	<![CDATA[
+	select userproject.user_no as userNo, role_no as roleNo, user_name as userName, user_email as userEmail, user_photo as userPhoto
+	from project, userproject, user
+	where project.project_no = userproject.project_no
+	and userproject.user_no = user.user_no
+	and project.project_no = #{projectNo};
+	]]>
+	</select>
+	
+	<insert id="insertUserProject" parameterType="map">
+	<![CDATA[
+	insert into userproject values (#{projectNo}, #{userNo}, 3)
+	]]>
 	</insert>
 </mapper>
