@@ -32,5 +32,4 @@ public class ApiDashboardController {
 		boolean result = projectService.projectAdd(projectVo);
 		return JsonResult.success(result ? projectVo : -1);
 	}
-	
 }

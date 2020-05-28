@@ -14,6 +14,8 @@ public class UserVo {
 	private String userTimezone;	// 시간설정
 	private String userPhoto;		// 프로필사진
 	
+	private Long roleNo;			// 권한번호
+	
 	public Long getUserNo() {
 		return userNo;
 	}
@@ -80,12 +82,18 @@ public class UserVo {
 	public void setUserPhoto(String userPhoto) {
 		this.userPhoto = userPhoto;
 	}
+	public Long getRoleNo() {
+		return roleNo;
+	}
+	public void setRoleNo(Long roleNo) {
+		this.roleNo = roleNo;
+	}
 	
 	@Override
 	public String toString() {
 		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", userName="
 				+ userName + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
 				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
-				+ ", userPhoto=" + userPhoto + "]";
+				+ ", userPhoto=" + userPhoto + ", roleNo=" + roleNo + "]";
 	}
 }
