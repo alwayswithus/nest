@@ -87,12 +87,34 @@ public class KanbanBoardRepository {
 	
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : taskList 추가
+	 * 설명 : 테스크리스트 insert
 	 */
 	public int taskListAdd(TaskListVo taskListVo) {
-		int result = sqlSession.insert("kanbanBoard.taskListAdd", taskListVo);
-		System.out.println(taskListVo);
-		return result;
+		return sqlSession.insert("kanbanBoard.taskListAdd", taskListVo);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 delete
+	 */
+	public int taskListDelete(TaskListVo taskListVo) {
+		return sqlSession.insert("kanbanBoard.taskListDelete", taskListVo);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테그리스트 정렬 update
+	 */
+	public int taskListReOrder(TaskListVo taskListVo) {
+		return sqlSession.insert("kanbanBoard.taskListReOrder", taskListVo);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 이름 변경
+	 */
+	public int taskListEditName(TaskListVo taskListVo) {
+		return sqlSession.insert("kanbanBoard.taskListEditName", taskListVo);
 	}
 	
 	/*
@@ -102,6 +124,15 @@ public class KanbanBoardRepository {
 	public int taskCopy(TaskVo taskVo) {
 		return sqlSession.insert("kanbanBoard.taskCopy", taskVo);
 	}
+
+
+
+
+
+
+
+
+
 
 
 
