@@ -24,7 +24,7 @@ public class KanbanBoardService {
 
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : taskList JSON 생성
+	 * 설명 : 테스크리스트 JSON 생성
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject selectKanbanBoard(Long projectNo) {
@@ -158,21 +158,46 @@ public class KanbanBoardService {
 	
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : taskList 추가
+	 * 설명 : 테스크리스트 insert
 	 */
 	public boolean taskListAdd(TaskListVo taskListVo) {
 		Long taskListOrderNo = kanbanBoardRepository.selectTaskListOrderNo(taskListVo.getProjectNo());
 		taskListVo.setTaskListOrder(taskListOrderNo+1);
 		return 1 == kanbanBoardRepository.taskListAdd(taskListVo);
 	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 delete
+	 */
+	public boolean taskListDelete(TaskListVo taskListVo) {
+		 boolean result = 1 == kanbanBoardRepository.taskListDelete(taskListVo);
+		 if(result) {
+			 result = -1 != kanbanBoardRepository.taskListReOrder(taskListVo);
+		 }
+		return result;
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 이름 변경
+	 */
+	public boolean taskListEditName(TaskListVo taskListVo) {
+		 boolean result = 1 == kanbanBoardRepository.taskListEditName(taskListVo);
+		return result;
+	}
 
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : task 복사
+	 * 설명 : 테스크 복사
 	 */
 	public boolean taskCopy(TaskVo taskVo) {
 		return 1 == kanbanBoardRepository.taskCopy(taskVo);
 	}
+
+	
+
+
 
 
 

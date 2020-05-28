@@ -23,7 +23,7 @@ public class KanbanboardController {
 
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : taskList Select
+	 * 설명 : 테스크 리스트 select
 	 */
 	@GetMapping("/api/kanbanMain")
 	public JsonResult kanbanMain() {
@@ -35,7 +35,7 @@ public class KanbanboardController {
 	
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : taskList 추가
+	 * 설명 : 테스크 리스트 추가
 	 */
 	@PostMapping("/api/taskList/add")
 	public JsonResult taskListAdd(@RequestBody TaskListVo taskListVo) {
@@ -45,7 +45,27 @@ public class KanbanboardController {
 	
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : task 복사
+	 * 설명 : 테스크 리스트 삭제
+	 */
+	@PostMapping("/api/taskList/delete")
+	public JsonResult taskListDelete(@RequestBody TaskListVo taskListVo) {
+		boolean result = kanbanboardService.taskListDelete(taskListVo);
+		return  JsonResult.success(result ? taskListVo : -1);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 이름 변경
+	 */
+	@PostMapping("/api/taskList/editName")
+	public JsonResult taskListEditName(@RequestBody TaskListVo taskListVo) {
+		boolean result = kanbanboardService.taskListEditName(taskListVo);
+		return  JsonResult.success(true ? taskListVo : -1);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 복사
 	 */
 	@PostMapping("/api/task/copy")
 	public JsonResult taskCopy(@RequestBody TaskVo taskVo) {
