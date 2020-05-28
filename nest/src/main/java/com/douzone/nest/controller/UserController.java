@@ -37,8 +37,9 @@ public class UserController {
 		//return "index";
 	}
 	
+	// 
 	@PostMapping("/auth")
-	public String auth(HttpServletRequest request, HttpServletResponse response){
+	public void auth(HttpServletRequest request, HttpServletResponse response){
 		System.out.println("로그인 시도중... auth..!");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -51,7 +52,7 @@ public class UserController {
 		if(authUser == null) {
 			request.setAttribute("userVo", vo);
 			//response.sendRedirect(request.getContextPath()+"/");
-			return "redirect:/";
+			//return "redirect:/";
 		}
 		
 		System.out.println("------>authUser:" + authUser);
@@ -61,7 +62,7 @@ public class UserController {
 		session.setAttribute("authUser", authUser);
 		//response.sendRedirect(request.getContextPath()+"/dashboard");
 		
-		return "redirect:/dashboard";
+		//return "redirect:/dashboard";
 		
 	}
 }

@@ -13,6 +13,7 @@ public class UserVo {
 	private String userDept;		// 부서
 	private String userTimezone;	// 시간설정
 	private String userPhoto;		// 프로필사진
+	private String userBg;			// 배경사진
 	
 	public Long getUserNo() {
 		return userNo;
@@ -80,12 +81,17 @@ public class UserVo {
 	public void setUserPhoto(String userPhoto) {
 		this.userPhoto = userPhoto;
 	}
-	
+	public String getUserBg() {
+		return userBg;
+	}
+	public void setUserBg(String useBg) {
+		this.userBg = useBg;
+	}
 	@Override
 	public String toString() {
 		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", userName="
 				+ userName + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
 				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
-				+ ", userPhoto=" + userPhoto + "]";
+				+ ", userPhoto=" + userPhoto + ", useBg=" + userBg + "]";
 	}
 }
