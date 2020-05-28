@@ -14,6 +14,7 @@ import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskVo;
+import com.douzone.nest.vo.UserVo;
 
 @Service
 public class KanbanBoardService {
@@ -100,28 +101,46 @@ public class KanbanBoardService {
 					commentList.put("taskNo",commentVo.getTaskNo());
 					commentList.put("fileNo",commentVo.getFileNo());
 					
-					
-					JSONArray fileJSONArray = new JSONArray(); 
-					List<FileVo> fileList = kanbanBoardRepository.selectFileList(taskVo.getTaskNo());
-					for(FileVo fileVo : fileList) {
-						// 하나의 TaskList{}
-						JSONObject file = new JSONObject();
-						
-						file.put("fileNo",fileVo.getFileNo());
-						file.put("originName",fileVo.getOriginName());
-						file.put("changeName",fileVo.getChangeName());
-						file.put("filePath",fileVo.getFilePath());
-						file.put("fileRegdate",fileVo.getFileRegdate());
-						file.put("taskNo",fileVo.getTaskNo());
-						
-						fileJSONArray.add(file);
-					}
-					commentList.put("fileList", fileJSONArray);
-					
-					
 					commentsJSONArray.add(commentList);
 				}
 				task.put("commentList", commentsJSONArray);
+				
+				JSONArray fileJSONArray = new JSONArray(); 
+				List<FileVo> fileList = kanbanBoardRepository.selectFileList(taskVo.getTaskNo());
+				for(FileVo fileVo : fileList) {
+					// 하나의 TaskList{}
+					JSONObject file = new JSONObject();
+					
+					file.put("fileNo",fileVo.getFileNo());
+					file.put("originName",fileVo.getOriginName());
+					file.put("changeName",fileVo.getChangeName());
+					file.put("filePath",fileVo.getFilePath());
+					file.put("fileRegdate",fileVo.getFileRegdate());
+					file.put("taskNo",fileVo.getTaskNo());
+					
+					fileJSONArray.add(file);
+				}
+				task.put("fileList", fileJSONArray);
+				
+				JSONArray memberJSONArray = new JSONArray(); 
+				List<UserVo> memberList = kanbanBoardRepository.selectMemberList(taskVo.getTaskNo());
+				for(UserVo memberVo : memberList) {
+					// 하나의 TaskList{}
+					JSONObject member = new JSONObject();
+					
+					member.put("userNo",memberVo.getUserNo());
+					member.put("userRegdate",memberVo.getUserRegdate());
+					member.put("userEmail",memberVo.getUserEmail());
+					member.put("userName",memberVo.getUserName());
+					member.put("userNumber",memberVo.getUserNumber());
+					member.put("userBirth",memberVo.getUserBirth());
+					member.put("userTitle",memberVo.getUserTitle());
+					member.put("userDept",memberVo.getUserDept());
+					member.put("userPhoto",memberVo.getUserPhoto());
+					
+					memberJSONArray.add(member);
+				}
+				task.put("memberList", memberJSONArray);
 				
 //				task.put("taskListNo", taskVo.getTaskListNo());
 //				task.put("projectNo", taskVo.getProjectNo());
