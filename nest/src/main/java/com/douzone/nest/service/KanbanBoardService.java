@@ -36,12 +36,14 @@ public class KanbanBoardService {
 		for (TaskListVo taskListVo : allTaskLsit) {
 			// 하나의 TaskList{}
 			JSONObject taskList = new JSONObject();
-			taskList.put("taskListNo", taskListVo.getTasklistNo() + "");
-			taskList.put("taskListName", taskListVo.getTasklistName());
+			taskList.put("taskListNo", taskListVo.getTaskListNo() + "");
+			taskList.put("taskListName", taskListVo.getTaskListName());
+			taskList.put("taskListOrder", taskListVo.getTaskListOrder());
+			taskList.put("projectNo", taskListVo.getProjectNo());
 			
 			// tasks[]			
 			JSONArray tasksJSONArray = new JSONArray();
-			List<TaskVo> tasks = kanbanBoardRepository.selectTasks(taskListVo.getTasklistNo());
+			List<TaskVo> tasks = kanbanBoardRepository.selectTasks(taskListVo.getTaskListNo());
 			for (TaskVo taskVo : tasks) {
 				// 하나의 Task{}
 				JSONObject task = new JSONObject();
@@ -101,7 +103,7 @@ public class KanbanBoardService {
 				}
 				task.put("commentList", commentsJSONArray);
 				
-//				task.put("tasklistNo", taskVo.getTasklistNo());
+//				task.put("taskListNo", taskVo.getTaskListNo());
 //				task.put("projectNo", taskVo.getProjectNo());
 
 				tasksJSONArray.add(task);
@@ -114,6 +116,16 @@ public class KanbanBoardService {
 
 		return obj;
 	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : taskList 추가
+	 */
+	public boolean taskListAdd(TaskListVo taskListVo) {
+		Long taskListOrderNo = kanbanBoardRepository.selectTaskListOrderNo(taskListVo.getProjectNo());
+		taskListVo.setTaskListOrder(taskListOrderNo+1);
+		return 1 == kanbanBoardRepository.taskListAdd(taskListVo);
+	}
 
 	/*
 	 * 작성자 : 최인효
@@ -122,5 +134,7 @@ public class KanbanBoardService {
 	public boolean taskCopy(TaskVo taskVo) {
 		return 1 == kanbanBoardRepository.taskCopy(taskVo);
 	}
+
+
 
 }
