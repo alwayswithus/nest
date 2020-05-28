@@ -60,15 +60,22 @@
 	<!-- 코멘트 select -->
 	<select id="selectComments" resultType="commentvo">
 		<![CDATA[
-			select comment_no commentNo,
-					comment_regdate commentRegdate,
-					comment_contents commentContents,
-					comment_like commentLike,
-					user_no userNo,
-					task_no taskNo,
-					file_no fileNo
-			from comment
-			where task_no = #{taskNo}
+			select  a.comment_no commentNo,
+					a.comment_regdate commentRegdate,
+					a.comment_contents commentContents,
+					a.comment_like commentLike,
+					a.user_no userNo,
+					a.task_no taskNo,
+					a.file_no fileNo,
+			        b.user_name userName,
+			        b.user_photo userPhoto,
+			        c.origin_name originName,
+			        c.file_path filePath,
+			        c.file_regdate fileRegdate
+			from comment a
+			join user b on(a.user_no = b.user_no)
+			left join file c on(a.file_no = c.file_no)
+			where a.task_no = #{taskNo};
  		]]>
 	</select>
 	

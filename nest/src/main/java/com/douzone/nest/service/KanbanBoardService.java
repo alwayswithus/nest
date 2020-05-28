@@ -98,6 +98,11 @@ public class KanbanBoardService {
 					commentList.put("commentContents",commentVo.getCommentContents());
 					commentList.put("commentLike",commentVo.getCommentLike());
 					commentList.put("userNo",commentVo.getUserNo());
+					commentList.put("userName", commentVo.getUserName());
+					commentList.put("userPhoto", commentVo.getUserPhoto());
+					commentList.put("filePath", commentVo.getFilePath());
+					commentList.put("originName", commentVo.getOriginName());
+					commentList.put("fileRegDate", commentVo.getFileRegdate());
 					commentList.put("taskNo",commentVo.getTaskNo());
 					commentList.put("fileNo",commentVo.getFileNo());
 					
