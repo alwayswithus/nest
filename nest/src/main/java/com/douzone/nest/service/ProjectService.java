@@ -15,19 +15,20 @@ import com.douzone.nest.vo.UserVo;
 
 @Service
 public class ProjectService {
-	
+
 	@Autowired
 	private ProjectRepository projectRepository;
 
 	@SuppressWarnings("unchecked")
-	public JSONObject selectProject() {
+	public JSONObject selectProject(long authUserNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		// 메인 {}
 		JSONObject obj = new JSONObject();
-		
+
 		// allProject []
 		JSONArray allProjectArray = new JSONArray();
-		List<ProjectVo> allProjectList = projectRepository.selectProject();
+		List<ProjectVo> allProjectList = projectRepository.selectProject(authUserNo);
 		for(ProjectVo projectVo : allProjectList) {
 			// 하나의 project {}
 			JSONObject project = new JSONObject();
@@ -37,10 +38,12 @@ public class ProjectService {
 			project.put("projectStart", projectVo.getProjectStart());
 			project.put("projectEnd", projectVo.getProjectEnd());
 			project.put("projectState", projectVo.getProjectState());
-			
+
 			// members []
 			JSONArray memberArray = new JSONArray();
-			List<UserVo> userList = projectRepository.selectUser(projectVo.getProjectNo());
+			map.put("projectNo", projectVo.getProjectNo());
+			map.put("userNo", authUserNo);
+			List<UserVo> userList = projectRepository.selectUser(map);
 			for(UserVo userVo : userList) {
 				// 하나의 member {}
 				JSONObject member = new JSONObject();
@@ -49,37 +52,45 @@ public class ProjectService {
 				member.put("userName", userVo.getUserName());
 				member.put("userEmail", userVo.getUserEmail());
 				member.put("userPhoto", userVo.getUserPhoto());
-			
+
 				memberArray.add(member);
 			}
 			project.put("members", memberArray);
-			
+
 			allProjectArray.add(project);
 		}
-		
+
 		obj.put("allProject", allProjectArray);
-		
+
 		return obj;
 	}
 	/*
 	 * 작성자 : 한해용
 	 * 설명 : 프로젝트 추가
 	 */
-	public boolean projectAdd(ProjectVo projectVo) {
-		
+	public boolean projectAdd(ProjectVo projectVo, long authUserNo) {
+
 		// 프로젝트 먼저 insert (member X) => projectNo를 가져오기 위해서
 		int projectNotMember = projectRepository.insertProjectNotMember(projectVo);
-		int projectWithMember = 0;
+
+		Map<String, Object> map = new HashMap<String, Object>();;
+		map.put("projectNo", projectVo.getProjectNo());
+		map.put("userNo", authUserNo);
 		
-		for(UserVo member : projectVo.getMembers()) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			
-			map.put("projectNo", projectVo.getProjectNo());
-			map.put("userNo", member.getUserNo());
-			
-			// userproject 테이블에 insert
-			projectWithMember = projectRepository.insertUserProject(map);
+		int authUser = projectRepository.insertAuthUser(map);
+		int projectWithMember = 0;
+
+		if(projectVo.getMembers().isEmpty()) {
+			return (projectNotMember + authUser) == 2;
 		}
-		return (projectNotMember + projectWithMember) == 2;
+		else {
+			for(UserVo member : projectVo.getMembers()) {			
+				map.put("projectNo", projectVo.getProjectNo());
+				map.put("userNo", member.getUserNo());
+				// userproject 테이블에 insert
+				projectWithMember = projectRepository.insertUserProject(map);
+			}
+			return (projectNotMember + authUser + projectWithMember) == 3;
+		}
 	}
 }

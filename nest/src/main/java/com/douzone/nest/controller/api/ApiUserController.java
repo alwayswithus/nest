@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,9 +23,9 @@ public class ApiUserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/api/user")
-	public JsonResult user() {
-		JSONObject userVo = userService.getAllUser();
+	@GetMapping("/api/user/{authUserNo}")
+	public JsonResult user(@PathVariable("authUserNo") long authUserNo) {
+		JSONObject userVo = userService.getAllUser(authUserNo);
 		return JsonResult.success(userVo);
 	}
 	
@@ -45,7 +46,6 @@ public class ApiUserController {
 			return JsonResult.fail("Fail of login...!");
 		}
 		
-		
 		JSONObject userVo = new JSONObject();
 		userVo.put("userNo", authUser.getUserNo());
 		userVo.put("userName", authUser.getUserName());
@@ -60,6 +60,12 @@ public class ApiUserController {
 	@PostMapping("/api/user/backgroundChange")
 	public JsonResult backgroundChange(@RequestBody UserVo userVo) {
 		boolean result = userService.backgroundChange(userVo);
+		return JsonResult.success(result ? userVo : -1);
+	}
+	
+	@PostMapping("api/user/invite")
+	public JsonResult userInvite(@RequestBody UserVo userVo) {
+		boolean result = userService.userInvite(userVo);
 		return JsonResult.success(result ? userVo : -1);
 	}
 }

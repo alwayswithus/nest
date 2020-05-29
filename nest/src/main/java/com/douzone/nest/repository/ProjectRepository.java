@@ -16,8 +16,8 @@ public class ProjectRepository {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public List<ProjectVo> selectProject() {
-		return sqlSession.selectList("project.selectPro");
+	public List<ProjectVo> selectProject(long authUserNo) {
+		return sqlSession.selectList("project.selectPro", authUserNo);
 	}
 	
 	/*
@@ -32,8 +32,8 @@ public class ProjectRepository {
 	 * 작성자 : 한해용
 	 * 설명 : member 가져오기
 	 */
-	public List<UserVo> selectUser(Long projectNo) {
-		return sqlSession.selectList("project.selectUser", projectNo);
+	public List<UserVo> selectUser(Map<String, Object> map) {
+		return sqlSession.selectList("project.selectUser", map);
 	}
 	
 	/*
@@ -43,5 +43,12 @@ public class ProjectRepository {
 	public int insertUserProject(Map<String, Object> map) {
 		return sqlSession.insert("project.insertUserProject", map);
 	}
-
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : authUser project 추가
+	 */
+	public int insertAuthUser(Map<String, Object> map) {
+		return sqlSession.insert("project.insertAuthUser", map);
+	}
 }

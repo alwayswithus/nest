@@ -55,8 +55,6 @@ public class UserController {
 			//return "redirect:/";
 		}
 		
-		System.out.println("------>authUser:" + authUser);
-		
 		//session 처리
 		HttpSession session = request.getSession();
 		session.setAttribute("authUser", authUser);

@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="project">
-	<select id="selectPro" resultType="projectvo">
+	<select id="selectPro" parameterType="long" resultType="projectvo">
 	<![CDATA[
-		select project_no as projectNo,
+		select project.project_no as projectNo,
 			   project_title as projectTitle,
 			   project_desc as projectDesc,
 			   date_format(project_start, '%Y-%m-%d %H:%i') as projectStart,
 			   date_format(project_end, '%Y-%m-%d %H:%i') as projectEnd,
 			   project_state as projectState 
-	    from project;
+	    from project, userproject, user 
+	    where project.project_no = userproject.project_no 
+	    and userproject.user_no = user.user_no
+	    and user.user_no = #{authUserNo}
  		]]> 
 	</select>
 	<insert id="insertProjectNotMember" parameterType="projectvo">
@@ -21,15 +24,22 @@
 	</selectKey>
 	</insert>
 	
-	<select id="selectUser" parameterType="long" resultType="uservo">
+	<select id="selectUser" parameterType="map" resultType="uservo">
 	<![CDATA[
 	select userproject.user_no as userNo, role_no as roleNo, user_name as userName, user_email as userEmail, user_photo as userPhoto
 	from project, userproject, user
 	where project.project_no = userproject.project_no
 	and userproject.user_no = user.user_no
-	and project.project_no = #{projectNo};
+	and project.project_no = #{projectNo}
+	and user.user_no != #{userNo}
 	]]>
 	</select>
+	
+	<insert id="insertAuthUser" parameterType="map">
+	<![CDATA[
+	insert into userproject values (#{projectNo}, #{userNo}, 1)
+	]]>
+	</insert>
 	
 	<insert id="insertUserProject" parameterType="map">
 	<![CDATA[
