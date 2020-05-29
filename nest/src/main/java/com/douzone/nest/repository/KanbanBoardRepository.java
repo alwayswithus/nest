@@ -1,6 +1,7 @@
 package com.douzone.nest.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,10 +104,10 @@ public class KanbanBoardRepository {
 	
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : 테그리스트 정렬 update
+	 * 설명 : 테그리스트 삭제시 정렬 update
 	 */
-	public int taskListReOrder(TaskListVo taskListVo) {
-		return sqlSession.insert("kanbanBoard.taskListReOrder", taskListVo);
+	public int taskListDeleteReOrder(TaskListVo taskListVo) {
+		return sqlSession.insert("kanbanBoard.taskListDeleteReOrder", taskListVo);
 	}
 	
 	/*
@@ -119,31 +120,27 @@ public class KanbanBoardRepository {
 	
 	/*
 	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 DnD 정렬 update
+	 */
+	public int taskListDnDReOrder(TaskListVo taskListVo) {
+		return sqlSession.insert("kanbanBoard.taskListDnDReOrder", taskListVo);
+	}
+	
+	/*
+	 * 작성자 : 최인효
 	 * 설명 : 테스크 복사
 	 */
 	public int taskCopy(TaskVo taskVo) {
 		return sqlSession.insert("kanbanBoard.taskCopy", taskVo);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 DnD 정렬 update
+	 */
+	public int taskReOrder(TaskVo taskVo) {
+		return sqlSession.insert("kanbanBoard.taskDnDReOrder", taskVo);
+	}
+	
 
 }

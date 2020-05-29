@@ -1,6 +1,8 @@
 package com.douzone.nest.controller.api;
 
 
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +19,7 @@ import com.douzone.nest.vo.TaskVo;
 @CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
 
-public class KanbanboardController {
+public class ApiKanbanboardController {
 	@Autowired
 	private KanbanBoardService kanbanboardService;
 
@@ -60,7 +62,17 @@ public class KanbanboardController {
 	@PostMapping("/api/taskList/editName")
 	public JsonResult taskListEditName(@RequestBody TaskListVo taskListVo) {
 		boolean result = kanbanboardService.taskListEditName(taskListVo);
-		return  JsonResult.success(true ? taskListVo : -1);
+		return  JsonResult.success(result ? taskListVo : -1);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크리스트 DnD 정렬
+	 */
+	@PostMapping("/api/taskList/reOrder")
+	public JsonResult taskListReOrder(@RequestBody List<TaskListVo> taskLists) {
+		boolean result = kanbanboardService.taskListDnDReOrder(taskLists);
+		return  JsonResult.success(result ? taskLists : -1);
 	}
 	
 	/*
@@ -71,6 +83,17 @@ public class KanbanboardController {
 	public JsonResult taskCopy(@RequestBody TaskVo taskVo) {
 //		boolean result = kanbanboardService.taskCopy(taskVo);
 		return  JsonResult.success(true ? taskVo : -1);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 DnD 정렬
+	 */
+	@PostMapping("/api/task/reOrder")
+	public JsonResult taskReOrder(@RequestBody List<TaskVo> taskVo) {
+		System.out.println(taskVo);
+		boolean result = kanbanboardService.taskReOrder(taskVo);
+		return  JsonResult.success(result ? taskVo : -1);
 	}
 
 }
