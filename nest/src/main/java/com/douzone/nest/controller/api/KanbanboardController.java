@@ -29,7 +29,6 @@ public class KanbanboardController {
 	public JsonResult kanbanMain() {
 		Long projectNo = 5L;
 		JSONObject kanbanJson = kanbanboardService.selectKanbanBoard(projectNo);
-		System.out.println(kanbanJson);
 		return JsonResult.success(kanbanJson);
 	}
 	
