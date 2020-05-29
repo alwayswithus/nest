@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.douzone.nest.PathSetting;
 import com.douzone.nest.service.UserService;
 import com.douzone.nest.vo.UserVo;
 
@@ -39,7 +40,7 @@ public class UserController {
 	
 	// 
 	@PostMapping("/auth")
-	public void auth(HttpServletRequest request, HttpServletResponse response){
+	public String auth(HttpServletRequest request, HttpServletResponse response){
 		System.out.println("로그인 시도중... auth..!");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -52,7 +53,7 @@ public class UserController {
 		if(authUser == null) {
 			request.setAttribute("userVo", vo);
 			//response.sendRedirect(request.getContextPath()+"/");
-			//return "redirect:/";
+			return "redirect:"+PathSetting.PATH_AND_PORT+"/";
 		}
 		
 		System.out.println("------>authUser:" + authUser);
@@ -62,7 +63,7 @@ public class UserController {
 		session.setAttribute("authUser", authUser);
 		//response.sendRedirect(request.getContextPath()+"/dashboard");
 		
-		//return "redirect:/dashboard";
+		return "redirect:"+PathSetting.PATH_AND_PORT+"/dashboard";
 		
 	}
 }

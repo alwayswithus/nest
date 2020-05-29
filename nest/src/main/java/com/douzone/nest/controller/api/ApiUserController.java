@@ -28,6 +28,12 @@ public class ApiUserController {
 		return JsonResult.success(userVo);
 	}
 	
+	
+	/*
+	 * 작성자 : 허길행
+	 * 기능 : 로그인 정보 요청시 값 반환
+	 * 출력 : json (success면 data, fail면 message)
+	 * */
 	@SuppressWarnings("unchecked")
 	@PostMapping("/api/login")
 	public JsonResult login(HttpServletRequest request, HttpServletResponse response) {
@@ -57,6 +63,7 @@ public class ApiUserController {
 		return JsonResult.success(userVo);
 	}
 	
+	// 백 그라운드 적용
 	@PostMapping("/api/user/backgroundChange")
 	public JsonResult backgroundChange(@RequestBody UserVo userVo) {
 		boolean result = userService.backgroundChange(userVo);
