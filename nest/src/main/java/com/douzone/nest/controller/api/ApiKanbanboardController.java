@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +28,10 @@ public class ApiKanbanboardController {
 	 * 작성자 : 최인효
 	 * 설명 : 테스크 리스트 select
 	 */
-	@GetMapping("/api/kanbanMain")
-	public JsonResult kanbanMain() {
-		Long projectNo = 5L;
+	@GetMapping("/api/kanbanMain/{projectNo}")
+	public JsonResult kanbanMain(@PathVariable("projectNo") Long projectNo) {
+//		Long projectNo = 5L;
+		System.out.println(projectNo);
 		JSONObject kanbanJson = kanbanboardService.selectKanbanBoard(projectNo);
 		System.out.println(kanbanJson);
 		return JsonResult.success(kanbanJson);

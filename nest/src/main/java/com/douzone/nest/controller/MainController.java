@@ -14,10 +14,10 @@ public class MainController {
 	}
 
 
-	@RequestMapping("/dashboard")
-	public String dashboard() {
-		return "index";
-	}
+//	@RequestMapping("/dashboard")
+//	public String dashboard() {
+//		return "index";
+//	}
 	
 	@RequestMapping("/profile")
 	public String profile() {
@@ -34,20 +34,21 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping("/kanbanMain/**")
+	@RequestMapping("/dashboard/**")
 	public String setting() {
+		System.out.println("!!!!!");
 		return "index";
 	}
 	
-	@RequestMapping("/comment")
-	public String comment() {
-		return "index";
-	}
-	
-	@RequestMapping("/file")
-	public String file() {
-		return "index";
-	}
+//	@RequestMapping("/comment")
+//	public String comment() {
+//		return "index";
+//	}
+//	
+//	@RequestMapping("/file")
+//	public String file() {
+//		return "index";
+//	}
 	
 	@RequestMapping("/projectset")
 	public String projectset() {
@@ -59,10 +60,10 @@ public class MainController {
 //		return "index";
 //	}
 	
-	@RequestMapping("/gantt")
-	public String gantt() {
-		return "index";
-	}
+//	@RequestMapping("/gantt")
+//	public String gantt() {
+//		return "index";
+//	}
 	
 	@RequestMapping("/errors")
 	public String errors() {
