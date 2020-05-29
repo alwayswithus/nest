@@ -100,6 +100,6 @@ public class UserVo {
 		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", userName="
 				+ userName + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
 				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
-				+ ", userPhoto=" + userPhoto + ", useBg=" + userBg + ", roleNo=" + roleNo +"]";
+				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", roleNo=" + roleNo +"]";
 	}
 }

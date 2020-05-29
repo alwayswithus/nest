@@ -16,4 +16,10 @@
 		from user
 		]]>
 	</select>
+	
+	<update id="backgroundChange" parameterType="uservo">
+	<![CDATA[
+	update user set user_bg = #{userBg} where user_no = #{userNo}
+	]]>
+	</update>
 </mapper>

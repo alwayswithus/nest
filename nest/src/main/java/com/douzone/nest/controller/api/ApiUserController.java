@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
@@ -31,10 +32,8 @@ public class ApiUserController {
 	@PostMapping("/api/login")
 	public JsonResult login(HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println("로그인 시도중... auth..!");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		System.out.println(email+" / "+password);
 		
 		UserVo vo = new UserVo();
 		vo.setUserEmail(email);
@@ -46,7 +45,6 @@ public class ApiUserController {
 			return JsonResult.fail("Fail of login...!");
 		}
 		
-		System.out.println("------>authUser:" + authUser);
 		
 		JSONObject userVo = new JSONObject();
 		userVo.put("userNo", authUser.getUserNo());
@@ -57,5 +55,11 @@ public class ApiUserController {
 
 		
 		return JsonResult.success(userVo);
+	}
+	
+	@PostMapping("/api/user/backgroundChange")
+	public JsonResult backgroundChange(@RequestBody UserVo userVo) {
+		boolean result = userService.backgroundChange(userVo);
+		return JsonResult.success(result ? userVo : -1);
 	}
 }
