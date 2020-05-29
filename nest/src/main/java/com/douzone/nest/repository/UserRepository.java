@@ -21,10 +21,10 @@ public class UserRepository {
 	
 	/*
 	 * 작성자 : 한해용
-	 * 설명 : user 전부 가져오기 
+	 * 설명 : user 전부 가져오기 (authUser 제외)
 	 */
-	public List<UserVo> getAllUser() {
-		return sqlSession.selectList("user.getAllUser");
+	public List<UserVo> getAllUser(long authUserNo) {
+		return sqlSession.selectList("user.getAllUser", authUserNo);
 	}
 	
 	/*
@@ -33,5 +33,13 @@ public class UserRepository {
 	 */
 	public int backgroundChange(UserVo userVo) {
 		return sqlSession.update("user.backgroundChange", userVo);
+	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 멤버 초대 
+	 */
+	public int userInvite(UserVo userVo) {
+		return sqlSession.insert("user.userInvite", userVo);
 	}
 }

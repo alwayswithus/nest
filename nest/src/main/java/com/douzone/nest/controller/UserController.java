@@ -56,8 +56,6 @@ public class UserController {
 			return "redirect:"+PathSetting.PATH_AND_PORT+"/";
 		}
 		
-		System.out.println("------>authUser:" + authUser);
-		
 		//session 처리
 		HttpSession session = request.getSession();
 		session.setAttribute("authUser", authUser);

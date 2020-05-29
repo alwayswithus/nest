@@ -19,22 +19,21 @@ public class UserService {
 	// DB에서 유저 가저오기
 	public UserVo getUser(UserVo vo) {
 		UserVo result = userRepository.findByEmailAndPassword(vo);
-		System.out.println(result);
 		return result;
 	}
 
 	/*
 	 * 작성자 : 한해용
-	 * 설명 : user 전부 가져오기 
+	 * 설명 : user 전부 가져오기 (authUser 제외)
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONObject getAllUser() {
+	public JSONObject getAllUser(long authUserNo) {
 		// 메인 {}
 		JSONObject obj = new JSONObject();
 		
 		// allUser []
 		JSONArray allUserArray = new JSONArray();
-		List<UserVo> allUserList = userRepository.getAllUser();
+		List<UserVo> allUserList = userRepository.getAllUser(authUserNo);
 		for(UserVo userVo : allUserList) {
 			JSONObject user = new JSONObject();
 			user.put("userNo", userVo.getUserNo());
@@ -55,5 +54,14 @@ public class UserService {
 	public boolean backgroundChange(UserVo userVo) {
 		int authUser = userRepository.backgroundChange(userVo);
 		return authUser == 1;
+	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 멤버 초대
+	 */
+	public boolean userInvite(UserVo userVo) {
+		int userInvite = userRepository.userInvite(userVo);
+		return userInvite == 1;
 	}
 }
