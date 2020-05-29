@@ -23,17 +23,17 @@ public class KanbanBoardService {
 	private KanbanBoardRepository kanbanBoardRepository;
 
 	/*
-	 * 작성자 : 최인효
+	 * 작성자 : 최인효 
 	 * 설명 : 테스크리스트 JSON 생성
 	 */
 	@SuppressWarnings("unchecked")
 	public JSONObject selectKanbanBoard(Long projectNo) {
-		
+
 		// 메인 {}
-		JSONObject obj = new JSONObject(); 
-		
+		JSONObject obj = new JSONObject();
+
 		// allTaskLsit[]
-		JSONArray allTaskLsitJSONArray = new JSONArray(); 
+		JSONArray allTaskLsitJSONArray = new JSONArray();
 		List<TaskListVo> allTaskLsit = kanbanBoardRepository.selectAllTaskList(projectNo);
 		for (TaskListVo taskListVo : allTaskLsit) {
 			// 하나의 TaskList{}
@@ -42,8 +42,8 @@ public class KanbanBoardService {
 			taskList.put("taskListName", taskListVo.getTaskListName());
 			taskList.put("taskListOrder", taskListVo.getTaskListOrder());
 			taskList.put("projectNo", taskListVo.getProjectNo());
-			
-			// tasks[]			
+
+			// tasks[]
 			JSONArray tasksJSONArray = new JSONArray();
 			List<TaskVo> tasks = kanbanBoardRepository.selectTasks(taskListVo.getTaskListNo());
 			for (TaskVo taskVo : tasks) {
@@ -57,96 +57,96 @@ public class KanbanBoardService {
 				task.put("taskState", taskVo.getTaskState());
 				task.put("taskContents", taskVo.getTaskContents());
 				task.put("taskOrder", taskVo.getTaskOrder());
-				
+
 				// checkList[]
-				JSONArray checkListJSONArray = new JSONArray(); 
+				JSONArray checkListJSONArray = new JSONArray();
 				List<CheckListVo> checkLists = kanbanBoardRepository.selectCheckList(taskVo.getTaskNo());
-				for(CheckListVo checkListVo : checkLists) {
+				for (CheckListVo checkListVo : checkLists) {
 					// 하나의 checkList{}
 					JSONObject checkList = new JSONObject();
 					checkList.put("checklistNo", checkListVo.getChecklistNo());
 					checkList.put("checklistContents", checkListVo.getChecklistContents());
 					checkList.put("checklistState", checkListVo.getChecklistState());
 					checkList.put("taskNo", checkListVo.getTaskNo());
-					
+
 					checkListJSONArray.add(checkList);
 				}
 				task.put("checkList", checkListJSONArray);
-				
+
 				// tag[]
-				JSONArray tagJSONArray = new JSONArray(); 
+				JSONArray tagJSONArray = new JSONArray();
 				List<TagListVo> tags = kanbanBoardRepository.selectTag(taskVo.getTaskNo());
-				for(TagListVo tagVo : tags) {
+				for (TagListVo tagVo : tags) {
 					// 하나의 tagList{}
-					JSONObject tagList = new JSONObject(); 
-					tagList.put("tagNo",tagVo.getTagNo());
-					tagList.put("taskNo",tagVo.getTaskNo());
-					tagList.put("tagName",tagVo.getTagName());
-					tagList.put("tagColor",tagVo.getTagColor());
+					JSONObject tagList = new JSONObject();
+					tagList.put("tagNo", tagVo.getTagNo());
+					tagList.put("taskNo", tagVo.getTaskNo());
+					tagList.put("tagName", tagVo.getTagName());
+					tagList.put("tagColor", tagVo.getTagColor());
 					tagJSONArray.add(tagList);
 				}
 				task.put("tagList", tagJSONArray);
-				
+
 				// comments[]
-				JSONArray commentsJSONArray = new JSONArray(); 
+				JSONArray commentsJSONArray = new JSONArray();
 				List<CommentVo> comments = kanbanBoardRepository.selectComments(taskVo.getTaskNo());
-				for(CommentVo commentVo : comments) {
+				for (CommentVo commentVo : comments) {
 					// 하나의 TaskList{}
 					JSONObject commentList = new JSONObject();
-					commentList.put("commentNo",commentVo.getCommentNo());
-					commentList.put("commentRegdate",commentVo.getCommentRegdate());
-					commentList.put("commentContents",commentVo.getCommentContents());
-					commentList.put("commentLike",commentVo.getCommentLike());
-					commentList.put("userNo",commentVo.getUserNo());
+					commentList.put("commentNo", commentVo.getCommentNo());
+					commentList.put("commentRegdate", commentVo.getCommentRegdate());
+					commentList.put("commentContents", commentVo.getCommentContents());
+					commentList.put("commentLike", commentVo.getCommentLike());
+					commentList.put("userNo", commentVo.getUserNo());
 					commentList.put("userName", commentVo.getUserName());
 					commentList.put("userPhoto", commentVo.getUserPhoto());
 					commentList.put("filePath", commentVo.getFilePath());
 					commentList.put("originName", commentVo.getOriginName());
 					commentList.put("fileRegDate", commentVo.getFileRegdate());
-					commentList.put("taskNo",commentVo.getTaskNo());
-					commentList.put("fileNo",commentVo.getFileNo());
-					
+					commentList.put("taskNo", commentVo.getTaskNo());
+					commentList.put("fileNo", commentVo.getFileNo());
+
 					commentsJSONArray.add(commentList);
 				}
 				task.put("commentList", commentsJSONArray);
-				
-				JSONArray fileJSONArray = new JSONArray(); 
+
+				JSONArray fileJSONArray = new JSONArray();
 				List<FileVo> fileList = kanbanBoardRepository.selectFileList(taskVo.getTaskNo());
-				for(FileVo fileVo : fileList) {
+				for (FileVo fileVo : fileList) {
 					// 하나의 TaskList{}
 					JSONObject file = new JSONObject();
-					
-					file.put("fileNo",fileVo.getFileNo());
-					file.put("originName",fileVo.getOriginName());
-					file.put("changeName",fileVo.getChangeName());
-					file.put("filePath",fileVo.getFilePath());
-					file.put("fileRegdate",fileVo.getFileRegdate());
-					file.put("taskNo",fileVo.getTaskNo());
-					
+
+					file.put("fileNo", fileVo.getFileNo());
+					file.put("originName", fileVo.getOriginName());
+					file.put("changeName", fileVo.getChangeName());
+					file.put("filePath", fileVo.getFilePath());
+					file.put("fileRegdate", fileVo.getFileRegdate());
+					file.put("taskNo", fileVo.getTaskNo());
+
 					fileJSONArray.add(file);
 				}
 				task.put("fileList", fileJSONArray);
-				
-				JSONArray memberJSONArray = new JSONArray(); 
+
+				JSONArray memberJSONArray = new JSONArray();
 				List<UserVo> memberList = kanbanBoardRepository.selectMemberList(taskVo.getTaskNo());
-				for(UserVo memberVo : memberList) {
+				for (UserVo memberVo : memberList) {
 					// 하나의 TaskList{}
 					JSONObject member = new JSONObject();
-					
-					member.put("userNo",memberVo.getUserNo());
-					member.put("userRegdate",memberVo.getUserRegdate());
-					member.put("userEmail",memberVo.getUserEmail());
-					member.put("userName",memberVo.getUserName());
-					member.put("userNumber",memberVo.getUserNumber());
-					member.put("userBirth",memberVo.getUserBirth());
-					member.put("userTitle",memberVo.getUserTitle());
-					member.put("userDept",memberVo.getUserDept());
-					member.put("userPhoto",memberVo.getUserPhoto());
-					
+
+					member.put("userNo", memberVo.getUserNo());
+					member.put("userRegdate", memberVo.getUserRegdate());
+					member.put("userEmail", memberVo.getUserEmail());
+					member.put("userName", memberVo.getUserName());
+					member.put("userNumber", memberVo.getUserNumber());
+					member.put("userBirth", memberVo.getUserBirth());
+					member.put("userTitle", memberVo.getUserTitle());
+					member.put("userDept", memberVo.getUserDept());
+					member.put("userPhoto", memberVo.getUserPhoto());
+
 					memberJSONArray.add(member);
 				}
 				task.put("memberList", memberJSONArray);
-				
+
 //				task.put("taskListNo", taskVo.getTaskListNo());
 //				task.put("projectNo", taskVo.getProjectNo());
 
@@ -160,50 +160,67 @@ public class KanbanBoardService {
 
 		return obj;
 	}
-	
+
 	/*
-	 * 작성자 : 최인효
+	 * 작성자 : 최인효 
 	 * 설명 : 테스크리스트 insert
 	 */
 	public boolean taskListAdd(TaskListVo taskListVo) {
 		Long taskListOrderNo = kanbanBoardRepository.selectTaskListOrderNo(taskListVo.getProjectNo());
-		taskListVo.setTaskListOrder(taskListOrderNo+1);
+		taskListVo.setTaskListOrder(taskListOrderNo + 1);
 		return 1 == kanbanBoardRepository.taskListAdd(taskListVo);
 	}
-	
+
 	/*
-	 * 작성자 : 최인효
+	 * 작성자 : 최인효 
 	 * 설명 : 테스크리스트 delete
 	 */
 	public boolean taskListDelete(TaskListVo taskListVo) {
-		 boolean result = 1 == kanbanBoardRepository.taskListDelete(taskListVo);
-		 if(result) {
-			 result = -1 != kanbanBoardRepository.taskListReOrder(taskListVo);
-		 }
-		return result;
-	}
-	
-	/*
-	 * 작성자 : 최인효
-	 * 설명 : 테스크리스트 이름 변경
-	 */
-	public boolean taskListEditName(TaskListVo taskListVo) {
-		 boolean result = 1 == kanbanBoardRepository.taskListEditName(taskListVo);
+		boolean result = 1 == kanbanBoardRepository.taskListDelete(taskListVo);
+		if (result) {
+			result = -1 != kanbanBoardRepository.taskListDeleteReOrder(taskListVo);
+		}
 		return result;
 	}
 
 	/*
-	 * 작성자 : 최인효
+	 * 작성자 : 최인효 설명 : 테스크리스트 이름 변경
+	 */
+	public boolean taskListEditName(TaskListVo taskListVo) {
+		return 1 == kanbanBoardRepository.taskListEditName(taskListVo);
+	}
+
+	/*
+	 * 작성자 : 최인효 
+	 * 설명 : 테스크리스트 DnD 정렬
+	 */
+	public boolean taskListDnDReOrder(List<TaskListVo> taskLists) {
+		boolean result=true;
+		for(TaskListVo vo : taskLists) {
+			result = -1 != kanbanBoardRepository.taskListDnDReOrder(vo);
+		}
+		return result;
+	}
+
+	/*
+	 * 작성자 : 최인효 
 	 * 설명 : 테스크 복사
 	 */
 	public boolean taskCopy(TaskVo taskVo) {
 		return 1 == kanbanBoardRepository.taskCopy(taskVo);
 	}
-
 	
-
-
-
-
+	/*
+	 * 작성자 : 최인효 
+	 * 설명 : 테스크 DnD 정렬
+	 */
+	public boolean taskReOrder(List<TaskVo> taskVo) {
+		boolean result=true;
+		for(TaskVo vo : taskVo) {
+//			System.out.println(vo);
+			result = -1 != kanbanBoardRepository.taskReOrder(vo);
+		}
+		return result;
+	}
 
 }
