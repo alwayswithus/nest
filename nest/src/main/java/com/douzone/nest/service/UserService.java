@@ -47,4 +47,13 @@ public class UserService {
 		
 		return obj;
 	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 세션 사용자 배경화면 설정
+	 */
+	public boolean backgroundChange(UserVo userVo) {
+		int authUser = userRepository.backgroundChange(userVo);
+		return authUser == 1;
+	}
 }

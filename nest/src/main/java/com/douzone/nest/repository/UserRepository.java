@@ -26,5 +26,12 @@ public class UserRepository {
 	public List<UserVo> getAllUser() {
 		return sqlSession.selectList("user.getAllUser");
 	}
-
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 세션 사용자 배경화면 설정
+	 */
+	public int backgroundChange(UserVo userVo) {
+		return sqlSession.update("user.backgroundChange", userVo);
+	}
 }
