@@ -34,7 +34,6 @@ public class ApiKanbanboardController {
 	@GetMapping("/api/kanbanMain/{projectNo}")
 	public JsonResult kanbanMain(@PathVariable("projectNo") Long projectNo) {
 		JSONObject kanbanJson = kanbanboardService.selectKanbanBoard(projectNo);
-		System.out.println(kanbanJson);
 		return JsonResult.success(kanbanJson);
 	}
 	

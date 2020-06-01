@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
@@ -25,6 +27,26 @@ public class TagListController {
 		List<TagListVo> tagListVo = tagListService.selectTagList();
 		
 		return JsonResult.success(tagListVo);
+	}
+	
+	@PostMapping("/api/tag/add")
+	public JsonResult tagAdd(
+			@RequestBody TagListVo tagListVo) {
+		boolean result = tagListService.taskTagInsert(tagListVo);
+		return JsonResult.success(result ? tagListVo : -1);
+	}
+	
+	@DeleteMapping("/api/tag/delete/{taskNo}/{tagNo}")
+	public JsonResult tagDelete(
+			@PathVariable("taskNo") Long taskNo,
+			@PathVariable("tagNo") Long tagNo) {
+		
+		TagListVo tagListVo = new TagListVo();
+		tagListVo.setTagNo(tagNo);
+		tagListVo.setTaskNo(taskNo);
+		
+		boolean result = tagListService.taskTagDelete(tagListVo);
+		return JsonResult.success(result ? tagListVo : -1);
 	}
 	
 	@PostMapping("/api/taglist/add")
