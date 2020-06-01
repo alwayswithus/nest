@@ -1,6 +1,5 @@
 package com.douzone.nest.vo;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ProjectVo {
@@ -10,8 +9,11 @@ public class ProjectVo {
 	private String projectStart; 	// 프로젝트 시작일
 	private String projectEnd; 		// 프로젝트 마감일
 	private String projectState;	// 프로젝트 상태
+	private String projectRegDate;	// 프로젝트 작성일
+	private Long projectWriter;		// 프로젝트 작성자
 	
 	private List<UserVo> members;			// 프로젝트 멤버
+	private String projectWriterName;		// 프로젝트 작성자 이름
 	
 	public Long getProjectNo() {
 		return projectNo;
@@ -69,10 +71,35 @@ public class ProjectVo {
 		this.members = members;
 	}
 
+	public String getProjectRegDate() {
+		return projectRegDate;
+	}
+
+	public void setProjectRegDate(String projectRegDate) {
+		this.projectRegDate = projectRegDate;
+	}
+
+	public Long getProjectWriter() {
+		return projectWriter;
+	}
+
+	public void setProjectWriter(Long projectWriter) {
+		this.projectWriter = projectWriter;
+	}
+
+	public String getProjectWriterName() {
+		return projectWriterName;
+	}
+
+	public void setProjectWriterName(String projectWriterName) {
+		this.projectWriterName = projectWriterName;
+	}
+
 	@Override
 	public String toString() {
 		return "ProjectVo [projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", projectDesc=" + projectDesc
 				+ ", projectStart=" + projectStart + ", projectEnd=" + projectEnd + ", projectState=" + projectState
-				+ ", members=" + members + "]";
+				+ ", projectRegDate=" + projectRegDate + ", projectWriter=" + projectWriter + ", members=" + members
+				+ ", projectWriterName=" + projectWriterName + "]";
 	}
 }

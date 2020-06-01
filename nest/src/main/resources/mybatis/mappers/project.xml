@@ -3,21 +3,24 @@
 <mapper namespace="project">
 	<select id="selectPro" parameterType="long" resultType="projectvo">
 	<![CDATA[
-		select project.project_no as projectNo,
-			   project_title as projectTitle,
-			   project_desc as projectDesc,
-			   date_format(project_start, '%Y-%m-%d %H:%i') as projectStart,
-			   date_format(project_end, '%Y-%m-%d %H:%i') as projectEnd,
-			   project_state as projectState 
-	    from project, userproject, user 
-	    where project.project_no = userproject.project_no 
-	    and userproject.user_no = user.user_no
-	    and user.user_no = #{authUserNo}
+		select  p.project_no as projectNo, 
+				p.project_title as projectTitle,
+        		p.project_desc as projectDesc,
+        		date_format(p.project_start, '%Y-%m-%d %H:%m') as projectStart,
+        		date_format(p.project_end, '%Y-%m-%d %H:%m') as projectEnd,
+				p.project_state as projectState,
+        		date_format(p.project_regdate, '%Y-%m-%d %H:%m') as projectRegDate,
+        		p.project_writer as projectWriter,
+        		u.user_name as projectWriterName
+		from project p
+		join user u on p.project_writer = u.user_no
+		join userproject up on p.project_no = up.project_no
+		where up.user_no = #{authUserNo};
  		]]> 
 	</select>
 	<insert id="insertProjectNotMember" parameterType="projectvo">
 	<![CDATA[
-	insert into project values (null, #{projectTitle}, #{projectDesc}, #{projectStart}, #{projectEnd}, #{projectState})
+	insert into project values (null, #{projectTitle}, #{projectDesc}, #{projectStart}, #{projectEnd}, #{projectState}, #{projectRegDate}, #{projectWriter})
 	]]>
 	<selectKey keyProperty = "projectNo" resultType="long" order="AFTER">
 		select last_insert_id()
@@ -46,4 +49,49 @@
 	insert into userproject values (#{projectNo}, #{userNo}, 3)
 	]]>
 	</insert>
+	
+	<insert id="userAdd" parameterType="userprojectvo">
+	<![CDATA[
+	insert into userproject values (#{projectNo}, #{userNo}, 3)
+	]]>
+	</insert>
+	
+	<delete id="userDelete" parameterType="userprojectvo">
+	<![CDATA[
+	delete from userproject where project_no = #{projectNo} and user_no = #{userNo}
+	]]>
+	</delete>
+	
+	<insert id="userInsert" parameterType="uservo">
+	<![CDATA[
+	insert into user values (null, now(), #{userEmail}, #{userName}, "", null, null, null, null, "korea", #{userPhoto}, null, "준회원")
+	]]>
+	<selectKey keyProperty = "userNo" resultType="long" order="AFTER">
+		select last_insert_id()
+	</selectKey>
+	</insert>
+	
+	<insert id="userProjectJoin" parameterType="uservo">
+	<![CDATA[
+	insert into userproject values (#{projectNo}, #{userNo}, 3)
+	]]>
+	</insert>
+	
+	<update id="titleUpdate" parameterType="projectvo">
+	<![CDATA[
+	update project set project_title = #{projectTitle} where project_no = #{projectNo}
+	]]>
+	</update>
+	
+	<update id="descUpdate" parameterType="projectvo">
+	<![CDATA[
+	update project set project_desc = #{projectDesc} where project_no = #{projectNo}
+	]]>
+	</update>
+	
+	<update id="stateUpdate" parameterType="projectvo">
+	<![CDATA[
+	update project set project_state = #{projectState} where project_no = #{projectNo}
+	]]>
+	</update>
 </mapper>
