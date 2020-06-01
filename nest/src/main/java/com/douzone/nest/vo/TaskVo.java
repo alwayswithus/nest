@@ -9,8 +9,22 @@ public class TaskVo {
 	private String taskState;	// 업무 상태
 	private String taskContents;// 업무 내용
 	private Long taskOrder;		// 업무 정렬 번호
-	private Long taskListNo;	
+	private Long taskListNo; // 업무 리스트 번호
+	private String taskRegdate; // 업무 생성일
+	private Long taskWriter; // 업무 작성자
 	
+	public String getTaskRegdate() {
+		return taskRegdate;
+	}
+	public void setTaskRegdate(String taskRegdate) {
+		this.taskRegdate = taskRegdate;
+	}
+	public Long getTaskWriter() {
+		return taskWriter;
+	}
+	public void setTaskWriter(Long taskWriter) {
+		this.taskWriter = taskWriter;
+	}
 	public Long getTaskListNo() {
 		return taskListNo;
 	}
@@ -70,7 +84,8 @@ public class TaskVo {
 	public String toString() {
 		return "TaskVo [taskNo=" + taskNo + ", taskStart=" + taskStart + ", taskEnd=" + taskEnd + ", taskPoint="
 				+ taskPoint + ", taskLabel=" + taskLabel + ", taskState=" + taskState + ", taskContents=" + taskContents
-				+ ", taskOrder=" + taskOrder + ", taskListNo=" + taskListNo + "]";
+				+ ", taskOrder=" + taskOrder + ", taskListNo=" + taskListNo + ", taskRegdate=" + taskRegdate
+				+ ", taskWriter=" + taskWriter + "]";
 	}
 	
 }
