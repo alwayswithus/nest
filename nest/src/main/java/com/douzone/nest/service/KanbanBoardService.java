@@ -231,7 +231,6 @@ public class KanbanBoardService {
 	public boolean taskDelete(TaskReOrderVo taskInfo) {
 		boolean result = -1 != kanbanBoardRepository.taskDelete(taskInfo.getReOrderTask());
 		for(TaskVo vo : taskInfo.getStartTasks()) {
-			System.out.println(vo);
 			result = -1 != kanbanBoardRepository.taskReOrder(vo);
 		}
 		return result;

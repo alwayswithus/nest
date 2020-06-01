@@ -32,6 +32,10 @@
 	</update>
 	
 	<delete id="deleteComment" parameterType="long">
-		delete from comment where comment_no=#{commentNo}; 
+		delete from comment where comment_no=#{commentNo}
+	</delete>
+	
+	<delete id="deleteFile" parameterType="long">
+		delete from file where file_no=#{fileNo}
 	</delete>
 </mapper>

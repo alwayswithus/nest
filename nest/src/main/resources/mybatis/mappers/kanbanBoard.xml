@@ -107,7 +107,7 @@
 					u.user_photo userPhoto
 			from user u
 			join taskuser tu using(user_no)
-			where task_no = 81
+			where task_no = #{taskNo}
  		]]>
 	</select>
 

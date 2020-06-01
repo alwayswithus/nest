@@ -14,7 +14,7 @@ public class UserVo {
 	private String userTimezone;	// 시간설정
 	private String userPhoto;		// 프로필사진
 	private String userBg;			// 배경사진
-	
+	private Long projectNo; 		// 프로젝트 번호
 	private Long roleNo;			// 권한번호
 	
 	public Long getUserNo() {
@@ -22,6 +22,12 @@ public class UserVo {
 	}
 	public void setUserNo(Long userNo) {
 		this.userNo = userNo;
+	}
+	public Long getProjectNo() {
+		return projectNo;
+	}
+	public void setProjectNo(Long projectNo) {
+		this.projectNo = projectNo;
 	}
 	public String getUserRegdate() {
 		return userRegdate;
@@ -100,6 +106,7 @@ public class UserVo {
 		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", userName="
 				+ userName + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
 				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
-				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", roleNo=" + roleNo +"]";
+				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", projectNo=" + projectNo + ", roleNo=" + roleNo
+				+ "]";
 	}
 }
