@@ -38,6 +38,7 @@ public class UserService {
 			JSONObject user = new JSONObject();
 			user.put("userNo", userVo.getUserNo());
 			user.put("userName", userVo.getUserName());
+			user.put("userEmail", userVo.getUserEmail());
 			user.put("userPhoto", userVo.getUserPhoto());
 			
 			allUserArray.add(user);

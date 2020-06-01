@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.ProjectRepository;
 import com.douzone.nest.vo.ProjectVo;
+import com.douzone.nest.vo.UserProjectVo;
 import com.douzone.nest.vo.UserVo;
 
 @Service
@@ -38,6 +39,9 @@ public class ProjectService {
 			project.put("projectStart", projectVo.getProjectStart());
 			project.put("projectEnd", projectVo.getProjectEnd());
 			project.put("projectState", projectVo.getProjectState());
+			project.put("projectRegDate", projectVo.getProjectRegDate());
+			project.put("projectWriter", projectVo.getProjectWriter());
+			project.put("projectWriterName", projectVo.getProjectWriterName());
 
 			// members []
 			JSONArray memberArray = new JSONArray();
@@ -93,6 +97,60 @@ public class ProjectService {
 			return (projectNotMember + authUser + projectWithMember) == 3;
 		}
 	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 멤버 추가
+	 */
+	public boolean userAdd(UserProjectVo userProjectVo) {
+		return projectRepository.userAdd(userProjectVo) == 1;
+	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 멤버 삭제
+	 */
+	public boolean userDelete(UserProjectVo userProjectVo) {
+		return projectRepository.userDelete(userProjectVo) == 1;
+	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 멤버 초대
+	 */
+	public boolean userInvite(UserVo userVo) {
+		int userInsert = projectRepository.userInsert(userVo);
+		int userProjectJoin = projectRepository.userProjectJoin(userVo);
+		return (userInsert + userProjectJoin) == 2;
+	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 프로젝트 제목 수정
+	 */
+	public boolean titleUpdate(ProjectVo projectVo) {
+		int titleUpdate = projectRepository.titleUpdate(projectVo);
+		return titleUpdate == 1;
+	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 프로젝트 설명 수정
+	 */
+	public boolean descUpdate(ProjectVo projectVo) {
+		int titleUpdate = projectRepository.descUpdate(projectVo);
+		return titleUpdate == 1;
+	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : 프로젝트 상태 수정
+	 */
+	public boolean stateUpdate(ProjectVo projectVo) {
+		int stateUpdate = projectRepository.stateUpdate(projectVo);
+		return stateUpdate == 1;
+  }
+  
 	public List<UserVo> projectMemberSelect(Long projectNo) {
 		return projectRepository.projectMemberSelect(projectNo);
 	}
