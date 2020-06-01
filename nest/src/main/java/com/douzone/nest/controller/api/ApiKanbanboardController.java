@@ -2,6 +2,7 @@ package com.douzone.nest.controller.api;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.KanbanBoardService;
+import com.douzone.nest.vo.CopyTaskVo;
 import com.douzone.nest.vo.TaskListVo;
+import com.douzone.nest.vo.TaskReOrderVo;
 import com.douzone.nest.vo.TaskVo;
 
 @CrossOrigin(origins = { "http://localhost:3000" })
@@ -30,7 +33,6 @@ public class ApiKanbanboardController {
 	 */
 	@GetMapping("/api/kanbanMain/{projectNo}")
 	public JsonResult kanbanMain(@PathVariable("projectNo") Long projectNo) {
-//		Long projectNo = 5L;
 		JSONObject kanbanJson = kanbanboardService.selectKanbanBoard(projectNo);
 		return JsonResult.success(kanbanJson);
 	}
@@ -77,23 +79,63 @@ public class ApiKanbanboardController {
 	
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : 테스크 복사
+	 * 설명 : 테스크 추가
 	 */
-	@PostMapping("/api/task/copy")
-	public JsonResult taskCopy(@RequestBody TaskVo taskVo) {
-//		boolean result = kanbanboardService.taskCopy(taskVo);
+	@PostMapping("/api/task/insert")
+	public JsonResult taskInsert(@RequestBody Map taskInfo) {
+		TaskVo task = kanbanboardService.taskInsert(taskInfo);
+		System.out.println(task);
+		return  JsonResult.success(task);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 삭제
+	 */
+	@PostMapping("/api/task/delete")
+	public JsonResult taskDelete(@RequestBody TaskReOrderVo taskInfo) {
+		boolean result = kanbanboardService.taskDelete(taskInfo);
+		return  JsonResult.success(result ? taskInfo : -1);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 복사 insert
+	 */
+	@PostMapping("/api/task/copy/insert")
+	public JsonResult copyTask(@RequestBody CopyTaskVo copyTask) {
+		boolean result = kanbanboardService.copyTask(copyTask);
+		return  JsonResult.success(result ? copyTask : -1);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 체크 update
+	 */
+	@PostMapping("/api/task/state")
+	public JsonResult taskStateUpdate(@RequestBody TaskVo taskVo) {
+		boolean result = kanbanboardService.taskStateUpdate(taskVo);
 		return  JsonResult.success(true ? taskVo : -1);
 	}
 	
 	/*
 	 * 작성자 : 최인효
-	 * 설명 : 테스크 DnD 정렬
+	 * 설명 : 테스크 정렬(같은 리스트)
 	 */
-	@PostMapping("/api/task/reOrder")
-	public JsonResult taskReOrder(@RequestBody List<TaskVo> taskVo) {
-		System.out.println(taskVo);
-		boolean result = kanbanboardService.taskReOrder(taskVo);
+	@PostMapping("/api/task/reOrder/sameList")
+	public JsonResult taskReOrderSameList(@RequestBody List<TaskVo> taskVo) {
+		boolean result = kanbanboardService.taskReOrderSameList(taskVo);
 		return  JsonResult.success(result ? taskVo : -1);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 DnD 정렬(다른 리스트)
+	 */
+	@PostMapping("/api/task/reOrder/otherList")
+	public JsonResult taskReOrderOtherList(@RequestBody TaskReOrderVo TaskReOrder) {
+		boolean result = kanbanboardService.taskReOrderOtherList(TaskReOrder);
+		return  JsonResult.success(result ? TaskReOrder : -1);
 	}
 
 }

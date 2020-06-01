@@ -9,7 +9,14 @@ public class TaskVo {
 	private String taskState;	// 업무 상태
 	private String taskContents;// 업무 내용
 	private Long taskOrder;		// 업무 정렬 번호
+	private Long taskListNo;	
 	
+	public Long getTaskListNo() {
+		return taskListNo;
+	}
+	public void setTaskListNo(Long taskListNo) {
+		this.taskListNo = taskListNo;
+	}
 	public Long getTaskNo() {
 		return taskNo;
 	}
@@ -63,7 +70,7 @@ public class TaskVo {
 	public String toString() {
 		return "TaskVo [taskNo=" + taskNo + ", taskStart=" + taskStart + ", taskEnd=" + taskEnd + ", taskPoint="
 				+ taskPoint + ", taskLabel=" + taskLabel + ", taskState=" + taskState + ", taskContents=" + taskContents
-				+ ", taskOrder=" + taskOrder + "]";
+				+ ", taskOrder=" + taskOrder + ", taskListNo=" + taskListNo + "]";
 	}
 	
 }

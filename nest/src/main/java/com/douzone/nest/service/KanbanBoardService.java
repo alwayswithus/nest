@@ -1,6 +1,7 @@
 package com.douzone.nest.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,9 +11,11 @@ import org.springframework.stereotype.Service;
 import com.douzone.nest.repository.KanbanBoardRepository;
 import com.douzone.nest.vo.CheckListVo;
 import com.douzone.nest.vo.CommentVo;
+import com.douzone.nest.vo.CopyTaskVo;
 import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
+import com.douzone.nest.vo.TaskReOrderVo;
 import com.douzone.nest.vo.TaskVo;
 import com.douzone.nest.vo.UserVo;
 
@@ -167,7 +170,11 @@ public class KanbanBoardService {
 	 */
 	public boolean taskListAdd(TaskListVo taskListVo) {
 		Long taskListOrderNo = kanbanBoardRepository.selectTaskListOrderNo(taskListVo.getProjectNo());
-		taskListVo.setTaskListOrder(taskListOrderNo + 1);
+		if(taskListOrderNo == null) {
+			taskListOrderNo = 0L;
+		}		
+		taskListVo.setTaskListOrder(taskListOrderNo + 1L);
+		
 		return 1 == kanbanBoardRepository.taskListAdd(taskListVo);
 	}
 
@@ -176,7 +183,8 @@ public class KanbanBoardService {
 	 * 설명 : 테스크리스트 delete
 	 */
 	public boolean taskListDelete(TaskListVo taskListVo) {
-		boolean result = 1 == kanbanBoardRepository.taskListDelete(taskListVo);
+//		 result = 1 == kanbanBoardRepository.taskListInTaskDelete(taskListVo.getTaskListNo());
+		 boolean result = 1 == kanbanBoardRepository.taskListDelete(taskListVo);
 		if (result) {
 			result = -1 != kanbanBoardRepository.taskListDeleteReOrder(taskListVo);
 		}
@@ -184,7 +192,8 @@ public class KanbanBoardService {
 	}
 
 	/*
-	 * 작성자 : 최인효 설명 : 테스크리스트 이름 변경
+	 * 작성자 : 최인효 
+	 * 설명 : 테스크리스트 이름 변경
 	 */
 	public boolean taskListEditName(TaskListVo taskListVo) {
 		return 1 == kanbanBoardRepository.taskListEditName(taskListVo);
@@ -201,26 +210,105 @@ public class KanbanBoardService {
 		}
 		return result;
 	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 추가
+	 */
+	public TaskVo taskInsert(Map taskInfo) {
+		TaskVo task = null;
+		boolean result = 1 == kanbanBoardRepository.taskInsert(taskInfo);
+		if(result) {
+			task = kanbanBoardRepository.taskSelect(Long.parseLong(taskInfo.get("taskNo").toString()));
+		}
+		return task;
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 삭제
+	 */
+	public boolean taskDelete(TaskReOrderVo taskInfo) {
+		boolean result = -1 != kanbanBoardRepository.taskDelete(taskInfo.getReOrderTask());
+		for(TaskVo vo : taskInfo.getStartTasks()) {
+			System.out.println(vo);
+			result = -1 != kanbanBoardRepository.taskReOrder(vo);
+		}
+		return result;
+	}
 
 	/*
 	 * 작성자 : 최인효 
 	 * 설명 : 테스크 복사
 	 */
-	public boolean taskCopy(TaskVo taskVo) {
-		return 1 == kanbanBoardRepository.taskCopy(taskVo);
+	public boolean copyTask(CopyTaskVo copyTask) {
+		
+		boolean result=true;
+		result = -1 != kanbanBoardRepository.copyTask(copyTask);
+		
+		for(TagListVo vo : copyTask.getTagList()) {
+			vo.setTaskNo(copyTask.getTaskNo());
+			result = -1 != kanbanBoardRepository.copyTag(vo);
+		}
+		
+		for(UserVo vo : copyTask.getMemberList()) {
+			vo.setRoleNo(copyTask.getTaskNo());
+			result = -1 != kanbanBoardRepository.copyUser(vo);
+		}
+		
+		for(CheckListVo vo : copyTask.getCheckList()) {
+			vo.setTaskNo(copyTask.getTaskNo());
+			result = -1 != kanbanBoardRepository.copyCheckList(vo);
+		}
+		
+		return result;
 	}
 	
 	/*
 	 * 작성자 : 최인효 
-	 * 설명 : 테스크 DnD 정렬
+	 * 설명 :  최인효
+	 * 설명 : 테스크 정렬
 	 */
-	public boolean taskReOrder(List<TaskVo> taskVo) {
+	public boolean taskReOrderSameList(List<TaskVo> taskVo) {
 		boolean result=true;
 		for(TaskVo vo : taskVo) {
-//			System.out.println(vo);
 			result = -1 != kanbanBoardRepository.taskReOrder(vo);
 		}
 		return result;
 	}
+
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 DnD 정렬(다른 리스트)
+	 */
+	public boolean taskReOrderOtherList(TaskReOrderVo taskReOrder) {
+		boolean result=true;
+		for(TaskVo vo : taskReOrder.getStartTasks()) {
+			result = -1 !=kanbanBoardRepository.taskReOrder(vo);
+		}
+		
+		for(TaskVo vo : taskReOrder.getEndTasks()) {
+			result = -1 !=kanbanBoardRepository.taskReOrder(vo);
+		}
+		
+		result = -1 != kanbanBoardRepository.taskInTaskListNoChange(taskReOrder);
+		return result;
+	}
+
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 테스크 체크 update
+	 */
+	public boolean taskStateUpdate(TaskVo taskVo) {
+		if(taskVo.getTaskState() == "done") {
+			taskVo.setTaskState("do");
+		}else {
+			taskVo.setTaskState("done"); 
+		}
+		
+		return -1 != kanbanBoardRepository.taskStateUpdate(taskVo);
+	}
+
+
 
 }
