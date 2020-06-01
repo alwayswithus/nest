@@ -12,7 +12,7 @@ import com.douzone.nest.vo.FileVo;
 
 @Service
 public class FileUploadService {
-	private static final String SAVE_PATH="/nest-uploads";
+	private static final String SAVE_PATH="D:/nest-uploads";
 	private static final String URL="/assets/upimages";
 	
 	public String restore(FileVo fileVo, MultipartFile multipartFile) {
@@ -26,9 +26,6 @@ public class FileUploadService {
 			String saveFileName = generateSaveFilename(extName);
 			long fileSize = multipartFile.getSize();
 			
-			System.out.println("### " + originFileName );
-			System.out.println("### " + fileSize);
-			System.out.println("### " + saveFileName);
 			fileVo.setChangeName(saveFileName);
 			
 			byte[] fileData = multipartFile.getBytes();

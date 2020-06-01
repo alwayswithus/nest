@@ -93,4 +93,7 @@ public class ProjectService {
 			return (projectNotMember + authUser + projectWithMember) == 3;
 		}
 	}
+	public List<UserVo> projectMemberSelect(Long projectNo) {
+		return projectRepository.projectMemberSelect(projectNo);
+	}
 }

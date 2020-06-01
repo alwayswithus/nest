@@ -51,4 +51,8 @@ public class ProjectRepository {
 	public int insertAuthUser(Map<String, Object> map) {
 		return sqlSession.insert("project.insertAuthUser", map);
 	}
+
+	public List<UserVo> projectMemberSelect(Long projectNo) {
+		return sqlSession.selectList("project.selectProjectMember", projectNo);
+	}
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.CommentRepository;
+import com.douzone.nest.repository.FileRepository;
 import com.douzone.nest.vo.CommentVo;
 
 @Service
@@ -14,6 +15,9 @@ public class CommentService {
 	
 	@Autowired
 	private CommentRepository commentRepository;
+	
+	@Autowired
+	private FileRepository fileRepository;
 	
 	public boolean insertComment(CommentVo commentVo) {
 			return 1 == commentRepository.insertComment(commentVo);
@@ -29,8 +33,15 @@ public class CommentService {
 		return 1 == commentRepository.updateComment(map);
 	}
 
-	public boolean deleteComment(Long commentNo) {
-		return 1 == commentRepository.deleteComment(commentNo);
+	public boolean deleteComment(Long fileNo, Long commentNo) {
+		
+		int comment = commentRepository.deleteComment(commentNo);
+		int file = 0;
+		if(fileNo != 0) {
+			file = fileRepository.deleteFile(fileNo);
+		}
+			
+		return comment + file > 0;
 	}
 	
 	

@@ -16,4 +16,8 @@ public class FileRepository {
 		return sqlSession.insert("file.insertFile",fileVo);
 	}
 
+	public int deleteFile(Long fileNo) {
+		return sqlSession.delete("comment.deleteFile", fileNo);
+	}
+
 }

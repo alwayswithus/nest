@@ -11,8 +11,18 @@ public class ProjectVo {
 	private String projectEnd; 		// 프로젝트 마감일
 	private String projectState;	// 프로젝트 상태
 	
+	private Long userNo; // 프로젝트 작성자
+	
 	private List<UserVo> members;			// 프로젝트 멤버
 	
+	public Long getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(Long userNo) {
+		this.userNo = userNo;
+	}
+
 	public Long getProjectNo() {
 		return projectNo;
 	}
@@ -73,6 +83,6 @@ public class ProjectVo {
 	public String toString() {
 		return "ProjectVo [projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", projectDesc=" + projectDesc
 				+ ", projectStart=" + projectStart + ", projectEnd=" + projectEnd + ", projectState=" + projectState
-				+ ", members=" + members + "]";
+				+ ", userNo=" + userNo + ", members=" + members + "]";
 	}
 }
