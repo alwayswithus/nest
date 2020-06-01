@@ -108,5 +108,9 @@ public class ProjectRepository {
 	 */
 	public int stateUpdate(ProjectVo projectVo) {
 		return sqlSession.update("project.stateUpdate", projectVo);
+  }
+  
+	public List<UserVo> projectMemberSelect(Long projectNo) {
+		return sqlSession.selectList("project.selectProjectMember", projectNo);
 	}
 }

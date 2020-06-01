@@ -54,10 +54,12 @@ public class CommentController {
 	    * 작성자 : 김우경
 	    * comment delete
 	    */
-		@DeleteMapping("/api/comment/{commentNo}")
+		@DeleteMapping("/api/comment/{commentNo}/{fileNo}")
 		public JsonResult commentDelete(
-				@PathVariable("commentNo") Long commentNo) {
-			boolean result = commentService.deleteComment(commentNo);
+				@PathVariable("commentNo") Long commentNo,
+				@PathVariable("fileNo") Long fileNo) {
+			System.out.println(commentNo + " : " + fileNo);
+			boolean result = commentService.deleteComment(fileNo, commentNo);
 			return JsonResult.success(result ? commentNo : -1);
 		}
 }

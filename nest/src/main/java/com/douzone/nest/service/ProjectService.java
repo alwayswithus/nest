@@ -149,5 +149,9 @@ public class ProjectService {
 	public boolean stateUpdate(ProjectVo projectVo) {
 		int stateUpdate = projectRepository.stateUpdate(projectVo);
 		return stateUpdate == 1;
+  }
+  
+	public List<UserVo> projectMemberSelect(Long projectNo) {
+		return projectRepository.projectMemberSelect(projectNo);
 	}
 }

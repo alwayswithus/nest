@@ -60,6 +60,8 @@ public class KanbanBoardService {
 				task.put("taskState", taskVo.getTaskState());
 				task.put("taskContents", taskVo.getTaskContents());
 				task.put("taskOrder", taskVo.getTaskOrder());
+				task.put("taskRegdate", taskVo.getTaskRegdate());
+	            task.put("taskWriter", taskVo.getTaskWriter());
 
 				// checkList[]
 				JSONArray checkListJSONArray = new JSONArray();
@@ -231,7 +233,6 @@ public class KanbanBoardService {
 	public boolean taskDelete(TaskReOrderVo taskInfo) {
 		boolean result = -1 != kanbanBoardRepository.taskDelete(taskInfo.getReOrderTask());
 		for(TaskVo vo : taskInfo.getStartTasks()) {
-			System.out.println(vo);
 			result = -1 != kanbanBoardRepository.taskReOrder(vo);
 		}
 		return result;

@@ -2,274 +2,273 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kanbanBoard">
 
-	<!-- 테스크 리스트 select -->
-	<select id="selectAllTaskList" resultType="tasklistvo">
-		<![CDATA[
-			select tl.tasklist_no as tasklistNo, tl.tasklist_name as taskListName, tl.tasklist_order as tasklistOrder, tl.project_no projectNo
-			from project p
-			join tasklist tl on(p.project_no = tl.project_no)
-			where p.project_no = #{projectNo}
-			order by tl.tasklist_order
-		]]>
-	</select>
+   <!-- 테스크 리스트 select -->
+   <select id="selectAllTaskList" resultType="tasklistvo">
+      <![CDATA[
+         select tl.tasklist_no as tasklistNo, tl.tasklist_name as taskListName, tl.tasklist_order as tasklistOrder, tl.project_no projectNo
+         from project p
+         join tasklist tl on(p.project_no = tl.project_no)
+         where p.project_no = #{projectNo}
+         order by tl.tasklist_order
+      ]]>
+   </select>
 
-	<!-- 테크스 select -->
-	<select id="selectTasks" resultType="taskvo">
-		<![CDATA[
-			select task_no taskNo,
-					date_format(task_start, '%Y-%m-%d') as taskStart,
-					date_format(task_end, '%Y-%m-%d') as taskEnd,
-					task_point taskPoint,
-					task_label taskLabel,
-					task_state taskState,
-					task_contents taskContents,
-					task_order taskOrder,
-					tasklist_no tasklistNo,
-					project_no projectNo
-			from task
-			where tasklist_no = #{taskListNo}
-		    order by task_order desc
-		]]>
-	</select>
+   <!-- 테크스 select -->
+   <select id="selectTasks" resultType="taskvo">
+      <![CDATA[
+         select task_no taskNo,
+               date_format(task_start, '%Y-%m-%d') as taskStart,
+               date_format(task_end, '%Y-%m-%d') as taskEnd,
+               task_point taskPoint,
+               task_label taskLabel,
+               task_state taskState,
+               task_contents taskContents,
+               task_order taskOrder,
+               tasklist_no tasklistNo,
+                    task_regdate taskRegdate,
+                    task_writer taskWriter,
+               project_no projectNo
+         from task
+         where tasklist_no = #{taskListNo}
+          order by task_order desc
+      ]]>
+   </select>
 
-	<!-- 체크리스트 select -->
-	<select id="selectCheckList" resultType="checklistvo">
-		<![CDATA[
-			select checklist_no checklistNo,
-					checklist_contents checklistContents,
-					checklist_state checklistState,
-					task_no taskNo
-			from checklist
-			where task_no = #{taskNo}
- 		]]>
-	</select>
+   <!-- 체크리스트 select -->
+   <select id="selectCheckList" resultType="checklistvo">
+      <![CDATA[
+         select checklist_no checklistNo,
+               checklist_contents checklistContents,
+               checklist_state checklistState,
+               task_no taskNo
+         from checklist
+         where task_no = #{taskNo}
+       ]]>
+   </select>
 
-	<!-- 태그 select -->
-	<select id="selectTag" resultType="taglistvo">
-		<![CDATA[
-			select tl.tag_no tagNo, 
-					tt.task_no taskNo, 
-					tl.tag_name tagName, 
-					tl.tag_color tagColor
-			from tagtask tt 
-			join taglist tl using(tag_no)
-			where tt.task_no = #{taskNo}
- 		]]>
-	</select>
+   <!-- 태그 select -->
+   <select id="selectTag" resultType="taglistvo">
+      <![CDATA[
+         select tl.tag_no tagNo, 
+               tt.task_no taskNo, 
+               tl.tag_name tagName, 
+               tl.tag_color tagColor
+         from tagtask tt 
+         join taglist tl using(tag_no)
+         where tt.task_no = #{taskNo}
+       ]]>
+   </select>
 
-	<!-- 코멘트 select -->
-	<select id="selectComments" resultType="commentvo">
-		<![CDATA[
-			select  a.comment_no commentNo,
-					a.comment_regdate commentRegdate,
-					a.comment_contents commentContents,
-					a.comment_like commentLike,
-					a.user_no userNo,
-					a.task_no taskNo,
-					a.file_no fileNo,
-			        b.user_name userName,
-			        b.user_photo userPhoto,
-			        c.origin_name originName,
-			        c.file_path filePath,
-			        c.file_regdate fileRegdate
-			from comment a
-			join user b on(a.user_no = b.user_no)
-			left join file c on(a.file_no = c.file_no)
-			where a.task_no = #{taskNo};
- 		]]>
-	</select>
+   <!-- 코멘트 select -->
+   <select id="selectComments" resultType="commentvo">
+      <![CDATA[
+         select  a.comment_no commentNo,
+               a.comment_regdate commentRegdate,
+               a.comment_contents commentContents,
+               a.comment_like commentLike,
+               a.user_no userNo,
+               a.task_no taskNo,
+               a.file_no fileNo,
+                 b.user_name userName,
+                 b.user_photo userPhoto,
+                 c.origin_name originName,
+                 c.file_path filePath,
+                 c.file_regdate fileRegdate
+         from comment a
+         join user b on(a.user_no = b.user_no)
+         left join file c on(a.file_no = c.file_no)
+         where a.task_no = #{taskNo};
+       ]]>
+   </select>
 
-	<!-- 파일 select -->
-	<select id="selectFile" resultType="filevo">
-		<![CDATA[
-			select file_no fileNo,
-				origin_name originName,
-				change_name changeName,
-				file_path filePath,
-				file_regdate fileRegdate,
-				task_no taskNo
-			from file
-			where task_no = #{taskNo}
- 		]]>
-	</select>
+   <!-- 파일 select -->
+   <select id="selectFile" resultType="filevo">
+      <![CDATA[
+         select file_no fileNo,
+            origin_name originName,
+            change_name changeName,
+            file_path filePath,
+            file_regdate fileRegdate,
+            task_no taskNo
+         from file
+         where task_no = #{taskNo}
+       ]]>
+   </select>
 
-	<!-- 업무 유저 select -->
-	<select id="selectMemberList" resultType="uservo">
-		<![CDATA[
-			select u.user_no userNo,
-					u.user_regdate userRegdate,
-					u.user_email userEmail,
-					u.user_name userName,
-					u.user_number userNumber,
-					u.user_birth userBirth,
-					u.user_title userTitle, 
-					u.user_dept userDept, 
-					u.user_photo userPhoto
-			from user u
-			join taskuser tu using(user_no)
-			where task_no = 81
- 		]]>
-	</select>
+   <!-- 업무 유저 select -->
+   <select id="selectMemberList" resultType="uservo">
+      <![CDATA[
+         select u.user_no userNo,
+               u.user_regdate userRegdate,
+               u.user_email userEmail,
+               u.user_name userName,
+               u.user_number userNumber,
+               u.user_birth userBirth,
+               u.user_title userTitle, 
+               u.user_dept userDept, 
+               u.user_photo userPhoto
+         from user u
+         join taskuser tu using(user_no)
+         where task_no = #{taskNo}
+       ]]>
+   </select>
 
-	<!-- 테스크 리스트 정렬 번호 select -->
-	<select id="selectTaskListOrderNo" resultType="Long">
-		<![CDATA[
+   <!-- 테스크 리스트 정렬 번호 select -->
+   <select id="selectTaskListOrderNo" resultType="Long">
+      <![CDATA[
             select max(tasklist_order)
             from tasklist
             where project_no = #{projectNo}
-		]]>
-	</select>
+      ]]>
+   </select>
 
-	<!-- 테스크 리스트 insert -->
-	<insert id="taskListAdd" parameterType="tasklistvo"> 
-		<![CDATA[ 
-			insert into tasklist values(null, #{taskListName}, #{taskListOrder}, #{projectNo})
-		]]>
-		<selectKey keyProperty="taskListNo" resultType="long"
-			order="AFTER">
-			select last_insert_id()
-		</selectKey>
-	</insert>
+   <!-- 테스크 리스트 insert -->
+   <insert id="taskListAdd" parameterType="tasklistvo"> 
+      <![CDATA[ 
+         insert into tasklist values(null, #{taskListName}, #{taskListOrder}, #{projectNo})
+      ]]>
+      <selectKey keyProperty="taskListNo" resultType="long"
+         order="AFTER">
+         select last_insert_id()
+      </selectKey>
+   </insert>
 
-	<!-- 테스크 리스트 delete -->
-	<delete id="taskListDelete" parameterType="tasklistvo"> 
-		<![CDATA[ 
-			delete from tasklist
-			where tasklist_no = #{taskListNo}
-		]]>
-	</delete>
+   <!-- 테스크 리스트 delete -->
+   <delete id="taskListDelete" parameterType="tasklistvo"> 
+      <![CDATA[ 
+         delete from tasklist
+         where tasklist_no = #{taskListNo}
+      ]]>
+   </delete>
 
-	<!-- 테스크 리스트 삭제시 정렬 update -->
-	<update id="taskListDeleteReOrder" parameterType="tasklistvo"> 
-		<![CDATA[
-			update tasklist
-			set tasklist_order = tasklist_order - 1
-			where tasklist_order > #{taskListOrder}
-			and project_no = #{projectNo}	
-		]]>
-	</update>
+   <!-- 테스크 리스트 삭제시 정렬 update -->
+   <update id="taskListDeleteReOrder" parameterType="tasklistvo"> 
+      <![CDATA[
+         update tasklist
+         set tasklist_order = tasklist_order - 1
+         where tasklist_order > #{taskListOrder}
+         and project_no = #{projectNo}   
+      ]]>
+   </update>
 
-	<!-- 테스크 리스트 이름 update -->
-	<update id="taskListEditName" parameterType="tasklistvo"> 
-		<![CDATA[
-			update tasklist
-			set tasklist_name = #{taskListName}
-			where tasklist_no = #{taskListNo}
-		]]>
-	</update>
+   <!-- 테스크 리스트 이름 update -->
+   <update id="taskListEditName" parameterType="tasklistvo"> 
+      <![CDATA[
+         update tasklist
+         set tasklist_name = #{taskListName}
+         where tasklist_no = #{taskListNo}
+      ]]>
+   </update>
 
-	<!-- 테스크리스트 DnD 정렬 update -->
-	<update id="taskListDnDReOrder" parameterType="tasklistvo">
-		<![CDATA[ 
-			update tasklist
-			set tasklist_order = #{taskListOrder}
-			where tasklist_no = #{taskListNo}
-		]]>
-	</update>
-	
-	<!-- 테스크 추가 -->
-	<insert id="taskInsert" parameterType="HashMap">
-		<![CDATA[
-			insert into task 
-			values(null, now(), null, null, 'rgb(223,223,223)', 'do', #{taskContents},#{taskOrder},#{taskListNo},#{projectNo});
-		]]>
-	<selectKey keyProperty = "taskNo" resultType="long" order="AFTER">
-		select last_insert_id()
-	</selectKey>
-	</insert>
-	
-	<!-- 테스크 추가 후 정보 가져오기 -->
-	<select id="taskSelect" resultType="taskvo">
-		<![CDATA[
-			select task_no taskNo,
-					date_format(task_start, '%Y-%m-%d') as taskStart,
-					date_format(task_end, '%Y-%m-%d') as taskEnd,
-					task_point taskPoint,
-					task_label taskLabel,
-					task_state taskState,
-					task_contents taskContents,
-					task_order taskOrder,
-					tasklist_no tasklistNo,
-					project_no projectNo
-			from task
-			where task_no = #{taskNo};
-		]]>
-	</select>
-	
-	<!-- 테스크 삭제 -->
-	<delete id="taskDelete" parameterType="Long">
-		<![CDATA[ 
-			delete from task
-			where task_no = #{reOrderTask}
-		]]>
-	</delete>
-	
-	<!-- 테스크 복사 -->
-	<insert id="copyTask" parameterType="copytaskvo">
-		<![CDATA[
-			INSERT INTO task (task_no, task_start, task_end, task_point, task_label, task_state, task_contents, task_order, tasklist_no, project_no)
-			SELECT null, task_start, task_end, task_point, task_label, task_state, concat(task_contents,'_copy'), task_order, tasklist_no, project_no 
-			FROM task 
-			WHERE task_no = #{originalTaskNo} 
-		]]>
-	<selectKey keyProperty = "taskNo" resultType="long" order="AFTER">
-		select last_insert_id()
-	</selectKey>
-	</insert>
-	
-	<!-- 테스크 복사 (태그) -->
-	<insert id="copyTag" parameterType="taglistvo">
-		<![CDATA[
-			INSERT INTO tagtask 
-			values(#{tagNo},#{taskNo})
-		]]>
-	</insert>	
-	
-	<!-- 테스크 복사 (멤버) -->
-	<insert id="copyUser" parameterType="uservo">
-		<![CDATA[
-			INSERT INTO taskuser 
-			values(#{userNo},#{roleNo})
-		]]>
-	</insert>	
-	
-	<!-- 테스크 복사 (체크리스트) -->
-	<insert id="copyCheckList" parameterType="checklistvo">
-		<![CDATA[
-			insert into checklist 
-			values(null, #{checklistContents}, #{checklistState}, #{taskNo})
-		]]>
-	</insert>	
-	
-	<!-- 테스크 DnD 정렬 update -->
-	<update id="taskDnDReOrder" parameterType="taskvo">
-		<![CDATA[ 
-			update task
-			set task_order = #{taskOrder}
-			where task_no = #{taskNo}
-		]]>
-	</update>
-	
-	<!-- 테스크 DnD 정렬 update -->
-	<update id="taskInTaskListNoChange" parameterType="taskreordervo">
-		<![CDATA[ 
-			update task
-			set tasklist_no = #{endTaskListNo}
-			where task_no = #{reOrderTask}
-		]]>
-	</update>
-	
-	<!-- 테스크 체크 update -->
-	<update id="taskStateUpdate" parameterType="taskvo">
-		<![CDATA[ 
-			update task
-			set task_state = #{taskState}
-			where task_no = #{taskNo}
-		]]>
-	</update>
-	
-
-
-
-
+   <!-- 테스크리스트 DnD 정렬 update -->
+   <update id="taskListDnDReOrder" parameterType="tasklistvo">
+      <![CDATA[ 
+         update tasklist
+         set tasklist_order = #{taskListOrder}
+         where tasklist_no = #{taskListNo}
+      ]]>
+   </update>
+   
+   <!-- 테스크 추가 -->
+   <insert id="taskInsert" parameterType="HashMap">
+      <![CDATA[
+         insert into task 
+         values(null, now(), null, null, 'rgb(223,223,223)', 'do', #{taskContents}, #{taskOrder}, now(), #{taskListNo}, #{projectNo}, #{taskWriter});
+      ]]>
+   <selectKey keyProperty = "taskNo" resultType="long" order="AFTER">
+      select last_insert_id()
+   </selectKey>
+   </insert>
+   
+   <!-- 테스크 추가 후 정보 가져오기 -->
+   <select id="taskSelect" resultType="taskvo">
+      <![CDATA[
+         select task_no taskNo,
+               date_format(task_start, '%Y-%m-%d') as taskStart,
+               date_format(task_end, '%Y-%m-%d') as taskEnd,
+               task_point taskPoint,
+               task_label taskLabel,
+               task_state taskState,
+               task_contents taskContents,
+               task_order taskOrder,
+               tasklist_no tasklistNo,
+                    task_regdate taskRegdate,
+                    task_writer taskWriter,
+               project_no projectNo
+         from task
+         where task_no = #{taskNo};
+      ]]>
+   </select>
+   
+   <!-- 테스크 삭제 -->
+   <delete id="taskDelete" parameterType="Long">
+      <![CDATA[ 
+         delete from task
+         where task_no = #{reOrderTask}
+      ]]>
+   </delete>
+   
+   <!-- 테스크 복사 -->
+   <insert id="copyTask" parameterType="copytaskvo">
+      <![CDATA[
+         INSERT INTO task (task_no, task_start, task_end, task_point, task_label, task_state, task_contents, task_order, tasklist_no, project_no)
+         SELECT null, task_start, task_end, task_point, task_label, task_state, concat(task_contents,'_copy'), task_order, tasklist_no, project_no 
+         FROM task 
+         WHERE task_no = #{originalTaskNo} 
+      ]]>
+   <selectKey keyProperty = "taskNo" resultType="long" order="AFTER">
+      select last_insert_id()
+   </selectKey>
+   </insert>
+   
+   <!-- 테스크 복사 (태그) -->
+   <insert id="copyTag" parameterType="taglistvo">
+      <![CDATA[
+         INSERT INTO tagtask 
+         values(#{tagNo},#{taskNo})
+      ]]>
+   </insert>   
+   
+   <!-- 테스크 복사 (멤버) -->
+   <insert id="copyUser" parameterType="uservo">
+      <![CDATA[
+         INSERT INTO taskuser 
+         values(#{userNo},#{roleNo})
+      ]]>
+   </insert>   
+   
+   <!-- 테스크 복사 (체크리스트) -->
+   <insert id="copyCheckList" parameterType="checklistvo">
+      <![CDATA[
+         insert into checklist 
+         values(null, #{checklistContents}, #{checklistState}, #{taskNo})
+      ]]>
+   </insert>   
+   
+   <!-- 테스크 DnD 정렬 update -->
+   <update id="taskDnDReOrder" parameterType="taskvo">
+      <![CDATA[ 
+         update task
+         set task_order = #{taskOrder}
+         where task_no = #{taskNo}
+      ]]>
+   </update>
+   
+   <!-- 테스크 DnD 정렬 update -->
+   <update id="taskInTaskListNoChange" parameterType="taskreordervo">
+      <![CDATA[ 
+         update task
+         set tasklist_no = #{endTaskListNo}
+         where task_no = #{reOrderTask}
+      ]]>
+   </update>
+   
+   <!-- 테스크 체크 update -->
+   <update id="taskStateUpdate" parameterType="taskvo">
+      <![CDATA[ 
+         update task
+         set task_state = #{taskState}
+         where task_no = #{taskNo}
+      ]]>
+   </update>
 </mapper>

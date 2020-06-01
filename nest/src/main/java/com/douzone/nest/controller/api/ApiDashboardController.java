@@ -1,6 +1,8 @@
 package com.douzone.nest.controller.api;
 
 
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +16,7 @@ import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.ProjectService;
 import com.douzone.nest.vo.ProjectVo;
 import com.douzone.nest.vo.UserProjectVo;
+
 import com.douzone.nest.vo.UserVo;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -28,6 +31,18 @@ public class ApiDashboardController {
 		JSONObject proVo = projectService.selectProject(authUserNo);
 		return JsonResult.success(proVo);
 	}
+	
+	/*
+	 * 작성자:김우경
+	 * project member select
+	 * */
+//	@GetMapping("/api/dashboard/{projectNo}")
+//	public String projectMember(@PathVariable("projectNo") Long projectNo) {
+//		
+//		List<UserVo> userVo = projectService.projectMemberSelect(projectNo);
+//		System.out.println(userVo);
+//		return "";
+//	}
 	
 	@PostMapping("/api/dashboard/add/{authUserNo}")
 	public JsonResult projectAdd(@RequestBody ProjectVo projectVo, @PathVariable("authUserNo") long authUserNo) {

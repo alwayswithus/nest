@@ -38,6 +38,18 @@
 	]]>
 	</select>
 	
+	<select id="selectProjectMember" parameterType="long" resultType="uservo">
+		<![CDATA[
+			select a.user_no as userNo, 
+				   a.user_name as userName,
+				   a.user_photo as userPhoto,
+				   b.project_no as projectNo
+			from user a, userproject b
+			where a.user_no = b.user_no 
+				  and project_no = #{projectNo};
+		]]>
+	</select>
+	
 	<insert id="insertAuthUser" parameterType="map">
 	<![CDATA[
 	insert into userproject values (#{projectNo}, #{userNo}, 1)
