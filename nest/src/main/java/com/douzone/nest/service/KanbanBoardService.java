@@ -60,6 +60,8 @@ public class KanbanBoardService {
 				task.put("taskState", taskVo.getTaskState());
 				task.put("taskContents", taskVo.getTaskContents());
 				task.put("taskOrder", taskVo.getTaskOrder());
+				task.put("taskRegdate", taskVo.getTaskRegdate());
+	            task.put("taskWriter", taskVo.getTaskWriter());
 
 				// checkList[]
 				JSONArray checkListJSONArray = new JSONArray();
