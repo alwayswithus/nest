@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+	<insert id="insertComment" parameterType="commentvo">
+		<choose>
+			<when test="fileNo == null ">
+		   	  <![CDATA[
+		      	insert into comment values(null, now(), #{commentContents}, 0, #{userNo}, #{taskNo}, #{fileNo})
+		      ]]>
+			</when>
+			<otherwise>
+	      	 <![CDATA[
+		      	insert into comment values(null, now(), #{originName}, 0, #{userNo}, #{taskNo}, #{fileNo})
+		      ]]>
+			</otherwise>
+		</choose>
+		<selectKey keyProperty="commentNo" resultType="long"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+	<update id="updateComment" parameterType="map">
+	<choose>
+		<when test="commentContents!=null">
+			update comment set comment_contents=#{commentContents} where comment_no = #{commentNo}
+		</when>
+		<otherwise>
+			update comment set comment_like=#{commentLike} where comment_no = #{commentNo}
+		</otherwise>
+	</choose>
+	</update>
+	
+	<delete id="deleteComment" parameterType="long">
+		delete from comment where comment_no=#{commentNo}; 
+	</delete>
+</mapper>

@@ -36,7 +36,6 @@ public class MainController {
 	
 	@RequestMapping("/dashboard/**")
 	public String setting() {
-		System.out.println("!!!!!");
 		return "index";
 	}
 	

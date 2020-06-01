@@ -23,5 +23,11 @@ public class TagListService {
 	public boolean tagDelete(Long tagNo) {
 		return tagListRepository.tagDelete(tagNo) > 0;
 	}
+	public boolean taskTagInsert(TagListVo tagListVo) {
+		return 1 == tagListRepository.taskTagInsert(tagListVo);
+	}
+	public boolean taskTagDelete(TagListVo tagListVo) {
+		return 1 == tagListRepository.taskTagDelete(tagListVo);
+	}
 
 }

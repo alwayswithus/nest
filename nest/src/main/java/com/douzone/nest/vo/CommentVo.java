@@ -4,7 +4,7 @@ public class CommentVo {
 	private Long commentNo;			// 코멘트 번호
 	private String commentRegdate;	// 코멘트 등록일
 	private String commentContents; // 코멘트 내용
-	private Long commentLike; 		// 코멘트 좋아요
+	private int commentLike; 		// 코멘트 좋아요
 	
 	private Long userNo;			// 회원 번호
 	private String userName; 		//회원 이름
@@ -66,10 +66,10 @@ public class CommentVo {
 	public void setCommentContents(String commentContents) {
 		this.commentContents = commentContents;
 	}
-	public Long getCommentLike() {
+	public int getCommentLike() {
 		return commentLike;
 	}
-	public void setCommentLike(Long commentLike) {
+	public void setCommentLike(int commentLike) {
 		this.commentLike = commentLike;
 	}
 	public Long getUserNo() {

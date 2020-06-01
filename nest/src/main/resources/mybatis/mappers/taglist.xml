@@ -19,9 +19,21 @@
 	</selectKey>
    </insert>
    
+   <insert id="insertTaskTag" parameterType="taglistvo">
+   <![CDATA[
+      insert into tagtask values(#{tagNo}, #{taskNo})
+      ]]>
+   </insert>
+   
    <delete id="deleteTagList" parameterType="taglistvo">
       <![CDATA[
          delete from taglist where tag_no = #{tagNo}
+      ]]>
+   </delete>
+   
+   <delete id="deleteTaskTag" parameterType="taglistvo">
+      <![CDATA[
+         delete from tagtask where tag_no = #{tagNo} and task_no = #{taskNo}
       ]]>
    </delete>
 </mapper>
