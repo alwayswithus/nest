@@ -1,18 +1,32 @@
 package com.douzone.nest.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.douzone.nest.vo.UserVo;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @Controller
 public class MainController {
 	
 	@RequestMapping({"","/"})
-	public String main() {
+	public String main(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		HttpSession session = request.getSession();
+		UserVo authUser = (UserVo) session.getAttribute("authUser");
+		if(authUser!=null){
+			System.out.println("이미 로그인 되있음...");
+//			return "redirect:/dashboard";
+		}
+		
 		return "index";
 	}
-
 
 //	@RequestMapping("/dashboard")
 //	public String dashboard() {
