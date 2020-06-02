@@ -61,7 +61,7 @@ public class KanbanBoardService {
 				task.put("taskContents", taskVo.getTaskContents());
 				task.put("taskOrder", taskVo.getTaskOrder());
 				task.put("taskRegdate", taskVo.getTaskRegdate());
-	            task.put("taskWriter", taskVo.getTaskWriter());
+				task.put("taskWriter", taskVo.getTaskWriter());
 
 				// checkList[]
 				JSONArray checkListJSONArray = new JSONArray();
@@ -118,7 +118,7 @@ public class KanbanBoardService {
 				JSONArray fileJSONArray = new JSONArray();
 				List<FileVo> fileList = kanbanBoardRepository.selectFileList(taskVo.getTaskNo());
 				for (FileVo fileVo : fileList) {
-					// 하나의 TaskList{}
+					// 파일
 					JSONObject file = new JSONObject();
 
 					file.put("fileNo", fileVo.getFileNo());
@@ -135,7 +135,7 @@ public class KanbanBoardService {
 				JSONArray memberJSONArray = new JSONArray();
 				List<UserVo> memberList = kanbanBoardRepository.selectMemberList(taskVo.getTaskNo());
 				for (UserVo memberVo : memberList) {
-					// 하나의 TaskList{}
+					// 멤버
 					JSONObject member = new JSONObject();
 
 					member.put("userNo", memberVo.getUserNo());
@@ -233,6 +233,7 @@ public class KanbanBoardService {
 	public boolean taskDelete(TaskReOrderVo taskInfo) {
 		boolean result = -1 != kanbanBoardRepository.taskDelete(taskInfo.getReOrderTask());
 		for(TaskVo vo : taskInfo.getStartTasks()) {
+			System.out.println(vo);
 			result = -1 != kanbanBoardRepository.taskReOrder(vo);
 		}
 		return result;
@@ -301,13 +302,11 @@ public class KanbanBoardService {
 	 * 설명 : 테스크 체크 update
 	 */
 	public boolean taskStateUpdate(TaskVo taskVo) {
-		if(taskVo.getTaskState() == "done") {
-			taskVo.setTaskState("do");
-		}else {
-			taskVo.setTaskState("done"); 
-		}
-		
 		return -1 != kanbanBoardRepository.taskStateUpdate(taskVo);
+	}
+
+	public boolean taskDateUpdate(TaskVo taskVo) {
+		return -1 != kanbanBoardRepository.taskDateUpdate(taskVo);
 	}
 
 

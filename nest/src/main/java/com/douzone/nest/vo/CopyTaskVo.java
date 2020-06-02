@@ -5,9 +5,18 @@ import java.util.List;
 public class CopyTaskVo {
 	private Long originalTaskNo; 
 	private Long taskNo;
+	private Long taskWriter;
 	private List<TagListVo> tagList; 
 	private List<UserVo> memberList; 
 	private List<CheckListVo> checkList; 
+
+	public Long getTaskWriter() {
+		return taskWriter;
+	}
+
+	public void setTaskWriter(Long taskWriter) {
+		this.taskWriter = taskWriter;
+	}
 
 	public Long getOriginalTaskNo() {
 		return originalTaskNo;
@@ -51,8 +60,8 @@ public class CopyTaskVo {
 
 	@Override
 	public String toString() {
-		return "CopyTaskVo [originalTaskNo=" + originalTaskNo + ", taskNo=" + taskNo + ", tagList=" + tagList
-				+ ", memberList=" + memberList + ", checkList=" + checkList + "]";
+		return "CopyTaskVo [originalTaskNo=" + originalTaskNo + ", taskNo=" + taskNo + ", taskWriter=" + taskWriter
+				+ ", tagList=" + tagList + ", memberList=" + memberList + ", checkList=" + checkList + "]";
 	}
 
 }
