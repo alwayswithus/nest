@@ -27,12 +27,7 @@ public class UserVo {
 	public void setUserNo(Long userNo) {
 		this.userNo = userNo;
 	}
-	public Long getProjectNo() {
-		return projectNo;
-	}
-	public void setProjectNo(Long projectNo) {
-		this.projectNo = projectNo;
-	}
+	
 	public String getUserRegdate() {
 		return userRegdate;
 	}
