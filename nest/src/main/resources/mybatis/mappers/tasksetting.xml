@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tasksetting">
+	
+	<insert id="insertChecklist" parameterType="checklistvo">
+		insert into checklist values(null, #{checklistContents}, #{checklistState}, #{taskNo})
+		<selectKey keyProperty="checklistNo" resultType="long"
+			order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+	
+	<update id="updateChecklist" parameterType="checklistvo">
+		<choose>
+			<when test="checklistContents != null">
+				<![CDATA[
+					update checklist set checklist_contents = #{checklistContents} where checklist_no = #{checklistNo}
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+					update checklist set checklist_state = #{checklistState} where checklist_no = #{checklistNo}
+				]]>
+			</otherwise>
+		</choose>
+	</update>
+	
+	<delete id="deleteChecklist" parameterType="long">
+		delete from checklist where checklist_no = #{checklistNo}
+	</delete>
+</mapper>

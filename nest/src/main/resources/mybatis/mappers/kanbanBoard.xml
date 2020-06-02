@@ -272,6 +272,21 @@
       ]]>
    </update>
    
+    <!-- 태스트 멤버 insert -->
+   <insert id="insertTaskUser" parameterType="taskuservo">
+      <![CDATA[
+         insert into taskuser
+         values(#{userNo}, #{taskNo})
+      ]]>
+   </insert> 
+   
+   <!-- 태스트 멤버 delete -->
+   <delete id="deleteTaskUser" parameterType="taskuservo">
+      <![CDATA[ 
+         delete from taskuser
+         where task_no = #{taskNo} and user_no = #{userNo}
+      ]]>
+   </delete>  
    
    
    <!-- 간트차트용 selectAllTasksByProjectNo -->
@@ -296,5 +311,5 @@
          order by tl.tasklist_order asc, t.task_order desc;
       ]]>
    </select>
-   
+
 </mapper>

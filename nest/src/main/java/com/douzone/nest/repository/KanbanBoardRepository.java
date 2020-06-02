@@ -14,6 +14,7 @@ import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskReOrderVo;
+import com.douzone.nest.vo.TaskUserVo;
 import com.douzone.nest.vo.TaskVo;
 import com.douzone.nest.vo.UserVo;
 
@@ -209,6 +210,19 @@ public class KanbanBoardRepository {
 	 */
 	public int taskStateUpdate(TaskVo taskVo) {
 		return sqlSession.update("kanbanBoard.taskStateUpdate", taskVo);
+	}
+
+	/*
+	 * 작성자 : 김우경
+	 * 설명 : 업무 멤버 추가
+	 */
+	public int taskUserInsert(TaskUserVo taskUserVo) {
+		return sqlSession.insert("kanbanBoard.insertTaskUser",taskUserVo);
+	}
+
+
+	public int taskUserDelete(TaskUserVo taskUserVo) {
+		return sqlSession.delete("kanbanBoard.deleteTaskUser", taskUserVo);
 	}
 
 
