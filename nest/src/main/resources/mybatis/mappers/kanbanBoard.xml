@@ -271,4 +271,28 @@
          where task_no = #{taskNo}
       ]]>
    </update>
+   
+   
+   
+   <!-- 간트차트용 selectAllTasksByProjectNo -->
+      <select id="selectAllTasksByProjectNo" resultType="taskvo">
+      <![CDATA[
+         select task_no taskNo,
+               date_format(task_start, '%Y-%m-%d') as taskStart,
+               date_format(task_end, '%Y-%m-%d') as taskEnd,
+               task_point taskPoint,
+               task_label taskLabel,
+               task_state taskState,
+               task_contents taskContents,
+               task_order taskOrder,
+               tasklist_no tasklistNo,
+               task_regdate taskRegdate,
+               task_writer taskWriter,
+               project_no projectNo
+         from task
+         where project_no = #{projectNo}
+          order by task_order desc
+      ]]>
+   </select>
+   
 </mapper>

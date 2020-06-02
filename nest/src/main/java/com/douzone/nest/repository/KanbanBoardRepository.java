@@ -220,8 +220,12 @@ public class KanbanBoardRepository {
 
 
 
-
-
-	
+	/*
+	 * 간트차트용 업무 불러오기...
+	 * 작성자 : 허길행
+	 */
+	public List<TaskVo> selectAllTasksByProjectNo(Long projectNo) {
+		return sqlSession.selectList("kanbanBoard.selectAllTasksByProjectNo", projectNo);
+	}
 
 }

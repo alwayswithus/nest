@@ -12,6 +12,7 @@ public class TaskVo {
    private Long taskListNo; // 업무 리스트 번호
    private String taskRegdate; // 업무 생성일
    private Long taskWriter; // 업무 작성자
+   private Long taskListOrder; // 업무리스트 정렬번호
    
    public String getTaskRegdate() {
       return taskRegdate;
@@ -87,5 +88,11 @@ public class TaskVo {
             + ", taskOrder=" + taskOrder + ", taskListNo=" + taskListNo + ", taskRegdate=" + taskRegdate
             + ", taskWriter=" + taskWriter + "]";
    }
+public Long getTaskListOrder() {
+	return taskListOrder;
+}
+public void setTaskListOrder(Long taskListOrder) {
+	this.taskListOrder = taskListOrder;
+}
    
 }

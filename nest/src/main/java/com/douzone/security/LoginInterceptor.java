@@ -31,6 +31,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		UserVo authUser = userService.getUser(vo);
 		if(authUser == null) {
+			System.out.println("로그인 실패");
 			request.setAttribute("userVo", vo);
 			response.sendRedirect(PathSetting.PATH_AND_PORT+"/");
 			return false;
@@ -38,12 +39,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		
 		// session 처리
-		HttpSession session = request.getSession(true);
-		session.setAttribute("authUserNo", authUser.getUserNo());
-		session.setAttribute("authUserEmail", authUser.getUserEmail());
-		session.setAttribute("authUserName", authUser.getUserName());
-		session.setAttribute("authUserPhoto", authUser.getUserPhoto());
-		session.setAttribute("authUserBg", authUser.getUserBg());
+//		HttpSession session = request.getSession(true);
+//		session.setAttribute("authUser", authUser);
+//		session.setAttribute("authUserNo", authUser.getUserNo());
+//		session.setAttribute("authUserEmail", authUser.getUserEmail());
+//		session.setAttribute("authUserName", authUser.getUserName());
+//		session.setAttribute("authUserPhoto", authUser.getUserPhoto());
+//		session.setAttribute("authUserBg", authUser.getUserBg());
 		response.sendRedirect(PathSetting.PATH_AND_PORT+"/dashboard");
 		return false;
 	}

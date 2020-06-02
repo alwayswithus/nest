@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.douzone.nest.PathSetting;
 import com.douzone.nest.vo.UserVo;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -17,12 +18,11 @@ public class MainController {
 	@RequestMapping({"","/"})
 	public String main(HttpServletRequest request, HttpServletResponse response) {
 		
-		
 		HttpSession session = request.getSession();
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if(authUser!=null){
-			System.out.println("이미 로그인 되있음...");
-//			return "redirect:/dashboard";
+//			System.out.println("이미 로그인 되있음...");
+//			return "redirect:"+PathSetting.PATH_AND_PORT+"/dashboard";
 		}
 		
 		return "index";
