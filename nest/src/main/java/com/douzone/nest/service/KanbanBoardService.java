@@ -305,6 +305,14 @@ public class KanbanBoardService {
 	public boolean taskStateUpdate(TaskVo taskVo) {
 		return -1 != kanbanBoardRepository.taskStateUpdate(taskVo);
 	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 업무 날짜 변경
+	 */
+	public boolean taskDateUpdate(TaskVo taskVo) {
+		return -1 != kanbanBoardRepository.taskDateUpdate(taskVo);
+	}
   
 	/*
 	 * 작성자 : 김우경
