@@ -1,7 +1,5 @@
 package com.douzone.nest.repository;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,8 +15,16 @@ public class UserProjectRepository {
 	/*
 	 * 작성자 : 한해용
 	 * 설명 : authUser projectNo와 roleNo 가져오기
-	 */
-	public List<UserProjectVo> selectUserProject(Long authUserNo) {
-		return sqlSession.selectList("userproject.selectUserProject", authUserNo);
+	 */	
+	public UserProjectVo selectUserProject(UserProjectVo userProjectVo) {
+		return sqlSession.selectOne("userproject.selectUserProject", userProjectVo);
+	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : member role 수정하기
+	 */	
+	public int roleChange(UserProjectVo userProjectVo) {
+		return sqlSession.update("userproject.roleChange", userProjectVo);
 	}
 }

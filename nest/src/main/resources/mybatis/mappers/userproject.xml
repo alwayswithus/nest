@@ -4,10 +4,17 @@
 <mapper namespace="userproject">
 	<select id="selectUserProject" parameterType="long" resultType="userprojectvo">
 	<![CDATA[
-	 select project_no as projectNo, 
-			role_no as roleNo		
-	 from userproject
-	 where user_no = #{authUserNo}
+	select project_no as projectNo,
+		user_no as userNo,
+		role_no as roleNo 
+	from userproject 
+	where project_no = #{projectNo} and user_no = #{userNo}
 	]]> 
 	</select>
+	
+	<update id="roleChange" parameterType="userprojectvo">
+	<![CDATA[
+	update userproject set role_no = #{roleNo} where project_no = #{projectNo} and user_no = #{userNo} 
+	]]> 
+	</update>
 </mapper>

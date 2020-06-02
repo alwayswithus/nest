@@ -1,8 +1,5 @@
 package com.douzone.nest.service;
 
-import java.util.List;
-
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,25 +18,25 @@ public class UserProjectService {
 	 * 설명 : authUser projectNo와 roleNo 가져오기
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONObject selectUserProject(Long authUserNo) {
+	public JSONObject selectUserProject(UserProjectVo userProjectVo) {
 		
-		// 메인 {}
+		// 하나의 {}
 		JSONObject obj = new JSONObject();
+		UserProjectVo userProject = userProjectRepository.selectUserProject(userProjectVo);
 		
-		// authUserNo []
-		JSONArray ProjectAndRoleNoArray = new JSONArray();
-		List<UserProjectVo> userProjectList = userProjectRepository.selectUserProject(authUserNo);
-		for(UserProjectVo userProjectVo : userProjectList) {
-			// 하나의 {}
-			JSONObject projectAndRoleNo = new JSONObject();
-			projectAndRoleNo.put("projectNo", userProjectVo.getProjectNo());
-			projectAndRoleNo.put("roleNo", userProjectVo.getRoleNo());
-			
-			ProjectAndRoleNoArray.add(projectAndRoleNo);
-		}
-		
-		obj.put("ProjectAndRoleNo", ProjectAndRoleNoArray);
+		obj.put("projectNo", userProject.getProjectNo());
+		obj.put("userNo", userProject.getUserNo());
+		obj.put("roleNo", userProject.getRoleNo());
 		
 		return obj;
+	}
+	
+	/*
+	 * 작성자 : 한해용
+	 * 설명 : member role 수정하기
+	 */	
+	public boolean roleChange(UserProjectVo userProjectVo) {
+		int roleChange = userProjectRepository.roleChange(userProjectVo);
+		return roleChange == 1;
 	}
 }
