@@ -42,7 +42,12 @@
 		<![CDATA[
 			select a.user_no as userNo, 
 				   a.user_name as userName,
+				   a.user_email as userEmail,
+                   a.user_title as userTitle,
+                   a.user_dept as userDept,
+                   a.user_regdate as userRegdate,
 				   a.user_photo as userPhoto,
+                   a.user_birth as userBirth,
 				   b.project_no as projectNo
 			from user a, userproject b
 			where a.user_no = b.user_no 

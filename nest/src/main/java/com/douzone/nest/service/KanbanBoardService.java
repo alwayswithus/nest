@@ -16,6 +16,7 @@ import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskReOrderVo;
+import com.douzone.nest.vo.TaskUserVo;
 import com.douzone.nest.vo.TaskVo;
 import com.douzone.nest.vo.UserVo;
 
@@ -308,6 +309,22 @@ public class KanbanBoardService {
 		}
 		
 		return -1 != kanbanBoardRepository.taskStateUpdate(taskVo);
+	}
+
+	/*
+	 * 작성자 : 김우경
+	 * 설명 : 업무 멤버 추가
+	 */
+	public boolean taskUserInsert(TaskUserVo taskUserVo) {
+		return 1 == kanbanBoardRepository.taskUserInsert(taskUserVo);
+	}
+
+	/*
+	 * 작성자 : 김우경
+	 * 설명 : 업무 멤버 삭제
+	 */
+	public boolean taskUserDelete(TaskUserVo taskUserVo) {
+		return 1 == kanbanBoardRepository.taskUserDelete(taskUserVo);
 	}
 
 

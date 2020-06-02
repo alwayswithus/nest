@@ -7,6 +7,7 @@ import java.util.Map;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import com.douzone.nest.service.KanbanBoardService;
 import com.douzone.nest.vo.CopyTaskVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskReOrderVo;
+import com.douzone.nest.vo.TaskUserVo;
 import com.douzone.nest.vo.TaskVo;
 
 @CrossOrigin(origins = { "http://localhost:3000" })
@@ -136,6 +138,34 @@ public class ApiKanbanboardController {
 	public JsonResult taskReOrderOtherList(@RequestBody TaskReOrderVo TaskReOrder) {
 		boolean result = kanbanboardService.taskReOrderOtherList(TaskReOrder);
 		return  JsonResult.success(result ? TaskReOrder : -1);
+	}
+	
+    /*
+     * 작성자 : 김우경
+     * 설명 : 업무 멤버 추가하기
+     */
+	@PostMapping("/api/task/member/add")
+	public JsonResult taskMemberAdd(@RequestBody TaskUserVo taskUserVo ) {
+		boolean result = kanbanboardService.taskUserInsert(taskUserVo);
+		return JsonResult.success(result ? taskUserVo : -1);
+	}
+	
+	 /*
+     * 작성자 : 김우경
+     * 설명 : 업무 멤버 삭제하기
+     */
+	@DeleteMapping("/api/task/member/{userNo}/{taskNo}")
+	public JsonResult taskMemberDelete(
+			@PathVariable("userNo") Long userNo,
+			@PathVariable("taskNo") Long taskNo) {
+		
+		TaskUserVo taskUserVo = new TaskUserVo();
+		
+		taskUserVo.setUserNo(userNo);
+		taskUserVo.setTaskNo(taskNo);
+		
+		boolean result = kanbanboardService.taskUserDelete(taskUserVo);
+		return JsonResult.success(result ? taskUserVo : -1);
 	}
 
 }
