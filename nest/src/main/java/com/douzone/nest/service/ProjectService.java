@@ -42,6 +42,8 @@ public class ProjectService {
 			project.put("projectRegDate", projectVo.getProjectRegDate());
 			project.put("projectWriter", projectVo.getProjectWriter());
 			project.put("projectWriterName", projectVo.getProjectWriterName());
+			project.put("taskCount", projectVo.getTaskCount());
+			project.put("completedTask", projectVo.getCompletedTask());
 
 			// members []
 			JSONArray memberArray = new JSONArray();
