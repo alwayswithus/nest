@@ -211,8 +211,8 @@
    <!-- 테스크 복사 -->
    <insert id="copyTask" parameterType="copytaskvo">
       <![CDATA[
-         INSERT INTO task (task_no, task_start, task_end, task_point, task_label, task_state, task_contents, task_order, tasklist_no, project_no)
-         SELECT null, task_start, task_end, task_point, task_label, task_state, concat(task_contents,'_copy'), task_order, tasklist_no, project_no 
+         INSERT INTO task (task_no, task_start, task_end, task_point, task_label, task_state, task_contents, task_order, task_regdate, tasklist_no, project_no, task_writer)
+         SELECT null task_no, task_start, task_end, task_point, task_label, task_state, concat(task_contents,'_copy'), task_order, now() task_regdate, tasklist_no, project_no, #{taskWriter} task_writer
          FROM task 
          WHERE task_no = #{originalTaskNo} 
       ]]>
@@ -272,6 +272,15 @@
       ]]>
    </update>
    
+
+   <update id="taskDateUpdate" parameterType="taskvo">
+      <![CDATA[ 
+         update task
+         set task_start = #{taskStart}, task_end = #{taskEnd}
+         where task_no = #{taskNo}
+      ]]>
+   </update>
+  
     <!-- 태스트 멤버 insert -->
    <insert id="insertTaskUser" parameterType="taskuservo">
       <![CDATA[

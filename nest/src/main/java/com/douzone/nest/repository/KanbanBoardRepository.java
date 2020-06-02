@@ -220,6 +220,12 @@ public class KanbanBoardRepository {
 		return sqlSession.insert("kanbanBoard.insertTaskUser",taskUserVo);
 	}
 
+	public int taskDateUpdate(TaskVo taskVo) {
+		System.out.println(taskVo);
+		return sqlSession.update("kanbanBoard.taskDateUpdate", taskVo);
+	}
+
+
 
 	public int taskUserDelete(TaskUserVo taskUserVo) {
 		return sqlSession.delete("kanbanBoard.deleteTaskUser", taskUserVo);
