@@ -20,7 +20,6 @@ public class UserVo {
 	private Long projectNo; 		// 프로젝트 번호
 
 	private Long roleNo;			// 권한번호
-	private Long projectNo;			// 프로젝트번호
 	
 	public Long getUserNo() {
 		return userNo;
@@ -28,12 +27,7 @@ public class UserVo {
 	public void setUserNo(Long userNo) {
 		this.userNo = userNo;
 	}
-	public Long getProjectNo() {
-		return projectNo;
-	}
-	public void setProjectNo(Long projectNo) {
-		this.projectNo = projectNo;
-	}
+	
 	public String getUserRegdate() {
 		return userRegdate;
 	}

@@ -5,17 +5,30 @@
 	<![CDATA[
 		select  p.project_no as projectNo, 
 				p.project_title as projectTitle,
-        		p.project_desc as projectDesc,
-        		date_format(p.project_start, '%Y-%m-%d %H:%m') as projectStart,
-        		date_format(p.project_end, '%Y-%m-%d %H:%m') as projectEnd,
+		        p.project_desc as projectDesc,
+		        date_format(p.project_start, '%Y-%m-%d %H:%m') as projectStart,
+		        date_format(p.project_end, '%Y-%m-%d %H:%m') as projectEnd,
 				p.project_state as projectState,
-        		date_format(p.project_regdate, '%Y-%m-%d %H:%m') as projectRegDate,
-        		p.project_writer as projectWriter,
-        		u.user_name as projectWriterName
+		        date_format(p.project_regdate, '%Y-%m-%d %H:%m') as projectRegDate,
+		        p.project_writer as projectWriter,
+		        u.user_name as projectWriterName,
+		        d.taskCount as taskCount,
+		        d.completedTask as completedTask
 		from project p
 		join user u on p.project_writer = u.user_no
-		join userproject up on p.project_no = up.project_no
-		where up.user_no = #{authUserNo};
+		join userproject up on p.project_no = up.project_no 
+		left join (select a.project_no, ifnull(taskCount, 0) as taskCount, ifnull(completedTask, 0) as completedTask
+					from project as a
+					left outer join (select project_no, count(task_no) as taskCount
+					from task
+					group by project_no) as b
+					on a.project_no = b.project_no left outer join (select project.project_no, count(if(task_state = 'done',1,null)) as completedTask
+																		from project join task
+																		on project.project_no = task.project_no
+																		group by project_no) as c
+																		on b.project_no = c.project_no) as d
+		on p.project_no = d.project_no
+		where up.user_no = #{authUserNo}
  		]]> 
 	</select>
 	<insert id="insertProjectNotMember" parameterType="projectvo">

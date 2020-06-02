@@ -16,6 +16,8 @@ public class ProjectVo {
 	
 	private List<UserVo> members;			// 프로젝트 멤버
 	private String projectWriterName;		// 프로젝트 작성자 이름
+	private int taskCount;					// 업무 개수
+	private int completedTask;				// 완료된 업무 개수
 	
 	public Long getUserNo() {
 		return userNo;
@@ -105,12 +107,28 @@ public class ProjectVo {
 		this.projectWriterName = projectWriterName;
 	}
 
+	public int getTaskCount() {
+		return taskCount;
+	}
+
+	public void setTaskCount(int taskCount) {
+		this.taskCount = taskCount;
+	}
+
+	public int getCompletedTask() {
+		return completedTask;
+	}
+
+	public void setCompletedTask(int completedTask) {
+		this.completedTask = completedTask;
+	}
+
 	@Override
 	public String toString() {
 		return "ProjectVo [projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", projectDesc=" + projectDesc
 				+ ", projectStart=" + projectStart + ", projectEnd=" + projectEnd + ", projectState=" + projectState
-				+ ", projectRegDate=" + projectRegDate + ", projectWriter=" + projectWriter + ", members=" + members
-				+ ", projectWriterName=" + projectWriterName
-				+ ", userNo=" + userNo + ", members=" + members + "]";
+				+ ", projectRegDate=" + projectRegDate + ", projectWriter=" + projectWriter + ", userNo=" + userNo
+				+ ", members=" + members + ", projectWriterName=" + projectWriterName + ", taskCount=" + taskCount
+				+ ", completedTask=" + completedTask + "]";
 	}
 }
