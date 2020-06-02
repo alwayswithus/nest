@@ -14,6 +14,7 @@ import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskReOrderVo;
+import com.douzone.nest.vo.TaskUserVo;
 import com.douzone.nest.vo.TaskVo;
 import com.douzone.nest.vo.UserVo;
 
@@ -211,10 +212,23 @@ public class KanbanBoardRepository {
 		return sqlSession.update("kanbanBoard.taskStateUpdate", taskVo);
 	}
 
+	/*
+	 * 작성자 : 김우경
+	 * 설명 : 업무 멤버 추가
+	 */
+	public int taskUserInsert(TaskUserVo taskUserVo) {
+		return sqlSession.insert("kanbanBoard.insertTaskUser",taskUserVo);
+	}
 
 	public int taskDateUpdate(TaskVo taskVo) {
 		System.out.println(taskVo);
 		return sqlSession.update("kanbanBoard.taskDateUpdate", taskVo);
+	}
+
+
+
+	public int taskUserDelete(TaskUserVo taskUserVo) {
+		return sqlSession.delete("kanbanBoard.deleteTaskUser", taskUserVo);
 	}
 
 
@@ -226,8 +240,12 @@ public class KanbanBoardRepository {
 
 
 
-
-
-	
+	/*
+	 * 간트차트용 업무 불러오기...
+	 * 작성자 : 허길행
+	 */
+	public List<TaskVo> selectAllTasksByProjectNo(Long projectNo) {
+		return sqlSession.selectList("kanbanBoard.selectAllTasksByProjectNo", projectNo);
+	}
 
 }

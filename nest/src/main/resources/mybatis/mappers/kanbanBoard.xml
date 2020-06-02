@@ -280,4 +280,45 @@
          where task_no = #{taskNo}
       ]]>
    </update>
+  
+    <!-- 태스트 멤버 insert -->
+   <insert id="insertTaskUser" parameterType="taskuservo">
+      <![CDATA[
+         insert into taskuser
+         values(#{userNo}, #{taskNo})
+      ]]>
+   </insert> 
+   
+   <!-- 태스트 멤버 delete -->
+   <delete id="deleteTaskUser" parameterType="taskuservo">
+      <![CDATA[ 
+         delete from taskuser
+         where task_no = #{taskNo} and user_no = #{userNo}
+      ]]>
+   </delete>  
+   
+   
+   <!-- 간트차트용 selectAllTasksByProjectNo -->
+      <select id="selectAllTasksByProjectNo" resultType="taskvo">
+      <![CDATA[
+         select t.task_no taskNo,
+               date_format(t.task_start, '%Y-%m-%d') as taskStart,
+               date_format(t.task_end, '%Y-%m-%d') as taskEnd,
+               t.task_point taskPoint,
+               t.task_label taskLabel,
+               t.task_state taskState,
+               t.task_contents taskContents,
+               t.task_order taskOrder,
+               t.tasklist_no tasklistNo,
+               tl.tasklist_order tasklistOrder,
+               t.task_regdate taskRegdate,
+               t.task_writer taskWriter,
+               t.project_no projectNo
+         from task t
+         join tasklist tl on tl.tasklist_no = t.tasklist_no
+         where t.project_no = #{projectNo}
+         order by tl.tasklist_order asc, t.task_order desc;
+      ]]>
+   </select>
+
 </mapper>

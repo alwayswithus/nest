@@ -9,6 +9,7 @@
 		<typeAlias alias="projectvo" type="com.douzone.nest.vo.ProjectVo" />
 		<typeAlias alias="tasklistvo" type="com.douzone.nest.vo.TaskListVo" />
 		<typeAlias alias="taskvo" type="com.douzone.nest.vo.TaskVo" />
+		<typeAlias alias="taskuservo" type="com.douzone.nest.vo.TaskUserVo" />
 		<typeAlias alias="taskreordervo" type="com.douzone.nest.vo.TaskReOrderVo" />
 		<typeAlias alias="copytaskvo" type="com.douzone.nest.vo.CopyTaskVo" />
 		<typeAlias alias="checklistvo" type="com.douzone.nest.vo.CheckListVo" />
@@ -25,6 +26,7 @@
 		<mapper resource="mybatis/mappers/userproject.xml" />
 		<mapper resource="mybatis/mappers/file.xml" />
 		<mapper resource="mybatis/mappers/comment.xml" />
+		<mapper resource="mybatis/mappers/tasksetting.xml" />
 	</mappers>
 
 </configuration>

@@ -2,6 +2,7 @@ package com.douzone.nest.controller.api;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,11 @@ public class ApiUserController {
 		userVo.put("userPhoto", authUser.getUserPhoto());
 		userVo.put("userBg", authUser.getUserBg());
 
+		//session 처리
+		HttpSession session = request.getSession(true);
+		session.setAttribute("authUser", authUser);
+		// 세션받아쓰기
+		// UserVo aa = (UserVo) session.getAttribute("authUser");
 		
 		return JsonResult.success(userVo);
 	}
