@@ -220,6 +220,10 @@ public class KanbanBoardRepository {
 		return sqlSession.insert("kanbanBoard.insertTaskUser",taskUserVo);
 	}
 
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 업무 날짜 변경
+	 */
 	public int taskDateUpdate(TaskVo taskVo) {
 		System.out.println(taskVo);
 		return sqlSession.update("kanbanBoard.taskDateUpdate", taskVo);

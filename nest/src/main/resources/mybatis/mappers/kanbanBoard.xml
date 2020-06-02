@@ -272,7 +272,7 @@
       ]]>
    </update>
    
-
+	<!-- 업무 날짜 변경 -->
    <update id="taskDateUpdate" parameterType="taskvo">
       <![CDATA[ 
          update task

@@ -138,6 +138,16 @@ public class ApiKanbanboardController {
 	public JsonResult taskReOrderOtherList(@RequestBody TaskReOrderVo TaskReOrder) {
 		boolean result = kanbanboardService.taskReOrderOtherList(TaskReOrder);
 		return  JsonResult.success(result ? TaskReOrder : -1);
+	}	
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 업무 날짜 변경
+	 */
+	@PostMapping("/api/tasksetting/calendar/update")
+	public JsonResult taskDateUpdate(@RequestBody TaskVo TaskVo) {
+		boolean result = kanbanboardService.taskDateUpdate(TaskVo);
+		return  JsonResult.success(result ? TaskVo : -1);
 	}
 	
     /*
