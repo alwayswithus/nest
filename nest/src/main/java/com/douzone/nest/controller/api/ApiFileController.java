@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.douzone.nest.dto.JsonResult;
-import com.douzone.nest.service.CommentService;
 import com.douzone.nest.service.FileService;
 import com.douzone.nest.service.FileUploadService;
 import com.douzone.nest.vo.FileVo;
@@ -24,9 +23,6 @@ public class ApiFileController {
 	
 	@Autowired
 	private FileService fileService;
-	
-	@Autowired
-	private CommentService commentService;
 	
 	@PostMapping("/api/upload")
     public JsonResult File(
