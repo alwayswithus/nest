@@ -88,6 +88,15 @@ public class ApiDashboardController {
 	}
 	
 	/*
+	 * 작성자 : 최인효
+	 * 설명 : 프로젝트 마감 날짜 수정
+	 */
+	@PostMapping("api/projectsetting/calendar")
+	public JsonResult projectDateUpdate(@RequestBody ProjectVo projectVo) {
+		boolean result = projectService.projectDateUpdate(projectVo);
+		return JsonResult.success(result ? projectVo : -1);
+  }
+  /*
 	 * 작성자:김우경
 	 * 설명:프로젝트 별 파일 select
 	 */

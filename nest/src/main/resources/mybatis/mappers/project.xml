@@ -126,6 +126,16 @@
 	]]>
 	</update>
 	
+
+	<!-- 프로젝트 마감 날짜 업데이트 -->
+	<update id="projectDateUpdate" parameterType="projectvo">
+	<![CDATA[
+	update project 
+	set project_start = #{projectStart} , project_end = #{projectEnd} 
+	where project_no = #{projectNo}
+	]]>
+	</update>
+
 	<!-- 프로젝트 별 파일 select -->
 	<select id="selectFile" parameterType="long" resultType="filevo">
 		<![CDATA[
@@ -151,4 +161,5 @@
 			where a.project_no=#{projectNo}
 		]]>
 	</select>
+
 </mapper>

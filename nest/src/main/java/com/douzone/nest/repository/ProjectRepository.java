@@ -114,6 +114,14 @@ public class ProjectRepository {
 	public List<UserVo> projectMemberSelect(Long projectNo) {
 		return sqlSession.selectList("project.selectProjectMember", projectNo);
 	}
+  
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 프로젝트 마감 날짜 수정
+	 */
+	public int projectDateUpdate(ProjectVo projectVo) {
+		return sqlSession.update("project.projectDateUpdate", projectVo);
+  }
 	
 	/*
 	 * 작성자:김우경
