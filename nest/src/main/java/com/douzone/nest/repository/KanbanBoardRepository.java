@@ -252,4 +252,14 @@ public class KanbanBoardRepository {
 		return sqlSession.selectList("kanbanBoard.selectAllTasksByProjectNo", projectNo);
 	}
 
+
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 프로젝트 별 회원 권한
+	 */
+	public Long selectAuthUserRole(Map roleMap) {
+		return sqlSession.selectOne("kanbanBoard.selectAuthUserRole", roleMap);
+		
+	}
+
 }
