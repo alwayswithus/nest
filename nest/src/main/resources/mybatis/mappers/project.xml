@@ -13,7 +13,8 @@
 		        p.project_writer as projectWriter,
 		        u.user_name as projectWriterName,
 		        d.taskCount as taskCount,
-		        d.completedTask as completedTask
+		        d.completedTask as completedTask,
+		        up.role_no as roleNo
 		from project p
 		join user u on p.project_writer = u.user_no
 		join userproject up on p.project_no = up.project_no 
