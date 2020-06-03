@@ -12,7 +12,7 @@ import com.douzone.nest.vo.FileVo;
 
 @Service
 public class FileUploadService {
-	private static final String SAVE_PATH="D:/nest-uploads";
+	private static final String SAVE_PATH="/nest-uploads";
 	private static final String URL="/assets/upimages";
 	
 	public String restore(FileVo fileVo, MultipartFile multipartFile) {
