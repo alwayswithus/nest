@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.nest.vo.CheckListVo;
+import com.douzone.nest.vo.TaskVo;
 
 @Repository
 public class TaskSettingRepository {
@@ -22,5 +23,9 @@ public class TaskSettingRepository {
 
 	public int deleteChecklist(Long checklistNo) {
 		return sqlSession.delete("tasksetting.deleteChecklist", checklistNo);
+	}
+
+	public int updatePoint(TaskVo taskVo) {
+		return sqlSession.update("tasksetting.updatePoint", taskVo);
 	}
 }

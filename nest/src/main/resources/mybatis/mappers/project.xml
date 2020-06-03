@@ -13,7 +13,8 @@
 		        p.project_writer as projectWriter,
 		        u.user_name as projectWriterName,
 		        d.taskCount as taskCount,
-		        d.completedTask as completedTask
+		        d.completedTask as completedTask,
+		        up.role_no as roleNo
 		from project p
 		join user u on p.project_writer = u.user_no
 		join userproject up on p.project_no = up.project_no 
@@ -125,6 +126,7 @@
 	]]>
 	</update>
 	
+
 	<!-- 프로젝트 마감 날짜 업데이트 -->
 	<update id="projectDateUpdate" parameterType="projectvo">
 	<![CDATA[
@@ -133,4 +135,31 @@
 	where project_no = #{projectNo}
 	]]>
 	</update>
+
+	<!-- 프로젝트 별 파일 select -->
+	<select id="selectFile" parameterType="long" resultType="filevo">
+		<![CDATA[
+			select distinct 
+					a.task_no as taskNo,
+					a.task_contents as taskContents,
+					b.file_no as fileNo, 
+			        b.file_path as filePath, 
+			        b.origin_name as originName,
+			        b.file_regdate as fileRegdate,
+			        c.project_no as projectNo,
+			        c.project_title as projectTitle,
+			        e.user_no as userNo,
+			        e.user_name as userName,
+			        f.tasklist_no as tasklistNo,
+			        f.tasklist_name as tasklistName
+			from task a
+			join file b on(a.task_no = b.task_no)
+			join project c on(a.project_no = c.project_no)
+			join comment d on(b.file_no = d.file_no)
+			join user e on(d.user_no = e.user_no)
+			join tasklist f on(f.tasklist_no = a.tasklist_no)
+			where a.project_no=#{projectNo}
+		]]>
+	</select>
+
 </mapper>

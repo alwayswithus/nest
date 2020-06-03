@@ -8,6 +8,57 @@ public class FileVo {
 	private String fileRegdate; // 파일 등록일
 	private Long taskNo; //업무번호
 	
+	private String taskContents; //업무 내용
+	private String projectNo; // 프로젝트 번호
+	private String projectTitle; // 프로젝트 이름
+	private Long userNo; // 회원 번호
+	private String userName; //회원 이름
+	
+	private Long tasklistNo; // 태스트리스트 번호
+	private String tasklistName; // 테스트리스트 이름
+	
+	public String getTasklistName() {
+		return tasklistName;
+	}
+	public void setTasklistName(String tasklistName) {
+		this.tasklistName = tasklistName;
+	}
+	public Long getTasklistNo() {
+		return tasklistNo;
+	}
+	public void setTasklistNo(Long tasklistNo) {
+		this.tasklistNo = tasklistNo;
+	}
+	public String getTaskContents() {
+		return taskContents;
+	}
+	public void setTaskContents(String taskContents) {
+		this.taskContents = taskContents;
+	}
+	public String getProjectNo() {
+		return projectNo;
+	}
+	public void setProjectNo(String projectNo) {
+		this.projectNo = projectNo;
+	}
+	public String getProjectTitle() {
+		return projectTitle;
+	}
+	public void setProjectTitle(String projectTitle) {
+		this.projectTitle = projectTitle;
+	}
+	public Long getUserNo() {
+		return userNo;
+	}
+	public void setUserNo(Long userNo) {
+		this.userNo = userNo;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public Long getFileNo() {
 		return fileNo;
 	}
@@ -48,6 +99,8 @@ public class FileVo {
 	@Override
 	public String toString() {
 		return "FileVo [fileNo=" + fileNo + ", originName=" + originName + ", changeName=" + changeName + ", filePath="
-				+ filePath + ", fileRegdate=" + fileRegdate + ", taskNo=" + taskNo + "]";
+				+ filePath + ", fileRegdate=" + fileRegdate + ", taskNo=" + taskNo + ", taskContents=" + taskContents
+				+ ", projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", userNo=" + userNo + ", userName="
+				+ userName + ", tasklistNo=" + tasklistNo + ", tasklistName=" + tasklistName + "]";
 	}
 }

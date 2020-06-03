@@ -1,5 +1,6 @@
 package com.douzone.nest.controller.api;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.ProjectService;
+import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.ProjectVo;
 import com.douzone.nest.vo.UserProjectVo;
 
@@ -93,5 +95,16 @@ public class ApiDashboardController {
 	public JsonResult projectDateUpdate(@RequestBody ProjectVo projectVo) {
 		boolean result = projectService.projectDateUpdate(projectVo);
 		return JsonResult.success(result ? projectVo : -1);
+  }
+  /*
+	 * 작성자:김우경
+	 * 설명:프로젝트 별 파일 select
+	 */
+	@GetMapping("/api/dashboard/{projectNo}/file")
+    public JsonResult projectFile(
+    		@PathVariable("projectNo") Long projectNo) throws IOException {    
+		List <FileVo> fileVo = projectService.selectFile(projectNo);
+
+		return JsonResult.success(fileVo);
 	}
 }

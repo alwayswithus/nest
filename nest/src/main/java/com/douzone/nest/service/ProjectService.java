@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.ProjectRepository;
+import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.ProjectVo;
 import com.douzone.nest.vo.UserProjectVo;
 import com.douzone.nest.vo.UserVo;
@@ -44,6 +45,7 @@ public class ProjectService {
 			project.put("projectWriterName", projectVo.getProjectWriterName());
 			project.put("taskCount", projectVo.getTaskCount());
 			project.put("completedTask", projectVo.getCompletedTask());
+			project.put("roleNo", projectVo.getRoleNo());
 
 			// members []
 			JSONArray memberArray = new JSONArray();
@@ -156,6 +158,7 @@ public class ProjectService {
 	public List<UserVo> projectMemberSelect(Long projectNo) {
 		return projectRepository.projectMemberSelect(projectNo);
 	}
+
 	/*
 	 * 작성자 : 최인효
 	 * 설명 : 프로젝트 마감 날짜 수정 
@@ -163,5 +166,13 @@ public class ProjectService {
 	public boolean projectDateUpdate(ProjectVo projectVo) {
 		int dateUpdate = projectRepository.projectDateUpdate(projectVo);
 		return dateUpdate == 1;
+  }
+	
+	/*
+	 * 작성자:김우경
+	 * 설명:프로젝트 별 파일 select
+	 */
+	public List<FileVo> selectFile(Long projectNo) {
+		return projectRepository.selectFile(projectNo);
 	}
 }

@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -116,5 +119,23 @@ public class WebConfig implements WebMvcConfigurer {
 					env.getProperty("fileupload.resourceMapping"))
 			.addResourceLocations(
 					"file:" + env.getProperty("fileupload.uploadLocation"));
+	}
+	
+	@Bean
+	public JavaMailSender javaMailSender() {
+		JavaMailSenderImpl sender = new JavaMailSenderImpl();
+		sender.setHost("smtp.gmail.com");
+		sender.setPort(587);
+		sender.setUsername("alwayswithusneat@gmail.com");
+		sender.setPassword("nestAWU!");
+		
+		Properties props = new Properties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", true);
+		props.put("mail.smtp.starttls.enable", true);
+		props.put("mail.debug", true);
+		sender.setJavaMailProperties(props);
+
+		return sender;
 	}
 }

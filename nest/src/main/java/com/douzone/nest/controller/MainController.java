@@ -48,7 +48,7 @@ public class MainController {
 		return "index";
 	}
 	
-	@RequestMapping("/dashboard/**")
+	@RequestMapping("/dashboard/{projectNo}/kanbanboard/**")
 	public String setting() {
 		return "index";
 	}
