@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.TaskSettingRepository;
 import com.douzone.nest.vo.CheckListVo;
+import com.douzone.nest.vo.TaskVo;
 
 @Service
 public class TaskSettingService {
@@ -23,6 +24,10 @@ public class TaskSettingService {
 
 	public boolean deleteChecklist(Long checklistNo) {
 		return 1 == taskSettingRepository.deleteChecklist(checklistNo);
+	}
+
+	public boolean updatePoint(TaskVo taskVo) {
+		return 1 == taskSettingRepository.updatePoint(taskVo);
 	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.ProjectRepository;
+import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.ProjectVo;
 import com.douzone.nest.vo.UserProjectVo;
 import com.douzone.nest.vo.UserVo;
@@ -155,5 +156,13 @@ public class ProjectService {
   
 	public List<UserVo> projectMemberSelect(Long projectNo) {
 		return projectRepository.projectMemberSelect(projectNo);
+	}
+	
+	/*
+	 * 작성자:김우경
+	 * 설명:프로젝트 별 파일 select
+	 */
+	public List<FileVo> selectFile(Long projectNo) {
+		return projectRepository.selectFile(projectNo);
 	}
 }

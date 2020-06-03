@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.ProjectVo;
 import com.douzone.nest.vo.UserProjectVo;
 import com.douzone.nest.vo.UserVo;
@@ -112,5 +113,13 @@ public class ProjectRepository {
   
 	public List<UserVo> projectMemberSelect(Long projectNo) {
 		return sqlSession.selectList("project.selectProjectMember", projectNo);
+	}
+	
+	/*
+	 * 작성자:김우경
+	 * 설명: 프로젝트 별 파일 select
+	 */
+	public List<FileVo> selectFile(Long projectNo) {
+		return sqlSession.selectList("project.selectFile", projectNo);
 	}
 }
