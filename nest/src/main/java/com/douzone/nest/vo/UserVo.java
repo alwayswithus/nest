@@ -106,15 +106,19 @@ public class UserVo {
 	public void setUserGrade(String userGrade) {
 		this.userGrade = userGrade;
 	}
+	public Long getProjectNo() {
+		return projectNo;
+	}
+	public void setProjectNo(Long projectNo) {
+		this.projectNo = projectNo;
+	}
 	
 	@Override
 	public String toString() {
 		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", userName="
 				+ userName + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
 				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
-				+ ", projectNo=" + projectNo
-				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", projectNo=" + projectNo + ", roleNo=" + roleNo
-				+ "]";
-
+				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", userGrade=" + userGrade + ", projectNo="
+				+ projectNo + ", roleNo=" + roleNo + "]";
 	}
 }

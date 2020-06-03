@@ -18,6 +18,7 @@ public class ProjectVo {
 	private String projectWriterName;		// 프로젝트 작성자 이름
 	private int taskCount;					// 업무 개수
 	private int completedTask;				// 완료된 업무 개수
+	private Long roleNo;					// 세션 사용자의 프로젝트에서의 권한번호
 	
 	public Long getUserNo() {
 		return userNo;
@@ -123,12 +124,21 @@ public class ProjectVo {
 		this.completedTask = completedTask;
 	}
 
+	public Long getRoleNo() {
+		return roleNo;
+	}
+
+	public void setRoleNo(Long roleNo) {
+		this.roleNo = roleNo;
+	}
+
 	@Override
 	public String toString() {
 		return "ProjectVo [projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", projectDesc=" + projectDesc
 				+ ", projectStart=" + projectStart + ", projectEnd=" + projectEnd + ", projectState=" + projectState
 				+ ", projectRegDate=" + projectRegDate + ", projectWriter=" + projectWriter + ", userNo=" + userNo
 				+ ", members=" + members + ", projectWriterName=" + projectWriterName + ", taskCount=" + taskCount
-				+ ", completedTask=" + completedTask + "]";
+				+ ", completedTask=" + completedTask + ", roleNo=" + roleNo + "]";
 	}
+
 }
