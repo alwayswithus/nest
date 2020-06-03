@@ -156,4 +156,12 @@ public class ProjectService {
 	public List<UserVo> projectMemberSelect(Long projectNo) {
 		return projectRepository.projectMemberSelect(projectNo);
 	}
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 프로젝트 마감 날짜 수정 
+	 */
+	public boolean projectDateUpdate(ProjectVo projectVo) {
+		int dateUpdate = projectRepository.projectDateUpdate(projectVo);
+		return dateUpdate == 1;
+	}
 }
