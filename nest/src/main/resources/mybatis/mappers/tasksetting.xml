@@ -28,4 +28,9 @@
 	<delete id="deleteChecklist" parameterType="long">
 		delete from checklist where checklist_no = #{checklistNo}
 	</delete>
+	
+	<!-- 업무 중요도 업데이트 -->
+	<update id="updatePoint" parameterType="taskvo">
+		update task set task_point=#{taskPoint} where task_no=#{taskNo}
+	</update>
 </mapper>

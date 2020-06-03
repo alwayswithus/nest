@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.TaskSettingService;
 import com.douzone.nest.vo.CheckListVo;
+import com.douzone.nest.vo.TaskVo;
 
 @CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
@@ -40,10 +41,23 @@ public class ApiTaskSettingController {
 		return JsonResult.success(result ? checklistVo : -1);
 	}
 	
+	/*
+	 * 작성자:김우경
+	 * 설명: checklist update
+	 */
 	@DeleteMapping("/api/tasksetting/checklist/{checklistNo}")
 	public JsonResult checklistDelete(@PathVariable("checklistNo") Long checklistNo) {
 		boolean result = taskSettingService.deleteChecklist(checklistNo);
 		return JsonResult.success(result ? checklistNo : -1);
 	}
 	
+	/*
+	 * 작성자:김우경
+	 * 설명:업무 중요도 업데이트
+	 */
+	@PostMapping("/api/tasksetting/point/update")
+	public JsonResult pointUpdate(@RequestBody TaskVo taskVo) {
+		boolean result = taskSettingService.updatePoint(taskVo);
+		return JsonResult.success(result ? taskVo : -1);
+	}
 }

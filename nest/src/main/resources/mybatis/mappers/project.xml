@@ -124,4 +124,30 @@
 	update project set project_state = #{projectState} where project_no = #{projectNo}
 	]]>
 	</update>
+	
+	<!-- 프로젝트 별 파일 select -->
+	<select id="selectFile" parameterType="long" resultType="filevo">
+		<![CDATA[
+			select distinct 
+					a.task_no as taskNo,
+					a.task_contents as taskContents,
+					b.file_no as fileNo, 
+			        b.file_path as filePath, 
+			        b.origin_name as originName,
+			        b.file_regdate as fileRegdate,
+			        c.project_no as projectNo,
+			        c.project_title as projectTitle,
+			        e.user_no as userNo,
+			        e.user_name as userName,
+			        f.tasklist_no as tasklistNo,
+			        f.tasklist_name as tasklistName
+			from task a
+			join file b on(a.task_no = b.task_no)
+			join project c on(a.project_no = c.project_no)
+			join comment d on(b.file_no = d.file_no)
+			join user e on(d.user_no = e.user_no)
+			join tasklist f on(f.tasklist_no = a.tasklist_no)
+			where a.project_no=#{projectNo}
+		]]>
+	</select>
 </mapper>
