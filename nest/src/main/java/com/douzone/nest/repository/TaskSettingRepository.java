@@ -28,4 +28,8 @@ public class TaskSettingRepository {
 	public int updatePoint(TaskVo taskVo) {
 		return sqlSession.update("tasksetting.updatePoint", taskVo);
 	}
+
+	public int updateTaskContents(TaskVo taskVo) {
+		return sqlSession.update("tasksetting.updateTaskContents", taskVo);
+	}
 }

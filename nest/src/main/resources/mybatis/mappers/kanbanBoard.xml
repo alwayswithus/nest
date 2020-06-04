@@ -320,5 +320,15 @@
          order by tl.tasklist_order asc, t.task_order desc;
       ]]>
    </select>
+   <!-- 프로젝트 회원별 권한 -->
+  <select id="selectAuthUserRole" parameterType="HashMap" resultType="Long">
+  	<![CDATA[
+  		select up.role_no
+		from user u
+		join userproject up using(user_no)
+		where u.user_no = #{authUserNo}
+		and up.project_no = #{projectNo};
+  	]]>
+  </select>
 
 </mapper>

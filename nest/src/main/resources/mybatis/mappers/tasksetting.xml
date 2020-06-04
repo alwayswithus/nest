@@ -33,4 +33,9 @@
 	<update id="updatePoint" parameterType="taskvo">
 		update task set task_point=#{taskPoint} where task_no=#{taskNo}
 	</update>
+	
+	<!-- 업무 내용 수정 -->
+	<update id="updateTaskContents" parameterType="taskvo">
+		update task set task_contents = #{taskContents} where task_no=#{taskNo}
+	</update>
 </mapper>

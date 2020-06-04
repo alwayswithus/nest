@@ -33,9 +33,9 @@ public class ApiKanbanboardController {
 	 * 작성자 : 최인효
 	 * 설명 : 테스크 리스트 select
 	 */
-	@GetMapping("/api/kanbanMain/{projectNo}")
-	public JsonResult kanbanMain(@PathVariable("projectNo") Long projectNo) {
-		JSONObject kanbanJson = kanbanboardService.selectKanbanBoard(projectNo);
+	@GetMapping("/api/kanbanMain/{projectNo}/{authUserNo}")
+	public JsonResult kanbanMain(@PathVariable("projectNo") Long projectNo,@PathVariable("authUserNo") Long authUserNo) {
+		JSONObject kanbanJson = kanbanboardService.selectKanbanBoard(projectNo,authUserNo);
 		return JsonResult.success(kanbanJson);
 	}
 	
