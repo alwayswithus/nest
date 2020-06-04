@@ -162,4 +162,27 @@
 		]]>
 	</select>
 
+	<update id="userProjectUpdate" parameterType="projectvo">
+		<![CDATA[
+			update userproject set role_no = 1 where user_no = #{userNo} and project_no = #{projectNo}
+		]]>
+	</update>
+
+	<delete id="userProjectDelete" parameterType="projectvo">
+		<![CDATA[
+			delete from userproject where user_no = #{sessionUserNo} and project_no = #{projectNo}
+		]]>
+	</delete>
+	
+	<delete id="notTransferDelete" parameterType="projectvo">
+		<![CDATA[
+			delete from userproject where user_no = #{sessionUserNo} and project_no = #{projectNo}
+		]]>
+	</delete>
+	
+	<delete id="foreverdelete" parameterType="projectvo">
+		<![CDATA[
+			delete from project where project_no = #{projectNo}
+		]]>
+	</delete>
 </mapper>

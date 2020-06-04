@@ -107,4 +107,23 @@ public class ApiDashboardController {
 
 		return JsonResult.success(fileVo);
 	}
+	
+	@PostMapping("api/dashboard/delete")
+	public JsonResult projectDelete(@RequestBody ProjectVo projectVo) {
+		boolean result = projectService.projectDelete(projectVo);
+		return JsonResult.success(result ? projectVo : -1);
+	}
+	
+	@PostMapping("api/dashboard/notTransferDelete")
+	public JsonResult notTransferDelete(@RequestBody ProjectVo projectVo) {
+		boolean result = projectService.notTransferDelete(projectVo);
+		return JsonResult.success(result ? projectVo : -1);
+	}
+	
+	@PostMapping("api/dashboard/foreverdelete")
+	public JsonResult foreverdelete(@RequestBody ProjectVo projectVo) {
+		boolean result = projectService.foreverdelete(projectVo);
+		return JsonResult.success(result ? projectVo : -1);
+	}
+	
 }
