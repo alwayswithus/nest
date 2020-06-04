@@ -175,4 +175,20 @@ public class ProjectService {
 	public List<FileVo> selectFile(Long projectNo) {
 		return projectRepository.selectFile(projectNo);
 	}
+	
+	public boolean projectDelete(ProjectVo projectVo) {
+		int userProjectUpdate = projectRepository.userProjectUpdate(projectVo);
+		int userProjectDelete = projectRepository.userProjectDelete(projectVo);
+		return (userProjectUpdate + userProjectDelete) == 2;
+	}
+	
+	public boolean notTransferDelete(ProjectVo projectVo) {
+		int notTransferDelete = projectRepository.notTransferDelete(projectVo);
+		return notTransferDelete == 1;
+	}
+	
+	public boolean foreverdelete(ProjectVo projectVo) {
+		int foreverdelete = projectRepository.foreverdelete(projectVo);
+		return foreverdelete == 1;
+	}
 }

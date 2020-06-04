@@ -20,6 +20,8 @@ public class ProjectVo {
 	private int completedTask;				// 완료된 업무 개수
 	private Long roleNo;					// 세션 사용자의 프로젝트에서의 권한번호
 	
+	private Long sessionUserNo;				// 세션 사용자 번호
+	
 	public Long getUserNo() {
 		return userNo;
 	}
@@ -132,13 +134,20 @@ public class ProjectVo {
 		this.roleNo = roleNo;
 	}
 
+	public Long getSessionUserNo() {
+		return sessionUserNo;
+	}
+
+	public void setSessionUserNo(Long sessionUserNo) {
+		this.sessionUserNo = sessionUserNo;
+	}
+
 	@Override
 	public String toString() {
 		return "ProjectVo [projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", projectDesc=" + projectDesc
 				+ ", projectStart=" + projectStart + ", projectEnd=" + projectEnd + ", projectState=" + projectState
 				+ ", projectRegDate=" + projectRegDate + ", projectWriter=" + projectWriter + ", userNo=" + userNo
 				+ ", members=" + members + ", projectWriterName=" + projectWriterName + ", taskCount=" + taskCount
-				+ ", completedTask=" + completedTask + ", roleNo=" + roleNo + "]";
+				+ ", completedTask=" + completedTask + ", roleNo=" + roleNo + ", sessionUserNo=" + sessionUserNo + "]";
 	}
-
 }

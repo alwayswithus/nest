@@ -130,4 +130,20 @@ public class ProjectRepository {
 	public List<FileVo> selectFile(Long projectNo) {
 		return sqlSession.selectList("project.selectFile", projectNo);
 	}
+	
+	public int userProjectUpdate(ProjectVo projectVo) {
+		return sqlSession.update("project.userProjectUpdate", projectVo);
+	}
+	
+	public int userProjectDelete(ProjectVo projectVo) {
+		return sqlSession.delete("project.userProjectDelete", projectVo); 
+	}
+	
+	public int notTransferDelete(ProjectVo projectVo) {
+		return sqlSession.delete("project.notTransferDelete", projectVo);
+	}
+	
+	public int foreverdelete(ProjectVo projectVo) {
+		return sqlSession.delete("project.foreverdelete", projectVo);
+	}
 }
