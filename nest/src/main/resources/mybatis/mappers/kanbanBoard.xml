@@ -112,6 +112,15 @@
          where task_no = #{taskNo}
        ]]>
    </select>
+   
+      <!-- 프로젝트 이름 select -->
+   <select id="selectProjectTitle" resultType="string">
+      <![CDATA[
+        select project_title
+		from project
+		where project_no = #{projectNo}
+       ]]>
+   </select>
 
    <!-- 테스크 리스트 정렬 번호 select -->
    <select id="selectTaskListOrderNo" resultType="Long">
