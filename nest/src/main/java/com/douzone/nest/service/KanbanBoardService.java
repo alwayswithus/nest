@@ -1,5 +1,6 @@
 package com.douzone.nest.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,7 @@ public class KanbanBoardService {
 	 * 설명 : 테스크리스트 JSON 생성
 	 */
 	@SuppressWarnings("unchecked")
-	public JSONObject selectKanbanBoard(Long projectNo) {
+	public JSONObject selectKanbanBoard(Long projectNo, Long authUserNo) {
 
 		// 메인 {}
 		JSONObject obj = new JSONObject();
@@ -163,6 +164,13 @@ public class KanbanBoardService {
 			allTaskLsitJSONArray.add(taskList);
 		}
 		obj.put("allTaskList", allTaskLsitJSONArray);
+		
+		Map <String, Object> roleMap = new HashMap<String, Object>();
+		roleMap.put("projectNo", projectNo);
+		roleMap.put("authUserNo", authUserNo);
+		
+		Long authUserRole = kanbanBoardRepository.selectAuthUserRole(roleMap);
+		obj.put("authUserRole", authUserRole);
 
 		return obj;
 	}
