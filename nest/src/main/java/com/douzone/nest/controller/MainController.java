@@ -28,10 +28,10 @@ public class MainController {
 		return "index";
 	}
 
-//	@RequestMapping("/dashboard")
-//	public String dashboard() {
-//		return "index";
-//	}
+	@RequestMapping("/dashboard")
+	public String dashboard() {
+		return "index";
+	}
 	
 	@RequestMapping("/profile")
 	public String profile() {

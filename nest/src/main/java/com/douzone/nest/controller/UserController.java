@@ -40,6 +40,13 @@ public class UserController {
 		//return "index";
 	}
 	
+	// 회원가입 이메일 발송...
+	@RequestMapping("/signup/sendmail")
+	public void signUpSendMail() {
+		userService.signUpSendMail();
+		//return "index";
+	}
+	
 	// 
 	@PostMapping("/auth")
 	public void auth() {}
@@ -94,4 +101,6 @@ public class UserController {
 //		}
 //		return "redirect:"+PathSetting.PATH_AND_PORT+"/";
 //	}
+	
+	
 }

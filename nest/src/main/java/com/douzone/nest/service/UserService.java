@@ -65,4 +65,13 @@ public class UserService {
 		int userInvite = userRepository.userInvite(userVo);
 		return userInvite == 1;
 	}
+
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 회원 가입용 메일 보내기
+	 */
+	public void signUpSendMail() {
+		// TODO Auto-generated method stub
+		
+	}
 }
