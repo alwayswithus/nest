@@ -60,4 +60,19 @@ public class ApiTaskSettingController {
 		boolean result = taskSettingService.updatePoint(taskVo);
 		return JsonResult.success(result ? taskVo : -1);
 	}
+	
+    /*
+     * 작성자: 김우경
+     * 설명: 업무 내용 업데이트
+     */
+	@PostMapping("/api/tasksetting/task/{taskNo}")
+	public JsonResult taskContentsUpdate(
+			@PathVariable("taskNo") Long taskNo,
+			@RequestBody String taskContents) {
+		TaskVo taskVo = new TaskVo();
+		taskVo.setTaskNo(taskNo);
+		taskVo.setTaskContents(taskContents);
+		boolean result = taskSettingService.updateTaskContents(taskVo);
+		return JsonResult.success(result ? taskVo : -1);
+	}
 }

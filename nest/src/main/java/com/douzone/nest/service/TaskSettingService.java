@@ -29,5 +29,9 @@ public class TaskSettingService {
 	public boolean updatePoint(TaskVo taskVo) {
 		return 1 == taskSettingRepository.updatePoint(taskVo);
 	}
+
+	public boolean updateTaskContents(TaskVo taskVo) {
+		return 1 == taskSettingRepository.updateTaskContents(taskVo);
+	}
 	
 }
