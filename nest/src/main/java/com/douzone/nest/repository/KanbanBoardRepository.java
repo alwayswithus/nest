@@ -262,4 +262,13 @@ public class KanbanBoardRepository {
 		
 	}
 
+
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 프로젝트 이름 찾기(상단바)
+	 */
+	public String selectProjectTitle(Long projectNo) {
+		return sqlSession.selectOne("kanbanBoard.selectProjectTitle",projectNo);
+	}
+
 }

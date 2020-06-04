@@ -171,6 +171,10 @@ public class KanbanBoardService {
 		
 		Long authUserRole = kanbanBoardRepository.selectAuthUserRole(roleMap);
 		obj.put("authUserRole", authUserRole);
+		
+		String projectTitle = kanbanBoardRepository.selectProjectTitle(projectNo);
+		obj.put("projectTitle", projectTitle);
+		
 
 		return obj;
 	}
