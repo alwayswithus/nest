@@ -1,16 +1,11 @@
 package com.douzone.nest.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.douzone.nest.PathSetting;
 import com.douzone.nest.service.UserService;
 import com.douzone.nest.vo.UserVo;
 
@@ -42,8 +37,12 @@ public class UserController {
 	
 	// 회원가입 이메일 발송...
 	@RequestMapping("/signup/sendmail")
-	public void signUpSendMail() {
-		userService.signUpSendMail();
+	public void signUpSendMail() throws Exception {
+		
+		UserVo userVo = new UserVo();
+		userVo.setUserEmail("hgh8401@gmail.com");
+		userService.signUpSendMail(userVo);
+		
 		//return "index";
 	}
 	

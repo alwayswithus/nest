@@ -42,4 +42,12 @@ public class UserRepository {
 	public int userInvite(UserVo userVo) {
 		return sqlSession.insert("user.userInvite", userVo);
 	}
+
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 이메일 인증키 세팅...
+	 */
+	public int setEmailConfirm(UserVo userVo) {
+		return sqlSession.update("user.setEmailConfirm", userVo);
+	}
 }

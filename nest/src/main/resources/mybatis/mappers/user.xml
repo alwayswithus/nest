@@ -33,4 +33,11 @@
 		select last_insert_id()
 		</selectKey>
 	</insert>
+	
+	<update id="setEmailConfirm" parameterType="uservo">
+		<![CDATA[
+		update user set user_password = #{userPassword} where user_no = #{userNo}
+		]]>
+	</update>
+	
 </mapper>
