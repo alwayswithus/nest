@@ -63,26 +63,20 @@ public class ApiFileController {
 	}
 	
 
-	@GetMapping("/api/download/{originName}")
-	public ResponseEntity<Resource> downloadFile(@PathVariable("originName") String originName) throws IOException {
-		File target = new File("/nest-uploads/20205434653515.jpg");
-		System.out.println(target.getName());
-		if(target.exists()) {
-			HttpHeaders headers = new HttpHeaders();
-			headers.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + target.getName());
-			headers.set("Access-Control-Expose-Headers", HttpHeaders.CONTENT_DISPOSITION);
-			
-			InputStreamResource resource = new InputStreamResource(new FileInputStream(target));
-			System.out.println(headers);
-			
-//			return ResponseEntity.ok().headers(headers).body(target);
-			return ResponseEntity.ok()
-					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + target.getName() + "\"")
-					.contentLength(target.length())
-					.contentType(MediaType.parseMediaType("application/octet-stream"))
-					.body(resource);
-		}
+	@GetMapping("/api/download/{fileNo}")
+	@CrossOrigin(value= {"*"}, exposedHeaders = {"Content-Disposition"})
+	public ResponseEntity<Resource> downloadFile(@PathVariable("fileNo") Long fileNo) throws IOException {
+		String changeName = fileService.findByFileNo(fileNo);
 		
-		return ResponseEntity.notFound().build();
+		Path path = Paths.get("/nest-uploads/" + changeName);
+		
+		String contentType = Files.probeContentType(path);
+		HttpHeaders headers = new HttpHeaders();
+		
+		headers.add(HttpHeaders.CONTENT_TYPE, contentType); // content type을 조사하여 response header에 세팅
+		headers.set("Content-Disposition", "attachment; filename=" + path.getFileName()); // 브라우저에서 url 호출
+		Resource resource = new InputStreamResource(Files.newInputStream(path));
+		
+		return new ResponseEntity<>(resource, headers, HttpStatus.OK);
 	}
 }
