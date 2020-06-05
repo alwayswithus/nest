@@ -32,5 +32,9 @@ public class FileService {
 //		System.out.println(commentVo);
 		return file == 1;
 	}
+
+	public String findByFileNo(Long fileNo) {
+		return fileRepository.findByFileNo(fileNo);
+	}
 	
 }

@@ -20,4 +20,8 @@ public class FileRepository {
 		return sqlSession.delete("comment.deleteFile", fileNo);
 	}
 
+	public String findByFileNo(Long fileNo) {
+		return sqlSession.selectOne("file.findByFileNo", fileNo);
+	}
+
 }
