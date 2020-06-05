@@ -50,4 +50,9 @@ public class UserRepository {
 	public int setEmailConfirm(UserVo userVo) {
 		return sqlSession.update("user.setEmailConfirm", userVo);
 	}
+
+	public UserVo findByEmail(UserVo inputVo) {
+		UserVo result = sqlSession.selectOne("user.findByEmail",inputVo);
+		return result;
+	}
 }

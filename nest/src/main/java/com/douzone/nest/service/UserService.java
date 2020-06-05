@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.UserRepository;
 import com.douzone.nest.vo.UserVo;
+import com.douzone.util.MailController;
 import com.douzone.util.MailHandler;
 import com.douzone.util.TempKey;
 
@@ -73,28 +74,19 @@ public class UserService {
 	public boolean userInvite(UserVo userVo) {
 		int userInvite = userRepository.userInvite(userVo);
 		
-		// 인증 이메일 발송 코드...
+		/* 인증 이메일 발송 코드...*/
+		// 인증키 생성
         String key = new TempKey().getKey(50, false);
+        // 데이터 베이스에 인증키 세팅
         userVo.setUserPassword(key);
         userRepository.setEmailConfirm(userVo);
+        // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
         try {
-            MailHandler sendMail = new MailHandler(mailSender);
-            sendMail.setSubject("[이메일 인증]");
-			sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
-			        .append("<a href='http://localhost:8080/nest/user/emailConfirm?key=")
-			        .append(key)
-			        .append("' target='_blenk'>이메일 인증 확인</a>")
-			        .toString());
-	        sendMail.setFrom("alwayswithusneat@gmail.com", "동행-둥지프로젝트");
-	        sendMail.setTo(userVo.getUserEmail());
-	        sendMail.send();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+        	MailController mailController = new MailController(new MailHandler(mailSender));
+        	mailController.userInviteMailSend(userVo.getUserEmail(), key);
+		} catch (MessagingException e) { e.printStackTrace(); }
         //이메일 발송 확인
-        System.out.println("메일발송!");
+        System.out.println("새 프로젝트 맴버 초대 메일발송!");
         
 		return userInvite == 1;
 	}
@@ -103,24 +95,33 @@ public class UserService {
 	 * 작성자 : 허길행
 	 * 설명 : 회원 가입용 메일 보내기
 	 */
-	public void signUpSendMail(UserVo userVo)
-			throws MessagingException, 
-			       UnsupportedEncodingException {
+	public boolean signUpSendMail(UserVo userVo) {
 
-		//userRepository.insertUser(userVo);
-        String key = new TempKey().getKey(50, false);
-        //userRepository.insertEmailConfirm(userVo.getUserNo(), key);
-        MailHandler sendMail = new MailHandler(mailSender);
-        sendMail.setSubject("[이메일 인증]");
-        sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
-                .append("<a href='http://localhost:8080/nest/user/emailConfirm?key=")
-                .append(key)
-                .append("' target='_blenk'>이메일 인증 확인</a>")
-                .toString());
-        sendMail.setFrom("alwayswithusneat@gmail.com", "동행-둥지프로젝트");
-        sendMail.setTo(userVo.getUserEmail());
-        sendMail.send();
-        System.out.println("메일발송!");
+		int userInvite = userRepository.userInvite(userVo);
 		
+		/* 인증 이메일 발송 코드...*/
+		// 인증키 생성
+        String key = new TempKey().getKey(50, false);
+        // 데이터 베이스에 인증키 세팅
+        userVo.setUserPassword(key);
+        userRepository.setEmailConfirm(userVo);
+        // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
+        try {
+        	MailController mailController = new MailController(new MailHandler(mailSender));
+        	mailController.userInviteMailSend(userVo.getUserEmail(), key);
+		} catch (MessagingException e) { e.printStackTrace(); }
+        //이메일 발송 확인
+        System.out.println("회원 가입용 메일발송!");
+		
+        return userInvite == 1;
+	}
+
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 회원 이메일 체크.
+	 */
+	public UserVo checkUserEmail(UserVo userVo) {
+		
+		return userRepository.findByEmail(userVo);
 	}
 }

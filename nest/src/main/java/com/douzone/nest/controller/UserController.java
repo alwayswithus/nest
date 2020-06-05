@@ -1,11 +1,16 @@
 package com.douzone.nest.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.douzone.nest.PathSetting;
 import com.douzone.nest.service.UserService;
 import com.douzone.nest.vo.UserVo;
 
@@ -101,5 +106,24 @@ public class UserController {
 //		return "redirect:"+PathSetting.PATH_AND_PORT+"/";
 //	}
 	
+	@RequestMapping(value="emailConfirm", method=RequestMethod.GET)
+    public String emailConfirm(String key){
+		
+		
+		return "index";
+    }
 	
+	
+	@PostMapping("/sendtomailbysignup")
+	public void sendToMail(HttpServletRequest request, HttpServletResponse response) {
+		
+		String email = request.getParameter("email");
+		
+		System.out.println(email);
+		System.out.println("이메일 발송준비 완료");
+		
+//		UserVo userVo = new UserVo();
+//		userVo.setUserEmail(email);
+//		userService.signUpSendMail(userVo);
+	}
 }

@@ -69,6 +69,36 @@ public class ApiUserController {
 		return JsonResult.success(userVo);
 	}
 	
+	// 이메일 체크
+	@SuppressWarnings("unchecked")
+	@PostMapping("/api/emailcheck")
+	public JsonResult emailCheck(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("이메일 체크중");
+		
+		String email = request.getParameter("email");
+		
+		UserVo vo = new UserVo();
+		vo.setUserEmail(email);
+		
+		JSONObject userVo = new JSONObject();
+		
+		UserVo user = userService.checkUserEmail(vo);
+		if(user != null) {
+			userVo.put("userNo", user.getUserNo());
+			userVo.put("userName", user.getUserName());
+			userVo.put("userEmail", user.getUserEmail());
+			userVo.put("userGrade", user.getUserGrade());
+			
+			System.out.println("이메일 있음");
+			System.out.println(user.getUserGrade()+" !!!!");
+			return JsonResult.success(userVo);
+		}else {
+			System.out.println("이메일 없음");
+			//return JsonResult.fail("This email is not in the database.");
+			return JsonResult.success(userVo);
+		}
+	}
+	
 	// 백 그라운드 적용
 	@PostMapping("/api/user/backgroundChange")
 	public JsonResult backgroundChange(@RequestBody UserVo userVo) {
