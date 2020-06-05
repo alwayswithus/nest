@@ -1,6 +1,5 @@
 package com.douzone.nest.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +19,7 @@ import com.douzone.nest.vo.ProjectVo;
 import com.douzone.nest.vo.UserProjectVo;
 import com.douzone.nest.vo.UserVo;
 import com.douzone.util.MailHandler;
+import com.douzone.util.MailController;
 import com.douzone.util.TempKey;
 
 @Service
@@ -139,28 +139,21 @@ public class ProjectService {
 		int userInsert = projectRepository.userInsert(userVo);
 		int userProjectJoin = projectRepository.userProjectJoin(userVo);
 		
-		// 인증 이메일 발송 코드...
+		/* 인증 이메일 발송 코드...*/
+		// 인증키 생성
         String key = new TempKey().getKey(50, false);
+        // 데이터 베이스에 인증키 세팅
         userVo.setUserPassword(key);
         userRepository.setEmailConfirm(userVo);
+        // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
         try {
-            MailHandler sendMail = new MailHandler(mailSender);
-            sendMail.setSubject("[이메일 인증]");
-			sendMail.setText(new StringBuffer().append("<h1>메일인증</h1>")
-			        .append("<a href='http://localhost:8080/nest/user/emailConfirm?key=")
-			        .append(key)
-			        .append("' target='_blenk'>이메일 인증 확인</a>")
-			        .toString());
-	        sendMail.setFrom("alwayswithusneat@gmail.com", "동행-둥지프로젝트");
-	        sendMail.setTo(userVo.getUserEmail());
-	        sendMail.send();
+        	MailController mailController = new MailController(new MailHandler(mailSender));
+        	mailController.userInviteMailSend(userVo.getUserEmail(), key);
 		} catch (MessagingException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
         //이메일 발송 확인
-        System.out.println("메일발송!");
+        System.out.println("프로젝트 멤버 초대 메일발송!");
 		
 		return (userInsert + userProjectJoin) == 2;
 	}

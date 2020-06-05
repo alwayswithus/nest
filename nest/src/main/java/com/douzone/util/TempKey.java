@@ -2,6 +2,7 @@ package com.douzone.util;
 
 import java.util.Random;
 
+// 인증키 생성용 클래스
 public class TempKey {
     
     private boolean lowerCheck;
