@@ -44,9 +44,9 @@ public class UserController {
 	@RequestMapping("/signup/sendmail")
 	public void signUpSendMail() throws Exception {
 		
-		UserVo userVo = new UserVo();
-		userVo.setUserEmail("hgh8401@gmail.com");
-		userService.signUpSendMail(userVo);
+		//UserVo userVo = new UserVo();
+		//userVo.setUserEmail("hgh8401@gmail.com");
+		//userService.signUpSendMail(userVo);
 		
 		//return "index";
 	}
@@ -114,9 +114,10 @@ public class UserController {
     }
 	
 	
-	@PostMapping("/sendtomailbysignup")
-	public void sendToMail(HttpServletRequest request, HttpServletResponse response) {
+	@PostMapping("/sendmail")
+	public String sendToMailSignUp(HttpServletRequest request, HttpServletResponse response) {
 		
+		String mode = request.getParameter("mode");
 		String email = request.getParameter("email");
 		
 		System.out.println(email);
@@ -125,5 +126,6 @@ public class UserController {
 //		UserVo userVo = new UserVo();
 //		userVo.setUserEmail(email);
 //		userService.signUpSendMail(userVo);
+		return "redirect:"+PathSetting.PATH_AND_PORT+"/sendmail/"+mode;
 	}
 }

@@ -1,6 +1,5 @@
 package com.douzone.nest.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -123,5 +122,13 @@ public class UserService {
 	public UserVo checkUserEmail(UserVo userVo) {
 		
 		return userRepository.findByEmail(userVo);
+	}
+
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 회원 이메일 이름 체크.
+	 */
+	public UserVo checkUserEmailName(UserVo userVo) {
+		return userRepository.findByEmailAndName(userVo);
 	}
 }
