@@ -318,29 +318,7 @@ public class KanbanBoardService {
 		return -1 != kanbanBoardRepository.taskStateUpdate(taskVo);
 	}
 	
-	/*
-	 * 작성자 : 최인효
-	 * 설명 : 업무 날짜 변경
-	 */
-	public boolean taskDateUpdate(TaskVo taskVo) {
-		return -1 != kanbanBoardRepository.taskDateUpdate(taskVo);
-	}
-  
-	/*
-	 * 작성자 : 김우경
-	 * 설명 : 업무 멤버 추가
-	 */
-	public boolean taskUserInsert(TaskUserVo taskUserVo) {
-		return 1 == kanbanBoardRepository.taskUserInsert(taskUserVo);
-	}
-
-	/*
-	 * 작성자 : 김우경
-	 * 설명 : 업무 멤버 삭제
-	 */
-	public boolean taskUserDelete(TaskUserVo taskUserVo) {
-		return 1 == kanbanBoardRepository.taskUserDelete(taskUserVo);
-	}
+	
 
 
 

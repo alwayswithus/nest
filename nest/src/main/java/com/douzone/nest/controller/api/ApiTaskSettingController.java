@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.TaskSettingService;
 import com.douzone.nest.vo.CheckListVo;
+import com.douzone.nest.vo.TaskUserVo;
 import com.douzone.nest.vo.TaskVo;
 
 @CrossOrigin(origins = { "http://localhost:3000" })
@@ -74,5 +75,43 @@ public class ApiTaskSettingController {
 		taskVo.setTaskContents(taskContents);
 		boolean result = taskSettingService.updateTaskContents(taskVo);
 		return JsonResult.success(result ? taskVo : -1);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 업무 날짜 변경
+	 */
+	@PostMapping("/api/tasksetting/calendar/update")
+	public JsonResult taskDateUpdate(@RequestBody TaskVo TaskVo) {
+		boolean result = taskSettingService.taskDateUpdate(TaskVo);
+		return  JsonResult.success(result ? TaskVo : -1);
+	}
+	
+    /*
+     * 작성자 : 김우경
+     * 설명 : 업무 멤버 추가하기
+     */
+	@PostMapping("/api/task/member/add")
+	public JsonResult taskMemberAdd(@RequestBody TaskUserVo taskUserVo ) {
+		boolean result = taskSettingService.taskUserInsert(taskUserVo);
+		return JsonResult.success(result ? taskUserVo : -1);
+	}
+	
+	 /*
+     * 작성자 : 김우경
+     * 설명 : 업무 멤버 삭제하기
+     */
+	@DeleteMapping("/api/task/member/{userNo}/{taskNo}")
+	public JsonResult taskMemberDelete(
+			@PathVariable("userNo") Long userNo,
+			@PathVariable("taskNo") Long taskNo) {
+		
+		TaskUserVo taskUserVo = new TaskUserVo();
+		
+		taskUserVo.setUserNo(userNo);
+		taskUserVo.setTaskNo(taskNo);
+		
+		boolean result = taskSettingService.taskUserDelete(taskUserVo);
+		return JsonResult.success(result ? taskUserVo : -1);
 	}
 }
