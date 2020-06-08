@@ -151,7 +151,8 @@
 			        e.user_no as userNo,
 			        e.user_name as userName,
 			        f.tasklist_no as tasklistNo,
-			        f.tasklist_name as tasklistName
+			        f.tasklist_name as tasklistName,
+			        d.comment_no as commentNo
 			from task a
 			join file b on(a.task_no = b.task_no)
 			join project c on(a.project_no = c.project_no)

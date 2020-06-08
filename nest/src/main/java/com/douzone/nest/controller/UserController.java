@@ -126,18 +126,18 @@ public class UserController {
 		UserVo userVo = new UserVo();
 		userVo.setUserEmail(email);
 		
-		switch (mode) {
-		case "signup":
-			userService.signUpSendMail(userVo);
-			break;
-
-		case "findpw":
-			System.out.println(mode + " 비밀번호 찾는중...");
-			break;
-
-		default:
-			break;
-		}
+//		switch (mode) {
+//		case "signup":
+//			userService.signUpSendMail(userVo);
+//			break;
+//
+//		case "findpw":
+//			System.out.println(mode + " 비밀번호 찾는중...");
+//			break;
+//
+//		default:
+//			break;
+//		}
 		
 		return "redirect:"+PathSetting.PATH_AND_PORT+"/sendmail/"+mode;
 	}
