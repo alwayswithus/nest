@@ -55,4 +55,9 @@ public class UserRepository {
 		UserVo result = sqlSession.selectOne("user.findByEmail",inputVo);
 		return result;
 	}
+
+	public UserVo findByEmailAndName(UserVo inputVo) {
+		UserVo result = sqlSession.selectOne("user.findByEmailAndName",inputVo);
+		return result;
+	}
 }

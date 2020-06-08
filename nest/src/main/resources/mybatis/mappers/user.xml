@@ -49,4 +49,14 @@
 		]]>
 	</select>
 	
+	<select id="findByEmailAndName" parameterType="uservo" resultType="uservo">
+		<![CDATA[
+		 select user_email as userEmail, user_grade as userGrade
+		   from user  
+		  where user_email = #{userEmail }
+		  	and user_name = #{userName }
+		  	and user_grade = "정회원"
+		]]>
+	</select>
+	
 </mapper>
