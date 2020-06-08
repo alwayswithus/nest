@@ -213,45 +213,12 @@ public class KanbanBoardRepository {
 	}
 
 	/*
-	 * 작성자 : 김우경
-	 * 설명 : 업무 멤버 추가
-	 */
-	public int taskUserInsert(TaskUserVo taskUserVo) {
-		return sqlSession.insert("kanbanBoard.insertTaskUser",taskUserVo);
-	}
-
-	/*
-	 * 작성자 : 최인효
-	 * 설명 : 업무 날짜 변경
-	 */
-	public int taskDateUpdate(TaskVo taskVo) {
-		System.out.println(taskVo);
-		return sqlSession.update("kanbanBoard.taskDateUpdate", taskVo);
-	}
-
-
-
-	public int taskUserDelete(TaskUserVo taskUserVo) {
-		return sqlSession.delete("kanbanBoard.deleteTaskUser", taskUserVo);
-	}
-
-
-
-
-
-
-
-
-
-
-	/*
 	 * 간트차트용 업무 불러오기...
 	 * 작성자 : 허길행
 	 */
 	public List<TaskVo> selectAllTasksByProjectNo(Long projectNo) {
 		return sqlSession.selectList("kanbanBoard.selectAllTasksByProjectNo", projectNo);
 	}
-
 
 	/*
 	 * 작성자 : 최인효
@@ -261,7 +228,6 @@ public class KanbanBoardRepository {
 		return sqlSession.selectOne("kanbanBoard.selectAuthUserRole", roleMap);
 		
 	}
-
 
 	/*
 	 * 작성자 : 최인효
