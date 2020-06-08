@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="task">
+	<select id="selectTask" parameterType="long" resultType="taskvo">
+	<![CDATA[
+		select task_no as taskNo,
+				task_start as taskStart,
+				task_end as taskEnd,
+				task_point as taskPoint,
+				task_label as taskLabel,
+				task_state as taskState,
+				task_contents as taskContents,
+				tasklist_no as tasklistNo,
+				task.project_no as projectNo
+		from task, (select project.project_no
+					from project, userproject, user
+					where project.project_no = userproject.project_no
+					and userproject.user_no = user.user_no
+					and user.user_no = #{authUserNo}) as b
+		where task.project_no = b.project_no;
+	]]>
+	</select>
+</mapper>
