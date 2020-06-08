@@ -95,6 +95,10 @@ public class UserService {
 	 * 설명 : 회원 가입용 메일 보내기
 	 */
 	public boolean signUpSendMail(UserVo userVo) {
+		if(userVo.getUserName()==null) {
+			userVo.setUserName(userVo.getUserEmail());
+			userVo.setUserPhoto("/nest/assets/images/unnamed.jpg");
+		}
 
 		int userInvite = userRepository.userInvite(userVo);
 		

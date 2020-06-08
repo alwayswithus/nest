@@ -123,9 +123,22 @@ public class UserController {
 		System.out.println(email);
 		System.out.println("이메일 발송준비 완료");
 		
-//		UserVo userVo = new UserVo();
-//		userVo.setUserEmail(email);
-//		userService.signUpSendMail(userVo);
+		UserVo userVo = new UserVo();
+		userVo.setUserEmail(email);
+		
+		switch (mode) {
+		case "signup":
+			userService.signUpSendMail(userVo);
+			break;
+
+		case "findpw":
+			System.out.println(mode + " 비밀번호 찾는중...");
+			break;
+
+		default:
+			break;
+		}
+		
 		return "redirect:"+PathSetting.PATH_AND_PORT+"/sendmail/"+mode;
 	}
 }
