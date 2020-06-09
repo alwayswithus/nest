@@ -20,7 +20,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		System.out.println("로그인!?");
+		// System.out.println("로그인!?");
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -31,9 +31,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		
 		UserVo authUser = userService.getUser(vo);
 		if(authUser == null) {
-			System.out.println("로그인 실패");
-			request.setAttribute("userVo", vo);
-			response.sendRedirect(PathSetting.PATH_AND_PORT+"/");
+			// System.out.println("로그인 실패");
+//			request.setAttribute("userVo", vo);
+			response.sendRedirect(PathSetting.PATH_AND_PORT+"?error");
 			return false;
 		}
 		
