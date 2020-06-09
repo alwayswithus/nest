@@ -39,7 +39,7 @@
 			join project e on (b.project_no = e.project_no)
 			join tasklist f on(d.tasklist_no = f.tasklist_no)
 			where a.user_no = #{authUserNo}
-			order by b.notice_date desc, b.notice_no desc;
+			order by b.notice_date desc, b.notice_no desc
 		]]>
 	</select>
 
