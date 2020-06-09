@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notification">
+
+	<!-- 알림 날짜 select -->
+	<select id="selectDate" resultType="HashMap">
+		<![CDATA[
+			select distinct date_format(b.notice_date, '%b') dateMonth , 
+							date_format(b.notice_date, '%d') dateDay , 
+							date_format(b.notice_date, '%Y') dateYear
+			from noticemsgbox a
+			join noticemessage b on (a.notice_no = b.notice_no)
+			join user c on (b.user_no = c.user_no)
+			where a.user_no = #{authUserNo}
+			order by b.notice_date desc
+		]]>
+	</select>
+
+	<!-- 알림 내용 select -->
+	<select id="selectNotice" resultType="HashMap">
+		<![CDATA[
+			select b.notice_no noticeNo,
+					a.message_ck messageCheck, 
+					c.user_photo userPhoto,
+			        c.user_name userName,
+			        c.user_no userNo, 
+			        b.notice_message noticeMessage,
+			        b.notice_date noticeDate, 
+			        b.project_no projectNo, 
+			        e.project_title projectTitle,
+			        b.task_no taskNo,  
+			        d.task_contents taskContents, 
+			        b.notice_type noticeType,
+			        f.tasklist_no taskListNo
+			from noticemsgbox a
+			join noticemessage b on (a.notice_no = b.notice_no)
+			join user c on (b.user_no = c.user_no)
+			join task d on (b.task_no = d.task_no)
+			join project e on (b.project_no = e.project_no)
+			join tasklist f on(d.tasklist_no = f.tasklist_no)
+			where a.user_no = #{authUserNo}
+			order by b.notice_date desc, b.notice_no desc;
+		]]>
+	</select>
+
+	<update id="messageCheck" parameterType="Long">
+		<![CDATA[   	        
+			update noticemsgbox
+			set message_ck = 'Y'
+			where notice_no = #{noticeNo}
+		]]>
+	</update>
+
+
+
+</mapper>

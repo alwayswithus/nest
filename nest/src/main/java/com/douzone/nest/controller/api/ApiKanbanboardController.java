@@ -86,7 +86,6 @@ public class ApiKanbanboardController {
 	@PostMapping("/api/task/insert")
 	public JsonResult taskInsert(@RequestBody Map taskInfo) {
 		TaskVo task = kanbanboardService.taskInsert(taskInfo);
-		System.out.println(task);
 		return  JsonResult.success(task);
 	}
 	
@@ -117,7 +116,7 @@ public class ApiKanbanboardController {
 	@PostMapping("/api/task/state")
 	public JsonResult taskStateUpdate(@RequestBody TaskVo taskVo) {
 		boolean result = kanbanboardService.taskStateUpdate(taskVo);
-		return  JsonResult.success(true ? taskVo : -1);
+		return  JsonResult.success(result ? taskVo : -1);
 	}
 	
 	/*

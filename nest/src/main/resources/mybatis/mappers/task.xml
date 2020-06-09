@@ -20,4 +20,12 @@
 		where task.project_no = b.project_no;
 	]]>
 	</select>
+	
+	<select id="selectUser" parameterType="map" resultType="long">
+	<![CDATA[
+		select user_no as userNo
+		from taskuser
+		where task_no = #{taskNo} and user_no = #{authUserNo}
+	]]>
+	</select>
 </mapper>

@@ -131,6 +131,7 @@ public class UserController {
 		UserVo userVo = new UserVo();
 		userVo.setUserEmail(email);
 		
+
 		switch (mode) {
 		case "signup":
 			userService.signUpSendMail(userVo);
@@ -143,5 +144,6 @@ public class UserController {
 		default:
 			break;
 		}
+    
 	}
 }

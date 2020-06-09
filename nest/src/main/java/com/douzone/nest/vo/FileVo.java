@@ -17,6 +17,14 @@ public class FileVo {
 	private Long tasklistNo; // 태스트리스트 번호
 	private String tasklistName; // 테스트리스트 이름
 	
+	private Long commentNo; // 코멘트 번호
+	
+	public Long getCommentNo() {
+		return commentNo;
+	}
+	public void setCommentNo(Long commentNo) {
+		this.commentNo = commentNo;
+	}
 	public String getTasklistName() {
 		return tasklistName;
 	}
@@ -101,6 +109,7 @@ public class FileVo {
 		return "FileVo [fileNo=" + fileNo + ", originName=" + originName + ", changeName=" + changeName + ", filePath="
 				+ filePath + ", fileRegdate=" + fileRegdate + ", taskNo=" + taskNo + ", taskContents=" + taskContents
 				+ ", projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", userNo=" + userNo + ", userName="
-				+ userName + ", tasklistNo=" + tasklistNo + ", tasklistName=" + tasklistName + "]";
+				+ userName + ", tasklistNo=" + tasklistNo + ", tasklistName=" + tasklistName + ", commentNo="
+				+ commentNo + "]";
 	}
 }

@@ -17,6 +17,7 @@ public class FileRepository {
 	}
 
 	public int deleteFile(Long fileNo) {
+		System.out.println(fileNo+"!!!!");
 		return sqlSession.delete("comment.deleteFile", fileNo);
 	}
 
