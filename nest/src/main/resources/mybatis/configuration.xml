@@ -21,6 +21,7 @@
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/project.xml" />
+		<mapper resource="mybatis/mappers/profile.xml" />
 		<mapper resource="mybatis/mappers/kanbanBoard.xml" />
     	<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/taglist.xml" />
