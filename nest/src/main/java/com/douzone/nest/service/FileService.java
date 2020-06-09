@@ -22,15 +22,15 @@ public class FileService {
 		CommentVo commentVo = new CommentVo();
 		
 		int file = fileRepository.insertFile(fileVo);
-//		
-//		commentVo.setOriginName(fileVo.getOriginName());
-//		commentVo.setUserNo(userNo);
-//		commentVo.setTaskNo(fileVo.getTaskNo());
-//		commentVo.setFileNo(fileVo.getFileNo());
-//		
-//		int comment = commentRepository.insertComment(commentVo);
-//		System.out.println(commentVo);
-		return file == 1;
+
+		commentVo.setOriginName(fileVo.getOriginName());
+		commentVo.setUserNo(userNo);
+		commentVo.setTaskNo(fileVo.getTaskNo());
+		commentVo.setFileNo(fileVo.getFileNo());
+		
+		int comment = commentRepository.insertComment(commentVo);
+		
+		return file + comment > 0;
 	}
 
 	public String findByFileNo(Long fileNo) {
