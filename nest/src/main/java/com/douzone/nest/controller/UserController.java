@@ -132,7 +132,7 @@ public class UserController {
 		userVo.setUserEmail(email);
 		
 
-		switch (mode) {
+		/*switch (mode) {
 		case "signup":
 			userService.signUpSendMail(userVo);
 			break;
@@ -143,7 +143,7 @@ public class UserController {
 
 		default:
 			break;
-		}
+		}*/
     
 	}
 }
