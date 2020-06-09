@@ -1,5 +1,7 @@
 package com.douzone.nest.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -115,13 +117,16 @@ public class UserController {
 	
 	
 	@PostMapping("/sendmail")
-	public String sendToMailSignUp(HttpServletRequest request, HttpServletResponse response) {
+	public void sendToMailSignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
 		
 		String mode = request.getParameter("mode");
 		String email = request.getParameter("email");
 		
 		System.out.println(email);
 		System.out.println("이메일 발송준비 완료");
+		
+		response.sendRedirect(PathSetting.PATH_AND_PORT+"/sendmail/"+mode);
 		
 		UserVo userVo = new UserVo();
 		userVo.setUserEmail(email);
@@ -138,7 +143,5 @@ public class UserController {
 		default:
 			break;
 		}
-		
-		return "redirect:"+PathSetting.PATH_AND_PORT+"/sendmail/"+mode;
 	}
 }
