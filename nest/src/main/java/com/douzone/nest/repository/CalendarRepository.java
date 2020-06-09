@@ -1,6 +1,7 @@
 package com.douzone.nest.repository;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,10 @@ public class CalendarRepository {
 	
 	public List<TaskVo> selectTask(Long authUserNo) {
 		return sqlSession.selectList("task.selectTask", authUserNo);
+	}
+	
+	public Long selectUser(Map<String, Object> map) {
+		Long userNo =  sqlSession.selectOne("task.selectUser", map);
+		return userNo;
 	}
 }

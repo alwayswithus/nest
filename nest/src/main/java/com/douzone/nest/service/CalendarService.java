@@ -1,6 +1,8 @@
 package com.douzone.nest.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,6 +20,7 @@ public class CalendarService {
 	
 	@SuppressWarnings("unchecked")
 	public JSONObject selectTask(Long authUserNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		// 메인 {}
 		JSONObject obj = new JSONObject();
@@ -37,6 +40,14 @@ public class CalendarService {
 			task.put("title", taskVo.getTaskContents());
 			task.put("tasklistNo", taskVo.getTaskListNo());
 			task.put("projectNo", taskVo.getProjectNo());
+			
+			map.put("taskNo", taskVo.getTaskNo());
+			map.put("authUserNo", authUserNo);
+			Long userNo = calendarRepository.selectUser(map);
+			if(userNo == null) {
+				userNo = (long) 0;
+			}
+			task.put("userNo", userNo);
 			
 			allTaskArray.add(task);
 		}
