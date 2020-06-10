@@ -3,7 +3,17 @@
 <mapper namespace="profile">
 	<select id="selectUser" parameterType="long" resultType="uservo">
 	<![CDATA[
-		select * from user where user_no = #{userNo}
+		select user_no as userNo,
+			   user_email as userEmail,
+			   user_name as userName,
+			   user_password as userPassword,
+			   user_number as userNumber,
+			   user_birth as userBirth,
+			   user_title as userTitle,
+			   user_dept as userDept,
+			   user_photo as userPhoto
+	 	from user 
+	 	where user_no = #{userNo}
  		]]> 
 	</select>
 	
