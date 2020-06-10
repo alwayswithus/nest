@@ -77,7 +77,7 @@ public class UserService {
 		// 인증키 생성
         String key = new TempKey().getKey(50, false);
         // 데이터 베이스에 인증키 세팅
-        userVo.setUserPassword(key);
+        userVo.setUserKey(key);
         userRepository.setEmailConfirm(userVo);
         // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
         try {
@@ -106,7 +106,7 @@ public class UserService {
 		// 인증키 생성
         String key = new TempKey().getKey(50, false);
         // 데이터 베이스에 인증키 세팅
-        userVo.setUserPassword(key);
+        userVo.setUserKey(key);
         userRepository.setEmailConfirm(userVo);
         // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
         try {
@@ -134,5 +134,13 @@ public class UserService {
 	 */
 	public UserVo checkUserEmailName(UserVo userVo) {
 		return userRepository.findByEmailAndName(userVo);
+	}
+
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 회원 인증키 체크.
+	 */
+	public UserVo checkUserKey(UserVo userVo) {
+		return userRepository.findByKey(userVo);
 	}
 }

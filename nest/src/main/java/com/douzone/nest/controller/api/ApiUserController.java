@@ -128,6 +128,31 @@ public class ApiUserController {
 		}
 	}
 	
+	// 인증키 체크!
+	@SuppressWarnings("unchecked")
+	@PostMapping("/api/emailConfirm")
+	public JsonResult emailConfirm(HttpServletRequest request, HttpServletResponse response) {
+		
+		String key = request.getParameter("key");
+		
+		UserVo vo = new UserVo();
+		vo.setUserKey(key);
+		
+		JSONObject userVo = new JSONObject();
+		
+		UserVo user = userService.checkUserKey(vo);
+		if(user != null) {
+			userVo.put("userNo", user.getUserNo());
+			userVo.put("userEmail", user.getUserEmail());
+			
+			return JsonResult.success(userVo);
+		}else {
+			return JsonResult.fail("This key is not in the database.");
+		}
+	}
+	
+	
+	
 	// 백 그라운드 적용
 	@PostMapping("/api/user/backgroundChange")
 	public JsonResult backgroundChange(@RequestBody UserVo userVo) {

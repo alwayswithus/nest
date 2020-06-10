@@ -16,6 +16,7 @@ public class UserVo {
 	private String userBg;			// 배경사진
 
 	private String userGrade;		// 회원등급
+	private String userKey;		// 회원등급
 	
 	private Long projectNo; 		// 프로젝트 번호
 
@@ -120,5 +121,11 @@ public class UserVo {
 				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
 				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", userGrade=" + userGrade + ", projectNo="
 				+ projectNo + ", roleNo=" + roleNo + "]";
+	}
+	public String getUserKey() {
+		return userKey;
+	}
+	public void setUserKey(String userKey) {
+		this.userKey = userKey;
 	}
 }
