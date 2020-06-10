@@ -17,8 +17,8 @@
    <select id="selectTasks" resultType="taskvo">
       <![CDATA[
          select task_no taskNo,
-               date_format(task_start, '%Y-%m-%d') as taskStart,
-               date_format(task_end, '%Y-%m-%d') as taskEnd,
+               date_format(task_start, '%Y-%m-%d %H:%i') as taskStart,
+               date_format(task_end, '%Y-%m-%d %H:%i') as taskEnd,
                task_point taskPoint,
                task_label taskLabel,
                task_state taskState,

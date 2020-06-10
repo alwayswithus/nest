@@ -39,7 +39,6 @@ public class TaskSettingRepository {
 	 * 설명 : 업무 날짜 변경
 	 */
 	public int taskDateUpdate(TaskVo taskVo) {
-		System.out.println(taskVo);
 		return sqlSession.update("kanbanBoard.taskDateUpdate", taskVo);
 	}
 	
