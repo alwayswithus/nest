@@ -23,4 +23,12 @@ public class NotificationRepository {
 	public boolean notificationMessageCheck(Long noticeNo) {
 		return -1 != sqlSession.update("notification.messageCheck",noticeNo);
 	}
+
+	public int insertNoticeMessage(Map noticeMessageMap) {
+		return sqlSession.insert("notification.insertNoticeMessage",noticeMessageMap);
+	}
+
+	public int insertNoticeMsgBox(Map noticeMsgBoxMap) {
+		return sqlSession.insert("notification.insertNoticeMsgBox",noticeMsgBoxMap);
+	}
 }
