@@ -15,4 +15,8 @@ public class ProfileService {
 	public UserVo userSelect(Long userNo) {
 		return profileRepository.userSelect(userNo);
 	}
+
+	public boolean updateUser(UserVo userVo) {
+		return 1 == profileRepository.updateUser(userVo);
+	}
 }

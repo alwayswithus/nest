@@ -15,5 +15,9 @@ public class ProfileRepository {
 	public UserVo userSelect(Long userNo) {
 		return sqlSession.selectOne("profile.selectUser", userNo);
 	}
+
+	public int updateUser(UserVo userVo) {
+		return sqlSession.update("profile.updateUser", userVo);
+	}
 	
 }

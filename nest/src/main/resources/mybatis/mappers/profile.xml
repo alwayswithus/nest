@@ -17,4 +17,14 @@
  		]]> 
 	</select>
 	
+	<update id="updateUser" parameterType="uservo">
+		update user set 
+			   user_name = #{userName},
+			   user_dept = #{userDept},
+			   user_title = #{userTitle},
+			   user_number = #{userNumber},
+			   user_birth = #{userBirth},
+			   user_photo = #{userPhoto}
+	    where user_no = #{userNo}
+	</update>
 </mapper>

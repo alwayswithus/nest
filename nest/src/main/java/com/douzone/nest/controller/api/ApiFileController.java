@@ -53,6 +53,7 @@ public class ApiFileController {
     
 	FileVo fileVo = new FileVo();
 	String url = fileUploadService.restore(fileVo, multipartFile);
+	
 	fileVo.setFilePath(url);
 	fileVo.setOriginName(multipartFile.getOriginalFilename());
 	fileVo.setTaskNo(taskNo);

@@ -15,8 +15,6 @@ public class CommentRepository {
 	private SqlSession sqlSession;
 	
 	public int insertComment(CommentVo commentVo) {
-		System.out.println(commentVo.getFileNo());
-		System.out.println(commentVo.getOriginName());
 		return sqlSession.insert("comment.insertComment", commentVo);
 	}
 
