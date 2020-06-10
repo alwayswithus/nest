@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
@@ -22,7 +23,6 @@ public class ApiNotificationController {
 	@GetMapping("/api/notification/{authUserNo}")
 	public JsonResult notification(@PathVariable("authUserNo") Long authUserNo) {
 		JSONObject notificationJson = notificationService.selectNotification(authUserNo);
-		System.out.println(notificationJson);
 		return JsonResult.success(notificationJson);
 	}
 	
@@ -30,6 +30,12 @@ public class ApiNotificationController {
 	public JsonResult notificationMessageCheck(@PathVariable("noticeNo") Long noticeNo) {
 		boolean result = notificationService.notificationMessageCheck(noticeNo);
 		return  JsonResult.success(result ? noticeNo : -1);
+	}
+	
+	@PostMapping("/api/notification/insertNotice")
+	public JsonResult insertNotice(@RequestBody JSONObject noticeJson ) {
+		boolean result = notificationService.insertNotice(noticeJson);
+		return  JsonResult.success(result ? noticeJson : -1);
 	}
 
 }
