@@ -35,14 +35,11 @@ public class CommentService {
 
 	public boolean deleteComment(Long fileNo, Long commentNo) {
 		
-		System.out.println(commentNo + " : 코멘트 삭제 전 ");
 		int comment = commentRepository.deleteComment(commentNo);
-		System.out.println(comment+" : 코멘트 삭제 후");
+		
 		int file = 0;
 		if(fileNo != 0) {
-			System.out.println("파일 삭제전");
 			file = fileRepository.deleteFile(fileNo);
-			System.out.println("파일 삭제 후");
 		}
 			
 		return comment + file > 0;

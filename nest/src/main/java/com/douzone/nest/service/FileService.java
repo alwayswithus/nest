@@ -23,14 +23,14 @@ public class FileService {
 		
 		int file = fileRepository.insertFile(fileVo);
 
-		commentVo.setOriginName(fileVo.getOriginName());
-		commentVo.setUserNo(userNo);
-		commentVo.setTaskNo(fileVo.getTaskNo());
-		commentVo.setFileNo(fileVo.getFileNo());
+//		commentVo.setOriginName(fileVo.getOriginName());
+//		commentVo.setUserNo(userNo);
+//		commentVo.setTaskNo(fileVo.getTaskNo());
+//		commentVo.setFileNo(fileVo.getFileNo());
+//		
+//		int comment = commentRepository.insertComment(commentVo);
 		
-		int comment = commentRepository.insertComment(commentVo);
-		
-		return file + comment > 0;
+		return file == 1;
 	}
 
 	public String findByFileNo(Long fileNo) {
