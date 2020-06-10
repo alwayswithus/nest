@@ -21,6 +21,7 @@ public class ApiProfileController {
 	public JsonResult userSelect(@PathVariable("userNo") Long userNo) {
 		System.out.println(userNo);
 		UserVo userVo = profileService.userSelect(userNo);
-		return JsonResult.success(null);
+
+		return JsonResult.success(userVo);
 	}
 }

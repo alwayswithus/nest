@@ -50,7 +50,21 @@
 			where notice_no = #{noticeNo}
 		]]>
 	</update>
-
-
+	
+	<insert id="insertNoticeMessage" parameterType="HashMap">
+		<![CDATA[   	        
+			INSERT INTO noticemessage 
+			VALUES (null,  #{message}, #{noticeType}, now(), #{senderNo}, #{taskNo}, #{projectNo});
+		]]>
+	    <selectKey resultType="int" keyProperty="noticeNo" order="AFTER">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+	
+	<insert id="insertNoticeMsgBox" parameterType="HashMap">
+		<![CDATA[   	        
+			INSERT INTO noticemsgbox VALUES (#{noticeNo}, #{receiverNo}, 'N');
+		]]>
+	</insert>
 
 </mapper>
