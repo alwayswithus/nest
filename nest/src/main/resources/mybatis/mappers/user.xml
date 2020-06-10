@@ -28,7 +28,7 @@
 
 	<insert id="userInvite" parameterType="uservo">
 		<![CDATA[
-		insert into user values (null, now(), #{userEmail}, #{userName}, "", null, null, null, null, "korea", #{userPhoto}, null, "준회원")
+		insert into user values (null, now(), #{userEmail}, #{userName}, "", null, null, null, null, "korea", #{userPhoto}, null, "준회원", null)
 		]]>
 		<selectKey keyProperty = "userNo" resultType="long" order="AFTER">
 		select last_insert_id()
@@ -37,7 +37,7 @@
 	
 	<update id="setEmailConfirm" parameterType="uservo">
 		<![CDATA[
-		update user set user_password = #{userPassword} where user_no = #{userNo}
+		update user set user_key = #{userKey} where user_no = #{userNo}
 		]]>
 	</update>
 	
@@ -56,6 +56,14 @@
 		  where user_email = #{userEmail }
 		  	and user_name = #{userName }
 		  	and user_grade = "정회원"
+		]]>
+	</select>
+	
+	<select id="findByKey" parameterType="uservo" resultType="uservo">
+		<![CDATA[
+		 select user_no as userNo, user_email as userEmail
+		   from user  
+		  where user_key = #{userKey }
 		]]>
 	</select>
 	

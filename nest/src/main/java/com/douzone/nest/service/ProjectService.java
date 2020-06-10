@@ -143,7 +143,7 @@ public class ProjectService {
 		// 인증키 생성
         String key = new TempKey().getKey(50, false);
         // 데이터 베이스에 인증키 세팅
-        userVo.setUserPassword(key);
+        userVo.setUserKey(key);
         userRepository.setEmailConfirm(userVo);
         // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
         try {
