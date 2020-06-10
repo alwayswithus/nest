@@ -61,10 +61,30 @@
 	
 	<select id="findByKey" parameterType="uservo" resultType="uservo">
 		<![CDATA[
-		 select user_no as userNo, user_email as userEmail
+		 select user_no as userNo, user_email as userEmail, user_grade as userGrade
 		   from user  
 		  where user_key = #{userKey }
 		]]>
 	</select>
+	
+	<update id="signUserNamePwUpdate" parameterType="uservo">
+		<![CDATA[
+		update user 
+		   set user_name = #{userName },
+		       user_password = #{userPassword },
+			   user_grade = "정회원",
+               user_key = null
+		 where user_no = #{userNo };
+		]]>
+	</update>
+	
+	<update id="updatePassword" parameterType="uservo">
+		<![CDATA[
+		update user 
+		   set user_password = #{userPassword },
+               user_key = null
+		 where user_no = #{userNo };
+		]]>
+	</update>
 	
 </mapper>

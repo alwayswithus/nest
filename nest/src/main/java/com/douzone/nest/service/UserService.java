@@ -95,19 +95,13 @@ public class UserService {
 	 * 설명 : 회원 가입용 메일 보내기
 	 */
 	public boolean signUpSendMail(UserVo userVo) {
-		if(userVo.getUserName()==null) {
-			userVo.setUserName(userVo.getUserEmail());
-			userVo.setUserPhoto("/nest/assets/images/unnamed.jpg");
-		}
-
-		int userInvite = userRepository.userInvite(userVo);
 		
 		/* 인증 이메일 발송 코드...*/
 		// 인증키 생성
         String key = new TempKey().getKey(50, false);
         // 데이터 베이스에 인증키 세팅
         userVo.setUserKey(key);
-        userRepository.setEmailConfirm(userVo);
+        int i = userRepository.setEmailConfirm(userVo);
         // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
         try {
         	MailController mailController = new MailController(new MailHandler(mailSender));
@@ -116,15 +110,38 @@ public class UserService {
         //이메일 발송 확인
         System.out.println("회원 가입용 메일발송!");
 		
-        return userInvite == 1;
+        return i == 1;
 	}
+	
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 회원 비밀번호 찾기용 메일 보내기
+	 */
+	public boolean pwFindSendMail(UserVo userVo) {
+		
+		/* 인증 이메일 발송 코드...*/
+		// 인증키 생성
+        String key = new TempKey().getKey(50, false);
+        // 데이터 베이스에 인증키 세팅
+        userVo.setUserKey(key);
+        int i = userRepository.setEmailConfirm(userVo);
+        // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
+        try {
+        	MailController mailController = new MailController(new MailHandler(mailSender));
+        	mailController.userFindPwMailSend(userVo.getUserEmail(), key);
+		} catch (MessagingException e) { e.printStackTrace(); }
+        //이메일 발송 확인
+        System.out.println("비밀번호 찾기용 메일발송!");
+        return i == 1;
+	}
+		
+       
 
 	/*
 	 * 작성자 : 허길행
 	 * 설명 : 회원 이메일 체크.
 	 */
 	public UserVo checkUserEmail(UserVo userVo) {
-		
 		return userRepository.findByEmail(userVo);
 	}
 
@@ -142,5 +159,23 @@ public class UserService {
 	 */
 	public UserVo checkUserKey(UserVo userVo) {
 		return userRepository.findByKey(userVo);
+	}
+	
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 회원 가입 데이터 입력.
+	 */
+	public boolean signUserUpdate(UserVo userVo) {
+		int i = userRepository.signUserNamePwUpdate(userVo);
+		return i==1;
+	}
+	
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 비밀번호 수정.
+	 */
+	public boolean pwUpdate(UserVo userVo) {
+		int i = userRepository.passwordUpdate(userVo);
+		return i==1;
 	}
 }

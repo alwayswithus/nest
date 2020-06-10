@@ -141,8 +141,10 @@ public class ApiUserController {
 		JSONObject userVo = new JSONObject();
 		
 		UserVo user = userService.checkUserKey(vo);
+		
 		if(user != null) {
 			userVo.put("userNo", user.getUserNo());
+			userVo.put("userGrade", user.getUserGrade());
 			userVo.put("userEmail", user.getUserEmail());
 			
 			return JsonResult.success(userVo);

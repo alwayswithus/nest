@@ -50,19 +50,27 @@ public class UserRepository {
 	public int setEmailConfirm(UserVo userVo) {
 		return sqlSession.update("user.setEmailConfirm", userVo);
 	}
-
+	// 이메일 찾기
 	public UserVo findByEmail(UserVo inputVo) {
 		UserVo result = sqlSession.selectOne("user.findByEmail",inputVo);
 		return result;
 	}
-
+	// 이메일 이름 찾기
 	public UserVo findByEmailAndName(UserVo inputVo) {
 		UserVo result = sqlSession.selectOne("user.findByEmailAndName",inputVo);
 		return result;
 	}
-
+	// 인증키 찾기
 	public UserVo findByKey(UserVo inputVo) {
 		UserVo result = sqlSession.selectOne("user.findByKey",inputVo);
 		return result;
+	}
+	// 회원가입 데이터 입력
+	public int signUserNamePwUpdate(UserVo userVo) {
+		return sqlSession.update("user.signUserNamePwUpdate", userVo);
+	}
+	// 비밀번호 수정
+	public int passwordUpdate(UserVo userVo) {
+		return sqlSession.update("user.updatePassword", userVo);
 	}
 }

@@ -126,24 +126,75 @@ public class UserController {
 		System.out.println(email);
 		System.out.println("이메일 발송준비 완료");
 		
-		response.sendRedirect(PathSetting.PATH_AND_PORT+"/sendmail/"+mode);
+		UserVo vo = new UserVo();
+		vo.setUserEmail(email);
 		
-		UserVo userVo = new UserVo();
-		userVo.setUserEmail(email);
+		UserVo userVo = userService.checkUserEmail(vo);
 		
-
 		switch (mode) {
 		case "signup":
-			userService.signUpSendMail(userVo);
+			if(userVo==null) {
+				userVo = new UserVo();
+				userVo.setUserName(email);
+				userVo.setUserEmail(email);
+				userVo.setUserPhoto("/nest/assets/images/unnamed.jpg");
+				userService.userInvite(userVo);
+				
+				System.out.println("새 회원보내기");
+				
+			}else {
+				userService.signUpSendMail(userVo);
+				
+				System.out.println("기존 준회원 보내기");
+			}
+			
 			break;
 
 		case "findpw":
 			System.out.println(mode + " 비밀번호 찾는중...");
+			if(userVo!=null) {
+				userService.pwFindSendMail(userVo);
+			}
 			break;
 
 		default:
 			break;
 		}
     
+		response.sendRedirect(PathSetting.PATH_AND_PORT+"/sendmail/"+mode);
+	}
+	
+	@PostMapping("/signupset")
+	public void signUpSet(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		Long no = Long.parseLong(request.getParameter("no"));
+		String name = request.getParameter("name");
+		String password = request.getParameter("password");
+		
+		UserVo userVo = new UserVo();
+		userVo.setUserNo(no);
+		userVo.setUserName(name);
+		userVo.setUserPassword(password);
+		
+		userService.signUserUpdate(userVo);
+		
+		response.sendRedirect(PathSetting.PATH_AND_PORT+"/signupdone/");
+	}
+	
+	@PostMapping("/pwupdate")
+	public void pwUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		
+		Long no = Long.parseLong(request.getParameter("no"));
+		String password = request.getParameter("password");
+		
+		UserVo userVo = new UserVo();
+		userVo.setUserNo(no);
+		userVo.setUserPassword(password);
+		
+		userService.pwUpdate(userVo);
+		
+		response.sendRedirect(PathSetting.PATH_AND_PORT+"/pwfinddone/");
 	}
 }
+
+
