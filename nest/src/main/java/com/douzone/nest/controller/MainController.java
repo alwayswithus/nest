@@ -56,7 +56,6 @@ public class MainController {
 //	public String comment() {
 //		return "index";
 //	}
-//	
 //	@RequestMapping("/file")
 //	public String file() {
 //		return "index";
@@ -71,7 +70,6 @@ public class MainController {
 //	public String kanbanMain() {
 //		return "index";
 //	}
-	
 //	@RequestMapping("/gantt")
 //	public String gantt() {
 //		return "index";
