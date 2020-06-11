@@ -1,5 +1,6 @@
 package com.douzone.nest.controller.api;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,5 +51,21 @@ public class ApiProfileController {
 		String url = fileUploadService.restore(fileVo, multipartFile);		
 		
 		return JsonResult.success(url);
+	}
+	
+	// 비밀번호 업데이트 기능
+	@SuppressWarnings("unchecked")
+	@PostMapping("/api/profile/passUpdate")
+	public JsonResult userPassUpdate(@RequestBody UserVo userVo) {
+		if(profileService.PassUpdate(userVo)) {
+			JSONObject vo = new JSONObject();
+			vo.put("userNo", userVo.getUserNo());
+			System.out.println(vo.toJSONString());
+
+			return JsonResult.success(vo);
+		}
+		else {
+			return JsonResult.fail("비밀번호 찾기 실패..");
+		}
 	}
 }

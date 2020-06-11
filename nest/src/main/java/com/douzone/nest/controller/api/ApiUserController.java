@@ -154,7 +154,6 @@ public class ApiUserController {
 	}
 	
 	
-	
 	// 백 그라운드 적용
 	@PostMapping("/api/user/backgroundChange")
 	public JsonResult backgroundChange(@RequestBody UserVo userVo) {

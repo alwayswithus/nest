@@ -19,4 +19,9 @@ public class ProfileService {
 	public boolean updateUser(UserVo userVo) {
 		return 1 == profileRepository.updateUser(userVo);
 	}
+
+	public boolean PassUpdate(UserVo userVo) {
+		return 1==profileRepository.updatePass(userVo);
+	}
+	
 }

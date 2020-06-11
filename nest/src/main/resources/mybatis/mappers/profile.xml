@@ -27,4 +27,11 @@
 			   user_photo = #{userPhoto}
 	    where user_no = #{userNo}
 	</update>
+	
+	<update id="updatePass" parameterType="uservo">
+		update user set 
+			   user_password = #{userNewPassword}
+	     where user_no = #{userNo}
+	       and user_password = #{userPassword}
+	</update>
 </mapper>

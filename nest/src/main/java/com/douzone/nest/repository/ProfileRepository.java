@@ -19,5 +19,9 @@ public class ProfileRepository {
 	public int updateUser(UserVo userVo) {
 		return sqlSession.update("profile.updateUser", userVo);
 	}
+
+	public int updatePass(UserVo userVo) {
+		return sqlSession.update("profile.updatePass", userVo);
+	}
 	
 }

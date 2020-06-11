@@ -16,7 +16,9 @@ public class UserVo {
 	private String userBg;			// 배경사진
 
 	private String userGrade;		// 회원등급
-	private String userKey;		// 회원등급
+	private String userKey;			// 회원 인증키
+	
+	private String userNewPassword; // 회원 새비밀번호
 	
 	private Long projectNo; 		// 프로젝트 번호
 
@@ -113,19 +115,26 @@ public class UserVo {
 	public void setProjectNo(Long projectNo) {
 		this.projectNo = projectNo;
 	}
-	
-	@Override
-	public String toString() {
-		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", userName="
-				+ userName + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
-				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
-				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", userGrade=" + userGrade + ", projectNo="
-				+ projectNo + ", roleNo=" + roleNo + "]";
-	}
 	public String getUserKey() {
 		return userKey;
 	}
 	public void setUserKey(String userKey) {
 		this.userKey = userKey;
 	}
+	public String getUserNewPassword() {
+		return userNewPassword;
+	}
+	public void setUserNewPassword(String userNewPassword) {
+		this.userNewPassword = userNewPassword;
+	}
+	@Override
+	public String toString() {
+		return "UserVo [userNo=" + userNo + ", userRegdate=" + userRegdate + ", userEmail=" + userEmail + ", userName="
+				+ userName + ", userPassword=" + userPassword + ", userNumber=" + userNumber + ", userBirth="
+				+ userBirth + ", userTitle=" + userTitle + ", userDept=" + userDept + ", userTimezone=" + userTimezone
+				+ ", userPhoto=" + userPhoto + ", userBg=" + userBg + ", userGrade=" + userGrade + ", userKey="
+				+ userKey + ", userNewPassword=" + userNewPassword + ", projectNo=" + projectNo + ", roleNo=" + roleNo
+				+ "]";
+	}
+	
 }
