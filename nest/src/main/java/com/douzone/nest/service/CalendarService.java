@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.CalendarRepository;
+import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskVo;
 
 @Service
@@ -53,6 +54,30 @@ public class CalendarService {
 		}
 		
 		obj.put("allTask", allTaskArray);
+		return obj;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONObject selectTaskList(Long projectNo) {
+		
+		// 메인 {}
+		JSONObject obj = new JSONObject();
+		
+		// allTaskList []
+		JSONArray allTaskListArray = new JSONArray();
+		List<TaskListVo> allTaskList = calendarRepository.selectTaskList(projectNo);
+		for(TaskListVo tasklistVo : allTaskList) {
+			// 하나의 tasklist {}
+			JSONObject tasklist = new JSONObject();
+			tasklist.put("tasklistNo", tasklistVo.getTaskListNo());
+			tasklist.put("tasklistName", tasklistVo.getTaskListName());
+			tasklist.put("tasklistOrder", tasklistVo.getTaskListOrder());
+			tasklist.put("projectNo", tasklistVo.getProjectNo());
+			
+			allTaskListArray.add(tasklist);
+		}
+		
+		obj.put("allTaskList", allTaskListArray);
 		return obj;
 	}
 }

@@ -31,6 +31,7 @@
 		<mapper resource="mybatis/mappers/tasksetting.xml" />
 		<mapper resource="mybatis/mappers/task.xml" />
 		<mapper resource="mybatis/mappers/notification.xml" />
+		<mapper resource="mybatis/mappers/tasklist.xml" />
 	</mappers>
 
 </configuration>

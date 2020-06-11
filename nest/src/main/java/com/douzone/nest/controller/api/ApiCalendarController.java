@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
@@ -21,5 +22,11 @@ public class ApiCalendarController {
 	public JsonResult calendar(@PathVariable("authUserNo") Long authUserNo) {
 		JSONObject taskVo = calendarService.selectTask(authUserNo);
 		return JsonResult.success(taskVo);
+	}
+	
+	@PostMapping("api/calendar/{projectNo}")
+	public JsonResult taskList(@PathVariable("projectNo") Long projectNo) {
+		JSONObject taskListVo = calendarService.selectTaskList(projectNo);
+		return JsonResult.success(taskListVo);
 	}
 }
