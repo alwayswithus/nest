@@ -128,13 +128,15 @@ public class NotificationService {
 			Map noticeMsgBoxMap = new HashMap();
 			noticeMsgBoxMap.put("noticeNo", noticeMessageMap.get("noticeNo"));
 			noticeMsgBoxMap.put("receiverNo", receiver);
-			
-			if(noticeJson.get("senderNo") != noticeMsgBoxMap.get("receiverNo")) {
-				noticeMsgBoxInsert = notificationRepository.insertNoticeMsgBox(noticeMsgBoxMap);
-			}
 
-			if (noticeMsgBoxInsert == -1) {
-				return false;
+			String senderNo = noticeJson.get("senderNo").toString();
+			String receiverNo = noticeMsgBoxMap.get("receiverNo").toString();
+
+			if (!senderNo.equals(receiverNo)) {
+				noticeMsgBoxInsert = notificationRepository.insertNoticeMsgBox(noticeMsgBoxMap);
+				if (noticeMsgBoxInsert == -1) {
+					return false;
+				}
 			}
 		}
 		return noticeMessageInsert != -1 && noticeMsgBoxInsert != -1;
