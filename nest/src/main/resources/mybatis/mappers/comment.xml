@@ -38,4 +38,25 @@
 	<delete id="deleteFile" parameterType="long">
 		delete from file where file_no=#{fileNo}
 	</delete>
+	
+	<select id="selectLikeUser" parameterType="map" resultType="commentlikeuservo">
+		 <![CDATA[
+			select user_no as userNo, 
+				   comment_no as commentNo
+		    from userlike
+		    where comment_no=#{commentNo} and user_no = #{userNo}
+	    ]]>
+	</select>
+	
+	<insert id="insertLikeUser" parameterType="map">
+		<![CDATA[
+			insert into userlike values(#{userNo}, #{commentNo})
+		]]>
+	</insert>
+	
+	<delete id="deleteLikeUser" parameterType="map">
+		<![CDATA[
+			delete from userlike where file_no=#{fileNo}
+		]]>
+	</delete>
 </mapper>

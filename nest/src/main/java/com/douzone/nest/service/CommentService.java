@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.CommentRepository;
 import com.douzone.nest.repository.FileRepository;
+import com.douzone.nest.vo.CommentLikeUserVo;
 import com.douzone.nest.vo.CommentVo;
 
 @Service
@@ -43,6 +44,36 @@ public class CommentService {
 		}
 			
 		return comment + file > 0;
+	}
+
+	public CommentLikeUserVo selectLikeUser(Long userNo, Long commentNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("userNo", userNo);
+		map.put("commentNo", commentNo);
+		
+		return commentRepository.selectLikeUser(map);
+	}
+
+	public boolean insertLikeUser(Long userNo, Long commentNo) {
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("userNo", userNo);
+		map.put("commentNo", commentNo);
+		
+		return 1 == commentRepository.insertLikeUser(map);
+	}
+
+	public boolean deleteLikeUser(Long userNo, Long commentNo) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("userNo", userNo);
+		map.put("commentNo", commentNo);
+		
+		return 1 == commentRepository.deleteLikeUser(map);
+		
 	}
 	
 	

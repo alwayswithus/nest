@@ -114,4 +114,20 @@ public class ApiTaskSettingController {
 		boolean result = taskSettingService.taskUserDelete(taskUserVo);
 		return JsonResult.success(result ? taskUserVo : -1);
 	}
+	
+	/*
+	 * 작성자:김우경
+	 * 설명: 업무 라벨 색상 수정
+	 */
+	@PostMapping("/api/tasksetting/tasklabel/{taskNo}")
+	public JsonResult taskLabel(
+			@PathVariable("taskNo") Long taskNo,
+			@RequestBody String color) {
+		
+		System.out.println(taskNo + " : " + color);
+		
+		boolean result = taskSettingService.updateTaskLabel(taskNo, color);
+		return JsonResult.success(result ? taskNo : -1);
+	}
+	
 }

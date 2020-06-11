@@ -38,4 +38,9 @@
 	<update id="updateTaskContents" parameterType="taskvo">
 		update task set task_contents = #{taskContents} where task_no=#{taskNo}
 	</update>
+	
+	<!-- 업무 라벨 수정 -->
+	<update id="updateTaskLabel" parameterType="map">
+		update task set task_label = #{color} where task_no = #{taskNo}
+	</update>
 </mapper>

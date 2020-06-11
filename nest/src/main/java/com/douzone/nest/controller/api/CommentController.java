@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.CommentService;
+import com.douzone.nest.vo.CommentLikeUserVo;
 import com.douzone.nest.vo.CommentVo;
 
 @CrossOrigin(origins = { "http://localhost:3000" })
@@ -33,7 +34,7 @@ public class CommentController {
 	
    /*
     * 작성자 : 김우경
-    * comment update
+    * comment like update
     */
 	@PostMapping("/api/comment/{commentNo}")
 	public JsonResult commentUpdate(
@@ -41,13 +42,27 @@ public class CommentController {
 			@RequestBody CommentVo commentVo) {
 		
 		
+		System.out.println(commentVo.getUserNo());
 		boolean result = commentService.updateComment(commentNo, commentVo);
-		System.out.println(commentVo.getCommentLike());
+		
+		CommentLikeUserVo likeUser = commentService.selectLikeUser(commentVo.getUserNo(), commentNo);
+		
+		System.out.println(likeUser);
+
 		if(commentVo.getCommentContents() != null) {
+			//comment contents 업데이트
 			return JsonResult.success(result ? commentVo.getCommentContents() : -1);
 		} else {
-			return JsonResult.success(result ? commentVo.getCommentLike() : -1);
+			//comment like 업데이트
+			if(likeUser == null) {
+				// 좋아요 증가하기
+				commentService.insertLikeUser(commentVo.getUserNo(), commentNo);
+				return JsonResult.success(result ? commentVo.getCommentLike()+1 : -1);
+			} else {
+				commentService.deleteLikeUser(commentVo.getUserNo(), commentNo);
+			}
 		}
+//		return JsonResult.success(null);
 	}
 	
 	 	/*
