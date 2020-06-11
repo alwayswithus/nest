@@ -1,5 +1,8 @@
 package com.douzone.nest.repository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -56,5 +59,18 @@ public class TaskSettingRepository {
 	 */
 	public int taskUserDelete(TaskUserVo taskUserVo) {
 		return sqlSession.delete("kanbanBoard.deleteTaskUser", taskUserVo);
+	}
+	
+	/*
+	 * 작성자 : 김우경
+	 * 설명 : 업무 라벨 수정
+	 */
+	public int updateTaskLabel(Long taskNo, String color) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("taskNo", taskNo);
+		map.put("color", color);
+		
+		return sqlSession.update("tasksetting.updateTaskLabel",map);
 	}
 }

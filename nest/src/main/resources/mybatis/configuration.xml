@@ -18,6 +18,7 @@
 		<typeAlias alias="filevo" type="com.douzone.nest.vo.FileVo" />
 		<typeAlias alias="userprojectvo" type="com.douzone.nest.vo.UserProjectVo" />
 		<typeAlias alias="noticevo" type="com.douzone.nest.vo.NoticeVo" />
+		<typeAlias alias="commentlikeuservo" type="com.douzone.nest.vo.CommentLikeUserVo" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="mybatis/mappers/project.xml" />

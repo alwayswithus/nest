@@ -58,5 +58,13 @@ public class TaskSettingService {
 	public boolean taskUserDelete(TaskUserVo taskUserVo) {
 		return 1 == taskSettingRepository.taskUserDelete(taskUserVo);
 	}
+
+	/*
+	 * 작성자 : 김우경
+	 * 설명 : 업무 라벨 수정
+	 */
+	public boolean updateTaskLabel(Long taskNo, String color) {
+		return 1 == taskSettingRepository.updateTaskLabel(taskNo, color);
+	}
 	
 }
