@@ -28,4 +28,21 @@
 		where task_no = #{taskNo} and user_no = #{authUserNo}
 	]]>
 	</select>
+	
+	<select id="selectTaskOrder" parameterType="taskvo" resultType="int">
+	<![CDATA[
+		select count(task_no) as taskOrder
+        from task
+        where tasklist_no = #{taskListNo} and project_no = #{projectNo}
+	]]>
+	</select>
+	
+	<insert id="taskAdd" parameterType="taskvo">
+	<![CDATA[
+		insert into task values (null, #{taskStart}, #{taskEnd}, #{taskPoint}, #{taskLabel}, #{taskState}, #{taskContents}, #{taskOrder}, #{taskRegdate}, #{taskListNo}, #{projectNo}, #{taskWriter})
+	]]>
+	<selectKey keyProperty = "taskNo" resultType="long" order="AFTER">
+		select last_insert_id()
+	</selectKey>
+	</insert>
 </mapper>

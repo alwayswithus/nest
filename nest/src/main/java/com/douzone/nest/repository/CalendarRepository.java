@@ -28,4 +28,12 @@ public class CalendarRepository {
 	public List<TaskListVo> selectTaskList(Long projectNo) {
 		return sqlSession.selectList("tasklist.selectTaskList", projectNo);
 	}
+	
+	public int selectTaskOrder(TaskVo taskVo) {
+		return sqlSession.selectOne("task.selectTaskOrder", taskVo);
+	}
+	
+	public int taskAdd(TaskVo taskVo) {
+		return sqlSession.insert("task.taskAdd", taskVo);
+	}
 }

@@ -80,4 +80,11 @@ public class CalendarService {
 		obj.put("allTaskList", allTaskListArray);
 		return obj;
 	}
+	
+	public boolean taskAdd(TaskVo taskVo) {
+		long taskOrder = calendarRepository.selectTaskOrder(taskVo) + 1;
+		taskVo.setTaskOrder(taskOrder);
+		int taskAdd = calendarRepository.taskAdd(taskVo);
+		return taskAdd == 1;
+	}
 }
