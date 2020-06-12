@@ -327,7 +327,7 @@
          from task t
          join tasklist tl on tl.tasklist_no = t.tasklist_no
          where t.project_no = #{projectNo}
-         order by tl.tasklist_order asc, t.task_order desc;
+         order by tl.tasklist_order asc, t.task_order desc
       ]]>
    </select>
    <!-- 프로젝트 회원별 권한 -->
@@ -337,7 +337,21 @@
 		from user u
 		join userproject up using(user_no)
 		where u.user_no = #{authUserNo}
-		and up.project_no = #{projectNo};
+		and up.project_no = #{projectNo}
+  	]]>
+  </select>
+  
+  <!-- 태그 검색될 테스크 번호 -->
+  <select id="searchTag" parameterType="HashMap" resultType="HashMap">
+  	  <![CDATA[
+         select distinct c.task_no
+         from project a
+         join tasklist b on(a.project_no = b.project_no)
+         join task c on (b.tasklist_no = c.tasklist_no)
+         join tagtask d on(c.task_no = d.task_no)
+         join taglist e on(d.tag_no = e.tag_no)
+         where a.project_no = #{projectNo}
+         and e.tag_name like CONCAT('%',#{keyword},'%')
   	]]>
   </select>
 	

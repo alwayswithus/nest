@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
@@ -137,9 +138,9 @@ public class ApiKanbanboardController {
 	public JsonResult taskReOrderOtherList(@RequestBody TaskReOrderVo TaskReOrder) {
 		boolean result = kanbanboardService.taskReOrderOtherList(TaskReOrder);
 		return  JsonResult.success(result ? TaskReOrder : -1);
-	}	
+	}
 	
-		/*
+	/*
 	 * 작성자 : 최인효
 	 * 설명 : 태그 검색될 테스크 번호
 	 */

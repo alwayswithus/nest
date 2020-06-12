@@ -318,6 +318,14 @@ public class KanbanBoardService {
 	public boolean taskStateUpdate(TaskVo taskVo) {
 		return -1 != kanbanBoardRepository.taskStateUpdate(taskVo);
 	}
+
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 태그 검색될 테스크 번호
+	 */
+	public List searchTag(Map tagSearch) {
+		return kanbanBoardRepository.searchTag(tagSearch);
+	}
 	
 	
 	/*
