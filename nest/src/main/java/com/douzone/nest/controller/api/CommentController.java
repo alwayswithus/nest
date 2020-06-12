@@ -63,6 +63,7 @@ public class CommentController {
 			}
 		}
 //		return JsonResult.success(null);
+		return null;
 	}
 	
 	 	/*
