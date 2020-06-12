@@ -354,19 +354,5 @@
          and e.tag_name like CONCAT('%',#{keyword},'%')
   	]]>
   </select>
-	
-	  <!-- 태그 검색될 테스크 번호 -->
-  <select id="searchTag" parameterType="HashMap" resultType="HashMap">
-  	  <![CDATA[
-         select distinct c.task_no
-         from project a
-         join tasklist b on(a.project_no = b.project_no)
-         join task c on (b.tasklist_no = c.tasklist_no)
-         join tagtask d on(c.task_no = d.task_no)
-         join taglist e on(d.tag_no = e.tag_no)
-         where a.project_no = #{projectNo}
-         and e.tag_name like CONCAT('%',#{keyword},'%')
-  	]]>
-  </select>
 
 </mapper>
