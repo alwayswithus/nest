@@ -71,6 +71,7 @@
                a.file_no fileNo,
                  b.user_name userName,
                  b.user_photo userPhoto,
+                 b.user_email userEmail,
                  c.origin_name originName,
                  c.file_path filePath,
                  c.file_regdate fileRegdate

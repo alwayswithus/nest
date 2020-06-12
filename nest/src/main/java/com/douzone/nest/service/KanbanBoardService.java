@@ -106,6 +106,7 @@ public class KanbanBoardService {
 					commentList.put("commentLike", commentVo.getCommentLike());
 					commentList.put("userNo", commentVo.getUserNo());
 					commentList.put("userName", commentVo.getUserName());
+					commentList.put("userEmail", commentVo.getUserEmail());
 					commentList.put("userPhoto", commentVo.getUserPhoto());
 					commentList.put("filePath", commentVo.getFilePath());
 					commentList.put("originName", commentVo.getOriginName());

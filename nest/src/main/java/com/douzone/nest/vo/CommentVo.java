@@ -9,7 +9,14 @@ public class CommentVo {
 	private Long userNo;			// 회원 번호
 	private String userName; 		//회원 이름
 	private String userPhoto; 		//회원 프로필
+	private String userEmail; 		//회원 이메일
 	
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 	private Long taskNo;			// 업무 번호
 	
 	private Long fileNo;			// 파일 번호
@@ -94,8 +101,8 @@ public class CommentVo {
 	public String toString() {
 		return "CommentVo [commentNo=" + commentNo + ", commentRegdate=" + commentRegdate + ", commentContents="
 				+ commentContents + ", commentLike=" + commentLike + ", userNo=" + userNo + ", userName=" + userName
-				+ ", userPhoto=" + userPhoto + ", taskNo=" + taskNo + ", fileNo=" + fileNo + ", originName="
-				+ originName + ", filePath=" + filePath + ", fileRegdate=" + fileRegdate + "]";
+				+ ", userPhoto=" + userPhoto + ", userEmail=" + userEmail + ", taskNo=" + taskNo + ", fileNo=" + fileNo
+				+ ", originName=" + originName + ", filePath=" + filePath + ", fileRegdate=" + fileRegdate + "]";
 	}
 	
 }
