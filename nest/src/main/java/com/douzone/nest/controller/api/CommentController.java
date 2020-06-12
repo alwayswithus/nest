@@ -43,8 +43,9 @@ public class CommentController {
 			@RequestBody CommentVo commentVo) {
 		
 		boolean result = commentService.updateCommentContents(commentNo, commentVo);
-		
+
 		return JsonResult.success(result ? commentVo.getCommentContents() : -1);
+
 	}
 	
 	/*
