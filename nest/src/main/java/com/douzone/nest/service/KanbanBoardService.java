@@ -106,6 +106,7 @@ public class KanbanBoardService {
 					commentList.put("commentLike", commentVo.getCommentLike());
 					commentList.put("userNo", commentVo.getUserNo());
 					commentList.put("userName", commentVo.getUserName());
+					commentList.put("userEmail", commentVo.getUserEmail());
 					commentList.put("userPhoto", commentVo.getUserPhoto());
 					commentList.put("filePath", commentVo.getFilePath());
 					commentList.put("originName", commentVo.getOriginName());
@@ -327,7 +328,14 @@ public class KanbanBoardService {
 	}
 	
 	
-
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 태그 검색될 테스크 번호
+	 */
+	public List searchTag(Map tagSearch) {
+		return kanbanBoardRepository.searchTag(tagSearch);
+	}
+	
 
 
 }

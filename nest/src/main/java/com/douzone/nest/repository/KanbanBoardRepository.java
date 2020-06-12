@@ -236,6 +236,15 @@ public class KanbanBoardRepository {
 	public String selectProjectTitle(Long projectNo) {
 		return sqlSession.selectOne("kanbanBoard.selectProjectTitle",projectNo);
 	}
+	
+		/*
+	 * 작성자 : 최인효
+	 * 설명 : 태그 검색될 테스크 번호
+	 */
+	public List searchTag(Map tagSearch) {
+		List list = sqlSession.selectList("kanbanBoard.searchTag",tagSearch);
+		return list;
+	}
 
 	/*
 	 * 작성자 : 최인효
