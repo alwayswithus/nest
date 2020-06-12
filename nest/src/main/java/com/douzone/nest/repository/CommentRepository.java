@@ -19,8 +19,8 @@ public class CommentRepository {
 		return sqlSession.insert("comment.insertComment", commentVo);
 	}
 
-	public int updateComment(Map<String,Object> map) {
-		return sqlSession.update("comment.updateComment", map);
+	public int updateCommentContents(Map<String,Object> map) {
+		return sqlSession.update("comment.updateCommentContents", map);
 	}
 
 	public int deleteComment(Long commentNo) {
@@ -37,6 +37,14 @@ public class CommentRepository {
 
 	public int deleteLikeUser(Map<String, Object> map) {
 		return sqlSession.delete("comment.deleteLikeUser", map);
+	}
+
+	public int deleteUserLikeByCommentNo(Long commentNo) {
+		return sqlSession.delete("comment.deleteUserLikeByCommentNo", commentNo);
+	}
+
+	public int updateCommentLike(Map<String, Object> map) {
+		return sqlSession.update("comment.updateCommentLike", map);
 	}
 
 }

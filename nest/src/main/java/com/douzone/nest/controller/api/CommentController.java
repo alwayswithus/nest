@@ -1,6 +1,7 @@
 package com.douzone.nest.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,36 +35,35 @@ public class CommentController {
 	
    /*
     * 작성자 : 김우경
-    * comment like update
+    * comment update
     */
-	@PostMapping("/api/comment/{commentNo}")
+	@PostMapping("/api/comment/contents/{commentNo}")
 	public JsonResult commentUpdate(
 			@PathVariable("commentNo") Long commentNo,
 			@RequestBody CommentVo commentVo) {
 		
+		boolean result = commentService.updateCommentContents(commentNo, commentVo);
 		
-		System.out.println(commentVo.getUserNo());
-		boolean result = commentService.updateComment(commentNo, commentVo);
-		
-		CommentLikeUserVo likeUser = commentService.selectLikeUser(commentVo.getUserNo(), commentNo);
-		
-		System.out.println(likeUser);
-
-		if(commentVo.getCommentContents() != null) {
-			//comment contents 업데이트
-			return JsonResult.success(result ? commentVo.getCommentContents() : -1);
-		} else {
-			//comment like 업데이트
-			if(likeUser == null) {
-				// 좋아요 증가하기
-				commentService.insertLikeUser(commentVo.getUserNo(), commentNo);
-				return JsonResult.success(result ? commentVo.getCommentLike()+1 : -1);
-			} else {
-				commentService.deleteLikeUser(commentVo.getUserNo(), commentNo);
-			}
-		}
-//		return JsonResult.success(null);
+		return JsonResult.success(result ? commentVo.getCommentContents() : -1);
 	}
+	
+	/*
+	    * 작성자 : 김우경
+	    * comment like update
+	    */
+		@PostMapping("/api/comment/like/{commentNo}")
+		public JsonResult commentLikeUpdate(
+				@PathVariable("commentNo") Long commentNo,
+				@RequestBody CommentVo commentVo,
+				ModelMap modelMap) {
+				 
+				CommentLikeUserVo likeUser = commentService.selectLikeUser(commentVo.getUserNo(), commentNo);
+				
+				modelMap.putAll(commentService.updateCommentLike(likeUser, commentVo.getUserNo(), commentNo, commentVo.getCommentLike()));
+				
+				return JsonResult.success((boolean) modelMap.get("result") ? modelMap.get("commentLike") : -1);
+//				return null;
+			}
 	
 	 	/*
 	    * 작성자 : 김우경
