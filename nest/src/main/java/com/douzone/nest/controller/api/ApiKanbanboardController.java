@@ -138,5 +138,15 @@ public class ApiKanbanboardController {
 		boolean result = kanbanboardService.taskReOrderOtherList(TaskReOrder);
 		return  JsonResult.success(result ? TaskReOrder : -1);
 	}	
+	
+		/*
+	 * 작성자 : 최인효
+	 * 설명 : 태그 검색될 테스크 번호
+	 */
+	@PostMapping("/api/kanbanMain/searchTag")
+	public JsonResult searchTag(@RequestBody Map tagSearch) {
+		List result = kanbanboardService.searchTag(tagSearch);
+		return  JsonResult.success(result);
+	}
 
 }
