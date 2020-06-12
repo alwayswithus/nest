@@ -20,15 +20,12 @@
 		</selectKey>
 	</insert>
 
-	<update id="updateComment" parameterType="map">
-	<choose>
-		<when test="commentContents!=null">
+	<update id="updateCommentContents" parameterType="map">
 			update comment set comment_contents=#{commentContents} where comment_no = #{commentNo}
-		</when>
-		<otherwise>
-			update comment set comment_like=#{commentLike} where comment_no = #{commentNo}
-		</otherwise>
-	</choose>
+	</update>
+	
+	<update id="updateCommentLike" parameterType="map">
+		update comment set comment_like=#{commentLike} where comment_no = #{commentNo}
 	</update>
 	
 	<delete id="deleteComment" parameterType="long">
@@ -50,13 +47,19 @@
 	
 	<insert id="insertLikeUser" parameterType="map">
 		<![CDATA[
-			insert into userlike values(#{userNo}, #{commentNo})
+			insert into userlike values(#{commentNo}, #{userNo})
 		]]>
 	</insert>
 	
 	<delete id="deleteLikeUser" parameterType="map">
 		<![CDATA[
-			delete from userlike where file_no=#{fileNo}
+			delete from userlike where user_no=#{userNo} and comment_no=#{commentNo}
+		]]>
+	</delete>
+	
+	<delete id="deleteUserLikeByCommentNo" parameterType="long">
+		<![CDATA[
+			delete from userlike where comment_no=#{commentNo}
 		]]>
 	</delete>
 </mapper>

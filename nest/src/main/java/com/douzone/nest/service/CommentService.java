@@ -3,6 +3,8 @@ package com.douzone.nest.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.stream.events.Comment;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,18 +26,18 @@ public class CommentService {
 			return 1 == commentRepository.insertComment(commentVo);
 	}
 
-	public boolean updateComment(Long commentNo, CommentVo commentVo) {
+	public boolean updateCommentContents(Long commentNo, CommentVo commentVo) {
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("commentNo", commentNo);
 		map.put("commentContents", commentVo.getCommentContents());
-		map.put("commentLike", commentVo.getCommentLike()+1);
 		
-		return 1 == commentRepository.updateComment(map);
+		return 1 == commentRepository.updateCommentContents(map);
 	}
 
 	public boolean deleteComment(Long fileNo, Long commentNo) {
 		
+		int userlike = commentRepository.deleteUserLikeByCommentNo(commentNo);
 		int comment = commentRepository.deleteComment(commentNo);
 		
 		int file = 0;
@@ -43,7 +45,7 @@ public class CommentService {
 			file = fileRepository.deleteFile(fileNo);
 		}
 			
-		return comment + file > 0;
+		return comment + file + userlike > 1;
 	}
 
 	public CommentLikeUserVo selectLikeUser(Long userNo, Long commentNo) {
@@ -74,6 +76,35 @@ public class CommentService {
 		
 		return 1 == commentRepository.deleteLikeUser(map);
 		
+	}
+
+	public Map<String, Object> updateCommentLike(CommentLikeUserVo userlike, Long userNo, Long commentNo, int commentLike) {
+		
+		Map<String, Object> map = new HashMap<>();
+		CommentVo commentVo = new CommentVo();
+		boolean result = false;
+		
+		map.put("commentNo", commentNo);
+		map.put("userNo", userNo);
+		
+		if(userlike == null) {
+			//코멘트 수 증가하기
+			commentRepository.insertLikeUser(map);
+			commentVo.setCommentLike(commentLike + 1);
+			map.put("commentLike", commentVo.getCommentLike());
+			System.out.println("insert + " + commentVo.getCommentLike());
+		} else {
+			//코멘트 수 감소하기
+			commentRepository.deleteLikeUser(map);
+			commentVo.setCommentLike(commentLike - 1);
+			map.put("commentLike", commentVo.getCommentLike());
+			System.out.println("delete + " + commentVo.getCommentLike());
+		}
+		result = 1 == commentRepository.updateCommentLike(map);
+		
+		map.put("result", result);
+		
+		return map;
 	}
 	
 	
