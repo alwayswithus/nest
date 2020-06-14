@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.nest.vo.CheckListVo;
+import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskUserVo;
 import com.douzone.nest.vo.TaskVo;
 
@@ -72,5 +73,9 @@ public class TaskSettingRepository {
 		map.put("color", color);
 		
 		return sqlSession.update("tasksetting.updateTaskLabel",map);
+	}
+
+	public int updateTag(TagListVo taglistVo) {
+		return sqlSession.update("tasksetting.updateTag", taglistVo);
 	}
 }
