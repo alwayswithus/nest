@@ -2,7 +2,7 @@ package com.douzone.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -32,7 +32,6 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		UserVo authUser = userService.getUser(vo);
 		if(authUser == null) {
 			// System.out.println("로그인 실패");
-//			request.setAttribute("userVo", vo);
 			response.sendRedirect(PathSetting.PATH_AND_PORT+"?error");
 			return false;
 		}
