@@ -43,4 +43,11 @@
 	<update id="updateTaskLabel" parameterType="map">
 		update task set task_label = #{color} where task_no = #{taskNo}
 	</update>
+	
+	<!-- 업무  태그 리스트 수정 -->
+	<update id="updateTag" parameterType="taglistvo">
+		<![CDATA[
+			update taglist set tag_name=#{tagName}, tag_color=#{tagColor} where tag_no=#{tagNo}
+		]]>
+	</update>
 </mapper>

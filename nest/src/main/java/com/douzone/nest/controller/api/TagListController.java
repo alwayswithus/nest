@@ -59,6 +59,7 @@ public class TagListController {
 	@DeleteMapping("/api/taglist/delete")
 	public JsonResult tagListDelete(
 			@RequestBody Long tagNo) {
+		
 		boolean result = tagListService.tagDelete(tagNo);
 		return JsonResult.success(result ? tagNo : -1);
 	}

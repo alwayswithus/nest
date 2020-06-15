@@ -10,6 +10,7 @@
  		]]> 
 	</select>
 	
+	<!-- 태그리스트에 태그 추가  -->
 	<insert id="insertTagList" parameterType="taglistvo">
    <![CDATA[
       insert into taglist values(null, #{tagName}, #{tagColor})
@@ -19,21 +20,31 @@
 	</selectKey>
    </insert>
    
+   <!-- 업무에 태그 추가  -->
    <insert id="insertTaskTag" parameterType="taglistvo">
    <![CDATA[
       insert into tagtask values(#{tagNo}, #{taskNo})
       ]]>
    </insert>
    
+   <!-- 태그리스트에서 태그 삭제  -->
    <delete id="deleteTagList" parameterType="taglistvo">
       <![CDATA[
          delete from taglist where tag_no = #{tagNo}
       ]]>
    </delete>
    
+   <!-- 업무에서 태그 삭제  -->
    <delete id="deleteTaskTag" parameterType="taglistvo">
       <![CDATA[
          delete from tagtask where tag_no = #{tagNo} and task_no = #{taskNo}
+      ]]>
+   </delete>
+   
+   <!-- 모든 업무에서 태그 삭제 -->
+   <delete id="deletAllTaskTag" parameterType="taglistvo">
+      <![CDATA[
+         delete from tagtask where tag_no = #{tagNo}
       ]]>
    </delete>
 </mapper>

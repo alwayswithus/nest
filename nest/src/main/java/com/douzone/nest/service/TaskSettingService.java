@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.TaskSettingRepository;
 import com.douzone.nest.vo.CheckListVo;
+import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskUserVo;
 import com.douzone.nest.vo.TaskVo;
 
@@ -65,6 +66,15 @@ public class TaskSettingService {
 	 */
 	public boolean updateTaskLabel(Long taskNo, String color) {
 		return 1 == taskSettingRepository.updateTaskLabel(taskNo, color);
+	}
+	
+	/*
+	 * 작성자:김우경
+	 * 설명:태그 수정
+	 */
+	public boolean updateTag(TagListVo taglistVo) {
+		
+		return 1 == taskSettingRepository.updateTag(taglistVo);
 	}
 	
 }

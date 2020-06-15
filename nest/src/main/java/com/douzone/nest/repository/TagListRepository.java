@@ -21,8 +21,8 @@ public class TagListRepository {
 		
 	}
 	public int tagDelete(Long tagNo) {
+		int tagTask = sqlSession.delete("taglist.deletAllTaskTag", tagNo);
 		int tagList = sqlSession.delete("taglist.deleteTagList", tagNo);
-		int tagTask = sqlSession.delete("taglist.deleteTagTask", tagNo);
 		return tagList  + tagTask ;
 	}
 	public int taskTagInsert(TagListVo tagListVo) {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.TaskSettingService;
 import com.douzone.nest.vo.CheckListVo;
+import com.douzone.nest.vo.TagListVo;
 import com.douzone.nest.vo.TaskUserVo;
 import com.douzone.nest.vo.TaskVo;
 
@@ -128,6 +129,17 @@ public class ApiTaskSettingController {
 		
 		boolean result = taskSettingService.updateTaskLabel(taskNo, color);
 		return JsonResult.success(result ? taskNo : -1);
+	}
+	
+	/*
+	 * 작성자:김우경
+	 * 설명:태그 수정
+	 */
+	@PostMapping("/api/tasksetting/tag/update")
+	public JsonResult tagUpdate(
+			@RequestBody TagListVo taglistVo) {
+		boolean result = taskSettingService.updateTag(taglistVo);
+		return JsonResult.success(result ? taglistVo : -1);
 	}
 	
 }
