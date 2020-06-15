@@ -1,5 +1,7 @@
 package com.douzone.nest.controller.api;
 
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,6 +29,10 @@ public class ApiProfileController {
 	@Autowired
 	private FileUploadService fileUploadService;
 	
+	/*
+	 * 작성자:김우경
+	 * 설명:회원에 대한 프로필 정보
+	 */
 	@GetMapping("/api/profile/{userNo}")
 	public JsonResult userSelect(@PathVariable("userNo") Long userNo) {
 	
@@ -35,6 +41,10 @@ public class ApiProfileController {
 		return JsonResult.success(userVo);
 	}
 	
+	/*
+	 * 작성자:김우경
+	 * 설명:회원에 대한 프로필 정보 업데이트
+	 */
 	@PostMapping("/api/profile/update")
 	public JsonResult updateUser(@RequestBody UserVo userVo) {
 		System.out.println(userVo);
@@ -44,6 +54,10 @@ public class ApiProfileController {
 		return JsonResult.success(userVo);
 	}
 	
+	/*
+	 * 작성자:김우경
+	 * 설명:회원에 대한 사진 정보 업데이트
+	 */
 	@PostMapping("/api/profile/photoupload")
 	public JsonResult userPhotoUrl(@RequestParam("file") MultipartFile multipartFile) {
 		FileVo fileVo = new FileVo();
@@ -51,6 +65,19 @@ public class ApiProfileController {
 		String url = fileUploadService.restore(fileVo, multipartFile);		
 		
 		return JsonResult.success(url);
+	}
+	
+	/*
+	 * 작성자:김우경
+	 * 설명:회원 계정삭제
+	 */
+	
+	@GetMapping("/api/profile/account/{userNo}")
+	public JsonResult accountSelect(@PathVariable("userNo") Long userNo) {
+		
+		JSONObject userInfo = profileService.select(userNo);
+		System.out.println(userInfo);
+		return JsonResult.success(userInfo);
 	}
 	
 	// 비밀번호 업데이트 기능

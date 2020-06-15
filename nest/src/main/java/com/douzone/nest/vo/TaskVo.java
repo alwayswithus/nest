@@ -12,8 +12,18 @@ public class TaskVo {
 	private Long taskListNo; // 업무 리스트 번호
 	private String taskRegdate; // 업무 생성일
 	private Long taskWriter; // 업무 작성자
+	
+	private String userName; // 회원이름
+
 	private Long taskListOrder; // 업무리스트 정렬번호
 	private Long projectNo;	   // 프로젝트번호
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public String getTaskRegdate() {
 		return taskRegdate;
@@ -100,6 +110,7 @@ public class TaskVo {
 		return "TaskVo [taskNo=" + taskNo + ", taskStart=" + taskStart + ", taskEnd=" + taskEnd + ", taskPoint="
 				+ taskPoint + ", taskLabel=" + taskLabel + ", taskState=" + taskState + ", taskContents=" + taskContents
 				+ ", taskOrder=" + taskOrder + ", taskListNo=" + taskListNo + ", taskRegdate=" + taskRegdate
-				+ ", taskWriter=" + taskWriter + ", taskListOrder=" + taskListOrder + ", projectNo=" + projectNo + "]";
+				+ ", taskWriter=" + taskWriter + ", userName=" + userName + ", taskListOrder=" + taskListOrder
+				+ ", projectNo=" + projectNo + "]";
 	}
 }

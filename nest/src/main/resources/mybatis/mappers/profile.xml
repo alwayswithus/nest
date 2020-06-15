@@ -17,6 +17,16 @@
  		]]> 
 	</select>
 	
+	<select id="selectAboutProject" parameterType="long" resultType="hashmap">
+	<![CDATA[
+		select up.project_no, up.role_no, p.project_title, u.user_name
+		  from userproject up
+		  join user u on u.user_no = up.user_no
+		  join project p on p.project_no = up.project_no
+		 where up.user_no = #{userNo}
+ 		]]> 
+	</select>
+	
 	<update id="updateUser" parameterType="uservo">
 		update user set 
 			   user_name = #{userName},

@@ -16,19 +16,21 @@
    <!-- 테크스 select -->
    <select id="selectTasks" resultType="taskvo">
       <![CDATA[
-         select task_no taskNo,
-               date_format(task_start, '%Y-%m-%d %H:%i') as taskStart,
-               date_format(task_end, '%Y-%m-%d %H:%i') as taskEnd,
-               task_point taskPoint,
-               task_label taskLabel,
-               task_state taskState,
-               task_contents taskContents,
-               task_order taskOrder,
-               tasklist_no tasklistNo,
-                    task_regdate taskRegdate,
-                    task_writer taskWriter,
-               project_no projectNo
-         from task
+          select a.task_no taskNo,
+               date_format(a.task_start, '%Y-%m-%d %H:%i') as taskStart,
+               date_format(a.task_end, '%Y-%m-%d %H:%i') as taskEnd,
+               a.task_point taskPoint,
+               a.task_label taskLabel,
+               a.task_state taskState,
+               a.task_contents taskContents,
+               a.task_order taskOrder,
+               a.tasklist_no tasklistNo,
+               a.task_regdate taskRegdate,
+               a.task_writer taskWriter,
+               a.project_no projectNo,
+               b.user_name userName
+         from task a
+         join user b on (a.task_writer = b.user_no)
          where tasklist_no = #{taskListNo}
           order by task_state, task_order desc
       ]]>

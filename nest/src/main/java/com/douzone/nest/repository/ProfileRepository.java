@@ -1,5 +1,8 @@
 package com.douzone.nest.repository;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -22,6 +25,10 @@ public class ProfileRepository {
 
 	public int updatePass(UserVo userVo) {
 		return sqlSession.update("profile.updatePass", userVo);
+	}
+
+	public List<HashMap> select(Long userNo) {
+		return sqlSession.selectList("profile.selectAboutProject",userNo);
 	}
 	
 }
