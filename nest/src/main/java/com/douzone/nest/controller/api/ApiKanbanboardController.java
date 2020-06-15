@@ -115,9 +115,9 @@ public class ApiKanbanboardController {
 	 * 설명 : 테스크 체크 update
 	 */
 	@PostMapping("/api/task/state")
-	public JsonResult taskStateUpdate(@RequestBody TaskVo taskVo) {
-		boolean result = kanbanboardService.taskStateUpdate(taskVo);
-		return  JsonResult.success(result ? taskVo : -1);
+	public JsonResult taskStateUpdate(@RequestBody List<TaskVo> tasks) {
+		boolean result = kanbanboardService.taskStateUpdate(tasks);
+		return  JsonResult.success(result ? tasks : -1);
 	}
 	
 	/*

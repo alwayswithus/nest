@@ -30,7 +30,7 @@
                project_no projectNo
          from task
          where tasklist_no = #{taskListNo}
-          order by task_order desc
+          order by task_state, task_order desc
       ]]>
    </select>
 
@@ -277,7 +277,7 @@
    <update id="taskStateUpdate" parameterType="taskvo">
       <![CDATA[ 
          update task
-         set task_state = #{taskState}
+         set task_state = #{taskState}, task_order = #{taskOrder}
          where task_no = #{taskNo}
       ]]>
    </update>

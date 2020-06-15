@@ -315,8 +315,15 @@ public class KanbanBoardService {
 	 * 작성자 : 최인효
 	 * 설명 : 테스크 체크 update
 	 */
-	public boolean taskStateUpdate(TaskVo taskVo) {
-		return -1 != kanbanBoardRepository.taskStateUpdate(taskVo);
+	public boolean taskStateUpdate(List<TaskVo> tasks) {
+		int result = 0;
+		for(TaskVo vo : tasks) {
+			result = kanbanBoardRepository.taskStateUpdate(vo);
+			if(result != 1) {
+				return false;
+			}
+		}
+		return result != -1;
 	}
 
 	/*
