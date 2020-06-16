@@ -15,6 +15,8 @@ public class LogoutInterceptor extends HandlerInterceptorAdapter {
 		throws Exception {
 		HttpSession session = request.getSession();
 		
+		System.out.println("로그아웃!");
+		
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if(authUser!=null){
 			System.out.println("세션제거...");

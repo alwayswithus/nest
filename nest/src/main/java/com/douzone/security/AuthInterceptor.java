@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.douzone.nest.PathSetting;
 import com.douzone.nest.vo.UserVo;
 
 public class AuthInterceptor extends HandlerInterceptorAdapter {
@@ -42,32 +43,41 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		//6. @Auth가 붙어 있기 때문 인증(Authentification) 여부 확인
 		HttpSession session = request.getSession();
 		if(session == null) {
-			response.sendRedirect(request.getContextPath() + "/user/login");
+			//response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(PathSetting.PATH_AND_PORT+"/");
 			return false;
 		}
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
 		if(authUser == null) {
-			response.sendRedirect(request.getContextPath() + "/user/login");
+			//response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(PathSetting.PATH_AND_PORT+"/");
 			return false;
 		}
 		
 		//6. 권한(Authorization) 체크를 위해서 @Auth의 role 가져오기 ("USER", "ADMIN")
 		String role = auth.value();
 
-		//7. @Auth의 role이 "USER" 인 경우에는 authUser의 role이 "USER" 이든 "ADMIN" 상관이 없음.
-		if("USER".equals(role)) { 
+		//7. @Auth의 role이 "GUEST" 인 경우에는 authUser의 role이 어떤것 이든 상관이 없음.
+		if("GUEST".equals(role)) { 
 			return true;
 		} 
-		
-		//8. @Auth의 role이 "ADMIN" 인 경우에는  반드시 authUser의 role이 "ADMIN" 여야 한다.
-		if("ADMIN".equals(authUser.getRoleNo()) == false) { 
-			response.sendRedirect(request.getContextPath());
-			return false;
+		// 만약 "GUEST"가 아닌경우 회원 상태들 확인
+		else {
+			if("준회원".equals(authUser.getUserGrade())) {
+				response.sendRedirect(PathSetting.PATH_AND_PORT+"/dashboard");
+				return false;
+			}
+			return true;
 		}
-		
-		// @Auth의 role => "ADMIN"
-		// authUser의 role => "ADMIN"
-		// 관리자 권한이 확인
-		return true;
+//		//8. @Auth의 role이 "ADMIN" 인 경우에는  반드시 authUser의 role이 "ADMIN" 여야 한다.
+//		if("ADMIN".equals(authUser.getRoleNo()) == false) { 
+//			response.sendRedirect(request.getContextPath());
+//			return false;
+//		}
+//		
+//		// @Auth의 role => "ADMIN"
+//		// authUser의 role => "ADMIN"
+//		// 관리자 권한이 확인
+//		return true;
 	}
 }

@@ -5,7 +5,7 @@
 
 	<select id="findByEmailAndPassword" parameterType="uservo" resultType="uservo">
 		<![CDATA[
-		 select user_no as userNo, user_name as userName, user_email as userEmail, user_photo as userPhoto, user_bg as userBg 
+		 select user_no as userNo, user_name as userName, user_email as userEmail, user_photo as userPhoto, user_bg as userBg, user_grade as userGrade
 		   from user  
 		  where user_email = #{userEmail }    
 		    and user_password = #{userPassword }
