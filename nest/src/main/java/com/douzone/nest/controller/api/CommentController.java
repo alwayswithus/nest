@@ -81,7 +81,7 @@ public class CommentController {
 	 * 작성자 : 김우경
 	 * comment delete
 	 */
-	@DeleteMapping("/api/comment/{commentNo}/{fileNo}")
+	@PostMapping("/api/comment/{commentNo}/{fileNo}")
 	public JsonResult commentDelete(
 			@PathVariable("commentNo") Long commentNo,
 			@PathVariable("fileNo") Long fileNo) {

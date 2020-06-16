@@ -29,11 +29,11 @@
 	</update>
 	
 	<delete id="deleteComment" parameterType="long">
-		delete from comment where comment_no=#{commentNo}
+		update comment set comment_state='F' where comment_no=#{commentNo}
 	</delete>
 	
 	<delete id="deleteFile" parameterType="long">
-		delete from file where file_no=#{fileNo}
+		update file set file_state='F' where file_no=#{fileNo}
 	</delete>
 	
 	<select id="selectLikeUser" parameterType="map" resultType="commentlikeuservo">

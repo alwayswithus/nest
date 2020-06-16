@@ -79,7 +79,8 @@
                  b.user_email userEmail,
                  c.origin_name originName,
                  c.file_path filePath,
-                 c.file_regdate fileRegdate
+                 c.file_regdate fileRegdate,
+                 c.file_state fileState
          from comment a
          join user b on(a.user_no = b.user_no)
          left join file c on(a.file_no = c.file_no)
