@@ -125,6 +125,7 @@ public class NotificationService {
 		ArrayList<Integer> receiverList = (ArrayList<Integer>) noticeJson.get("receiver");
 
 		for (int receiver : receiverList) {
+			
 			Map noticeMsgBoxMap = new HashMap();
 			noticeMsgBoxMap.put("noticeNo", noticeMessageMap.get("noticeNo"));
 			noticeMsgBoxMap.put("receiverNo", receiver);
