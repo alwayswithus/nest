@@ -11,18 +11,34 @@ public class CommentVo {
 	private String userPhoto; 		//회원 프로필
 	private String userEmail; 		//회원 이메일
 	
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
+	private String commentState; // 코멘트 상태
 	private Long taskNo;			// 업무 번호
 	
 	private Long fileNo;			// 파일 번호
 	private String originName; 		// 원본이름
 	private String filePath; 		// 파일 경로
 	private String fileRegdate;		// 파일 등록일
+	
+	private String fileState; // 파일 상태
+
+	public String getFileState() {
+		return fileState;
+	}
+	public void setFileState(String fileState) {
+		this.fileState = fileState;
+	}
+	public String getCommentState() {
+		return commentState;
+	}
+	public void setCommentState(String commentState) {
+		this.commentState = commentState;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
 	
 	
 	public String getUserName() {
@@ -101,8 +117,9 @@ public class CommentVo {
 	public String toString() {
 		return "CommentVo [commentNo=" + commentNo + ", commentRegdate=" + commentRegdate + ", commentContents="
 				+ commentContents + ", commentLike=" + commentLike + ", userNo=" + userNo + ", userName=" + userName
-				+ ", userPhoto=" + userPhoto + ", userEmail=" + userEmail + ", taskNo=" + taskNo + ", fileNo=" + fileNo
-				+ ", originName=" + originName + ", filePath=" + filePath + ", fileRegdate=" + fileRegdate + "]";
+				+ ", userPhoto=" + userPhoto + ", userEmail=" + userEmail + ", commentState=" + commentState
+				+ ", taskNo=" + taskNo + ", fileNo=" + fileNo + ", originName=" + originName + ", filePath=" + filePath
+				+ ", fileRegdate=" + fileRegdate + ", fileState=" + fileState + "]";
 	}
 	
 }

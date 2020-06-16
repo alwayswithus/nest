@@ -5,12 +5,12 @@
 		<choose>
 			<when test="fileNo == null ">
 		   	  <![CDATA[
-		      	insert into comment values(null, now(), #{commentContents}, 0, #{userNo}, #{taskNo}, #{fileNo})
+		      	insert into comment values(null, now(), #{commentContents}, 0, #{userNo}, #{taskNo}, #{fileNo},'T')
 		      ]]>
 			</when>
 			<otherwise>
 	      	 <![CDATA[
-		      	insert into comment values(null, now(), #{originName}, 0, #{userNo}, #{taskNo}, #{fileNo})
+		      	insert into comment values(null, now(), #{originName}, 0, #{userNo}, #{taskNo}, #{fileNo},'T')
 		      ]]>
 			</otherwise>
 		</choose>

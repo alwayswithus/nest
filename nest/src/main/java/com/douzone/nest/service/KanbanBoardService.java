@@ -47,6 +47,7 @@ public class KanbanBoardService {
 			taskList.put("taskListName", taskListVo.getTaskListName());
 			taskList.put("taskListOrder", taskListVo.getTaskListOrder());
 			taskList.put("projectNo", taskListVo.getProjectNo());
+			taskList.put("taskListState", taskListVo.getTaskListState());
 
 			// tasks[]
 			JSONArray tasksJSONArray = new JSONArray();
@@ -114,7 +115,9 @@ public class KanbanBoardService {
 					commentList.put("fileRegDate", commentVo.getFileRegdate());
 					commentList.put("taskNo", commentVo.getTaskNo());
 					commentList.put("fileNo", commentVo.getFileNo());
-
+					commentList.put("commentState", commentVo.getCommentState());
+					commentList.put("fileState", commentVo.getFileState());
+					
 					commentsJSONArray.add(commentList);
 				}
 				task.put("commentList", commentsJSONArray);
@@ -131,6 +134,7 @@ public class KanbanBoardService {
 					file.put("filePath", fileVo.getFilePath());
 					file.put("fileRegdate", fileVo.getFileRegdate());
 					file.put("taskNo", fileVo.getTaskNo());
+					file.put("fileState", fileVo.getFileState());
 
 					fileJSONArray.add(file);
 				}

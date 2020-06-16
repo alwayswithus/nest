@@ -1,5 +1,7 @@
 package com.douzone.nest.controller.api;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -90,7 +92,7 @@ public class CommentController {
 
 	@MessageMapping("/all") // react -> spring 송신
 //	@SendTo("/topic/all")	// spring -> react 송신
-	public void send(CommentVo commentVo) {
+	public void send(Map commentVo) {
 		template.convertAndSend("/topic/all", commentVo);
 	}
 }

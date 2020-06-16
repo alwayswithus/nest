@@ -3,7 +3,7 @@
 <mapper namespace="file">
 	<insert id="insertFile" parameterType="filevo">
 	   <![CDATA[
-	      insert into file values(null, #{originName}, #{changeName},#{filePath}, now(), #{taskNo})
+	      insert into file values(null, #{originName}, #{changeName},#{filePath}, now(), #{taskNo},'T')
 	      ]]>
 	       <selectKey keyProperty = "fileNo" resultType="long" order="AFTER">
 			select last_insert_id()

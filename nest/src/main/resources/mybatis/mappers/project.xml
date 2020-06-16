@@ -62,6 +62,7 @@
                    a.user_regdate as userRegdate,
 				   a.user_photo as userPhoto,
                    a.user_birth as userBirth,
+                   b.role_no as roleNo,
 				   b.project_no as projectNo
 			from user a, userproject b
 			where a.user_no = b.user_no 
