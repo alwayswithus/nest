@@ -102,7 +102,7 @@ public class KanbanBoardRepository {
 	 * 설명 : 테스크리스트 delete
 	 */
 	public int taskListDelete(TaskListVo taskListVo) {
-		return sqlSession.delete("kanbanBoard.taskListDelete", taskListVo);
+		return sqlSession.update("kanbanBoard.taskListDelete", taskListVo);
 	}
 	
 	/*
@@ -152,7 +152,7 @@ public class KanbanBoardRepository {
 	 * 설명 : 테스크 삭제
 	 */
 	public int taskDelete(Long reOrderTask) {
-		return sqlSession.delete("kanbanBoard.taskDelete", reOrderTask);
+		return sqlSession.update("kanbanBoard.taskDelete", reOrderTask);
 	}
 	
 	/*

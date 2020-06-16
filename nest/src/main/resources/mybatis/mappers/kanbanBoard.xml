@@ -9,6 +9,7 @@
          from project p
          join tasklist tl on(p.project_no = tl.project_no)
          where p.project_no = #{projectNo}
+         and tl.tasklist_state = 'T'
          order by tl.tasklist_order
       ]]>
    </select>
@@ -32,6 +33,7 @@
          from task a
          join user b on (a.task_writer = b.user_no)
          where tasklist_no = #{taskListNo}
+         and a.task_state != 'del'
           order by task_state, task_order desc
       ]]>
    </select>
@@ -137,7 +139,7 @@
    <!-- 테스크 리스트 insert -->
    <insert id="taskListAdd" parameterType="tasklistvo"> 
       <![CDATA[ 
-         insert into tasklist values(null, #{taskListName}, #{taskListOrder}, #{projectNo})
+         insert into tasklist values(null, #{taskListName}, #{taskListOrder}, #{projectNo}, 'T')
       ]]>
       <selectKey keyProperty="taskListNo" resultType="long"
          order="AFTER">
@@ -146,12 +148,13 @@
    </insert>
 
    <!-- 테스크 리스트 delete -->
-   <delete id="taskListDelete" parameterType="tasklistvo"> 
+   <update id="taskListDelete" parameterType="tasklistvo"> 
       <![CDATA[ 
-         delete from tasklist
+         update tasklist
+         set tasklist_state = 'F'
          where tasklist_no = #{taskListNo}
       ]]>
-   </delete>
+   </update>
 
    <!-- 테스크 리스트 삭제시 정렬 update -->
    <update id="taskListDeleteReOrder" parameterType="tasklistvo"> 
@@ -213,12 +216,13 @@
    </select>
    
    <!-- 테스크 삭제 -->
-   <delete id="taskDelete" parameterType="Long">
+   <update id="taskDelete" parameterType="Long">
       <![CDATA[ 
-         delete from task
+         update task
+         set task_state = 'del'
          where task_no = #{reOrderTask}
       ]]>
-   </delete>
+   </update>
    
    <!-- 테스크 복사 -->
    <insert id="copyTask" parameterType="copytaskvo">
