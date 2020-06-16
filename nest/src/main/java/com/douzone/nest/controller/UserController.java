@@ -93,7 +93,7 @@ public class UserController {
 //	}
 	
 	// 로그아웃
-	@RequestMapping("/logout")
+	@PostMapping("/logout/")
 	public void logout() {}
 //	public String logout (HttpServletRequest request, HttpServletResponse response) {
 //		

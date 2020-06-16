@@ -2,7 +2,7 @@ package com.douzone.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -20,7 +20,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		// System.out.println("로그인!?");
+		System.out.println("로그인!");
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -36,10 +36,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 		
-		
+
 		// session 처리
-//		HttpSession session = request.getSession(true);
-//		session.setAttribute("authUser", authUser);
+		System.out.println("세션생성");
+		HttpSession session = request.getSession(true);
+		session.setAttribute("authUser", authUser);
 //		session.setAttribute("authUserNo", authUser.getUserNo());
 //		session.setAttribute("authUserEmail", authUser.getUserEmail());
 //		session.setAttribute("authUserName", authUser.getUserName());

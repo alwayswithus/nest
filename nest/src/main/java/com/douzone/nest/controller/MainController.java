@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.douzone.nest.vo.UserVo;
+import com.douzone.security.Auth;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @Controller
@@ -20,7 +21,7 @@ public class MainController {
 		HttpSession session = request.getSession();
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
 		if(authUser!=null){
-//			System.out.println("이미 로그인 되있음...");
+			System.out.println("이미 로그인 되있음...");
 //			return "redirect:"+PathSetting.PATH_AND_PORT+"/dashboard";
 		}
 		
@@ -31,7 +32,7 @@ public class MainController {
 	public String dashboard() {
 		return "index";
 	}
-	
+
 	@RequestMapping("/profile")
 	public String profile() {
 		return "index";
@@ -41,7 +42,7 @@ public class MainController {
 	public String profileset() {
 		return "index";
 	}
-	
+	@Auth
 	@RequestMapping("/notification")
 	public String notification() {
 		return "index";
