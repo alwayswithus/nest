@@ -48,7 +48,6 @@
 	where project.project_no = userproject.project_no
 	and userproject.user_no = user.user_no
 	and project.project_no = #{projectNo}
-	and user.user_no != #{userNo}
 	]]>
 	</select>
 	

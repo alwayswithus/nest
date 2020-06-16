@@ -35,9 +35,9 @@
 			from noticemsgbox a
 			join noticemessage b on (a.notice_no = b.notice_no)
 			join user c on (b.user_no = c.user_no)
-			join task d on (b.task_no = d.task_no)
+			left join task d on (b.task_no = d.task_no)
 			join project e on (b.project_no = e.project_no)
-			join tasklist f on(d.tasklist_no = f.tasklist_no)
+			left join tasklist f on(d.tasklist_no = f.tasklist_no)
 			where a.user_no = #{authUserNo}
 			order by b.notice_date desc, b.notice_no desc
 		]]>
