@@ -7,6 +7,14 @@ public class TaskListVo {
 	
 	private Long projectNo;		// 프로젝트 번호
 	
+	private String taskListState; // 업무리스트 상태
+	
+	public String getTaskListState() {
+		return taskListState;
+	}
+	public void setTasklistState(String tasklistState) {
+		this.taskListState = tasklistState;
+	}
 	public Long getTaskListNo() {
 		return taskListNo;
 	}
@@ -35,7 +43,7 @@ public class TaskListVo {
 	@Override
 	public String toString() {
 		return "TaskListVo [taskListNo=" + taskListNo + ", taskListName=" + taskListName + ", taskListOrder="
-				+ taskListOrder + ", projectNo=" + projectNo + "]";
+				+ taskListOrder + ", projectNo=" + projectNo + ", tasklistState=" + taskListState + "]";
 	}
 
 	

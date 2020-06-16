@@ -19,6 +19,14 @@ public class FileVo {
 	
 	private Long commentNo; // 코멘트 번호
 	
+	private String fileState; // 파일 상태
+	
+	public String getFileState() {
+		return fileState;
+	}
+	public void setFileState(String fileState) {
+		this.fileState = fileState;
+	}
 	public Long getCommentNo() {
 		return commentNo;
 	}
@@ -110,6 +118,6 @@ public class FileVo {
 				+ filePath + ", fileRegdate=" + fileRegdate + ", taskNo=" + taskNo + ", taskContents=" + taskContents
 				+ ", projectNo=" + projectNo + ", projectTitle=" + projectTitle + ", userNo=" + userNo + ", userName="
 				+ userName + ", tasklistNo=" + tasklistNo + ", tasklistName=" + tasklistName + ", commentNo="
-				+ commentNo + "]";
+				+ commentNo + ", fileState=" + fileState + "]";
 	}
 }

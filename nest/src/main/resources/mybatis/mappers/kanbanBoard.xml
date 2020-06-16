@@ -71,6 +71,7 @@
                a.user_no userNo,
                a.task_no taskNo,
                a.file_no fileNo,
+                 a.comment_state commentState,
                  b.user_name userName,
                  b.user_photo userPhoto,
                  b.user_email userEmail,
@@ -92,7 +93,8 @@
             change_name changeName,
             file_path filePath,
             file_regdate fileRegdate,
-            task_no taskNo
+            task_no taskNo,
+            file_state fileState
          from file
          where task_no = #{taskNo}
        ]]>
@@ -137,7 +139,7 @@
    <!-- 테스크 리스트 insert -->
    <insert id="taskListAdd" parameterType="tasklistvo"> 
       <![CDATA[ 
-         insert into tasklist values(null, #{taskListName}, #{taskListOrder}, #{projectNo})
+         insert into tasklist values(null, #{taskListName}, #{taskListOrder}, #{projectNo},'T')
       ]]>
       <selectKey keyProperty="taskListNo" resultType="long"
          order="AFTER">
