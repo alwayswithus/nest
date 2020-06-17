@@ -109,6 +109,9 @@ public class ProjectService {
 				map.put("projectNo", projectVo.getProjectNo());
 				map.put("userNo", member.getUserNo());
 				// userproject 테이블에 insert
+				if(authUserNo == member.getUserNo()) {
+					continue;
+				}
 				projectWithMember = projectRepository.insertUserProject(map);
 			}
 			return (projectNotMember + authUser + projectWithMember) == 3;

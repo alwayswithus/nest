@@ -2,9 +2,12 @@ package com.douzone.nest.controller.api;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +29,13 @@ public class ApiDashboardController {
 	
 	@Autowired
 	private ProjectService projectService;
+	
+	private final SimpMessagingTemplate template;
+	
+	@Autowired
+	public ApiDashboardController(SimpMessagingTemplate template) {
+		this.template = template;
+	}
 	
 	@GetMapping("/api/dashboard/{authUserNo}")
 	public JsonResult dashboard(@PathVariable("authUserNo") long authUserNo) {
@@ -124,6 +134,13 @@ public class ApiDashboardController {
 	public JsonResult foreverdelete(@RequestBody ProjectVo projectVo) {
 		boolean result = projectService.foreverdelete(projectVo);
 		return JsonResult.success(result ? projectVo : -1);
+	}
+	
+	@MessageMapping("/dashboard/all") // react -> spring 송신
+//	@SendTo("/topic/all")	// spring -> react 송신
+	public void send(Map<Object, Object> socketData) {
+		System.out.println(socketData);
+		template.convertAndSend("/topic/dashboard/all", socketData);
 	}
 	
 }
