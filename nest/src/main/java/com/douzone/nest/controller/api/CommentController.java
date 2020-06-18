@@ -1,9 +1,6 @@
 package com.douzone.nest.controller.api;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,13 +20,6 @@ public class CommentController {
 
 	@Autowired
 	private CommentService commentService;
-	
-	private final SimpMessagingTemplate template;
-
-	@Autowired
-	public CommentController(SimpMessagingTemplate template) {
-		this.template = template;
-	}
 	
 	/*
 	 * 작성자 : 김우경
@@ -88,10 +78,5 @@ public class CommentController {
 		return JsonResult.success(result ? commentNo : -1);
 	}
 
-	@MessageMapping("/all") // react -> spring 송신
-//	@SendTo("/topic/all")	// spring -> react 송신
-	public void send(Map<Object, Object> socketData) {
-		System.out.println(socketData);
-		template.convertAndSend("/topic/all", socketData);
-	}
+
 }
