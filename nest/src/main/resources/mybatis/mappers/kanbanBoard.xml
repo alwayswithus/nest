@@ -9,7 +9,6 @@
          from project p
          join tasklist tl on(p.project_no = tl.project_no)
          where p.project_no = #{projectNo}
-         and tl.tasklist_state = 'T'
          order by tl.tasklist_order
       ]]>
    </select>
@@ -84,7 +83,6 @@
          join user b on(a.user_no = b.user_no)
          left join file c on(a.file_no = c.file_no)
          where a.task_no = #{taskNo}
-         and a.comment_state = 'T';
        ]]>
    </select>
 
@@ -100,7 +98,6 @@
             file_state fileState
          from file
          where task_no = #{taskNo}
-         and file_state = 'T'
        ]]>
    </select>
 
