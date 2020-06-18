@@ -1,6 +1,7 @@
 package com.douzone.nest.controller.api;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +38,11 @@ public class ApiKanbanboardController {
 	@MessageMapping("/all") // react -> spring 송신
 //	@SendTo("/topic/all")	// spring -> react 송신
 	public void send(Map<Object, Object> socketData) {
-		System.out.println(socketData);
-		template.convertAndSend("/topic/all", socketData);
+		List mamberList = (List) socketData.get("members");
+		for(int i=0; i < mamberList.size();i++) {
+			template.convertAndSend("/topic/all/"+mamberList.get(i), socketData);
+		}
+//		template.convertAndSend("/topic/all", socketData);
 	}
 
 	/*
