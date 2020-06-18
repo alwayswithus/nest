@@ -1,5 +1,7 @@
 package com.douzone.nest.repository;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -26,5 +28,13 @@ public class UserProjectRepository {
 	 */	
 	public int roleChange(UserProjectVo userProjectVo) {
 		return sqlSession.update("userproject.roleChange", userProjectVo);
+	}
+
+	public int transferRoleAndDelete(Map<String, Object> projectUserMap) {
+		return sqlSession.update("userproject.transferRole", projectUserMap);
+	}
+
+	public int userDelete(Long userNo) {
+		return sqlSession.update("userproject.deleteUser", userNo);
 	}
 }

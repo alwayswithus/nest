@@ -17,4 +17,16 @@
 	update userproject set role_no = #{roleNo} where project_no = #{projectNo} and user_no = #{userNo} 
 	]]> 
 	</update>
+	
+	<update id="transferRole" parameterType="map">
+		<![CDATA[
+			update userproject set role_no = 1 where project_no = #{projectNo} and user_no=#{userNo}
+		]]>
+	</update>
+	
+	<update id="deleteUser" parameterType="long">
+		<![CDATA[
+			update user set user_grade="비회원" where user_no=#{userNo}
+		]]>
+	</update>
 </mapper>
