@@ -39,7 +39,11 @@ public class UserController {
 	
 	// 로그인
 	@PostMapping("/auth")
-	public void auth() {}
+	public String auth() {
+		System.out.println("???");
+		//response.sendRedirect(PathSetting.PATH_AND_PORT+"/signupdone/");
+		return PathSetting.PATH_AND_PORT+"/signupdone/";
+	}
 	
 	// 로그아웃
 	@PostMapping("/logout/")
