@@ -206,6 +206,7 @@ public class KanbanBoardService {
 	public boolean taskListDelete(TaskListVo taskListVo) {
 //		 result = 1 == kanbanBoardRepository.taskListInTaskDelete(taskListVo.getTaskListNo());
 		 boolean result = 1 == kanbanBoardRepository.taskListDelete(taskListVo);
+		 		 result = -1 != kanbanBoardRepository.taskListInDelete(taskListVo.getTaskListNo());
 		if (result) {
 			result = -1 != kanbanBoardRepository.taskListDeleteReOrder(taskListVo);
 		}
@@ -252,7 +253,6 @@ public class KanbanBoardService {
 	public boolean taskDelete(TaskReOrderVo taskInfo) {
 		boolean result = -1 != kanbanBoardRepository.taskDelete(taskInfo.getReOrderTask());
 		for(TaskVo vo : taskInfo.getStartTasks()) {
-			System.out.println(vo);
 			result = -1 != kanbanBoardRepository.taskReOrder(vo);
 		}
 		return result;

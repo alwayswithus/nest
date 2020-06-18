@@ -91,7 +91,7 @@ public class CommentController {
 	@MessageMapping("/all") // react -> spring 송신
 //	@SendTo("/topic/all")	// spring -> react 송신
 	public void send(Map<Object, Object> socketData) {
-		System.out.println(socketData);
+		
 		template.convertAndSend("/topic/all", socketData);
 	}
 }

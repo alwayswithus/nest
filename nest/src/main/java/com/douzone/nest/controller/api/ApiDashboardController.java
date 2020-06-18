@@ -20,7 +20,6 @@ import com.douzone.nest.service.ProjectService;
 import com.douzone.nest.vo.FileVo;
 import com.douzone.nest.vo.ProjectVo;
 import com.douzone.nest.vo.UserProjectVo;
-
 import com.douzone.nest.vo.UserVo;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -138,9 +137,14 @@ public class ApiDashboardController {
 	
 	@MessageMapping("/dashboard/all") // react -> spring 송신
 //	@SendTo("/topic/all")	// spring -> react 송신
+	@SuppressWarnings("unchecked")
 	public void send(Map<Object, Object> socketData) {
-		System.out.println(socketData);
-		template.convertAndSend("/topic/dashboard/all", socketData);
+		System.out.println(socketData.get("completedTask"));
+		System.out.println(socketData.get("taskCount"));
+		List<Object> list = (List<Object>) socketData.get("membersNo");
+		for(int i=0; i<list.size(); i++) {
+//			System.out.print(list.get(i) + " ");
+			template.convertAndSend("/topic/dashboard/all/" + list.get(i), socketData);
+		}
 	}
-	
 }
