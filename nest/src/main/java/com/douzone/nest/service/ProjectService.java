@@ -108,8 +108,10 @@ public class ProjectService {
 			for(UserVo member : projectVo.getMembers()) {			
 				map.put("projectNo", projectVo.getProjectNo());
 				map.put("userNo", member.getUserNo());
+				
 				// userproject 테이블에 insert
 				if(authUserNo == member.getUserNo()) {
+					projectWithMember = 1;
 					continue;
 				}
 				projectWithMember = projectRepository.insertUserProject(map);

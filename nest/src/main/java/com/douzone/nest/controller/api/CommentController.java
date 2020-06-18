@@ -78,5 +78,10 @@ public class CommentController {
 		return JsonResult.success(result ? commentNo : -1);
 	}
 
-
+	@MessageMapping("/all") // react -> spring 송신
+//	@SendTo("/topic/all")	// spring -> react 송신
+	public void send(Map<Object, Object> socketData) {
+		
+		template.convertAndSend("/topic/all", socketData);
+	}
 }

@@ -246,4 +246,9 @@ public class KanbanBoardRepository {
 		return list;
 	}
 
+
+	public int taskListInDelete(Long taskListNo) {
+		return sqlSession.update("kanbanBoard.taskListInDelete", taskListNo);
+	}
+
 }
