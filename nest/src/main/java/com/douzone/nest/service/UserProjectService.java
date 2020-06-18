@@ -1,5 +1,9 @@
 package com.douzone.nest.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +42,30 @@ public class UserProjectService {
 	public boolean roleChange(UserProjectVo userProjectVo) {
 		int roleChange = userProjectRepository.roleChange(userProjectVo);
 		return roleChange == 1;
+	}
+
+	public boolean transferRoleAndDelete(JSONObject projectUserJson, Long userNo) {
+		int result = -1;
+		//allProjectUser []
+		List<JSONObject> allProjectUser = (List)projectUserJson.get("array");
+		
+		for(int i = 0; i < allProjectUser.size(); i++) {
+
+			HashMap<String,Object> projectUser =  allProjectUser.get(i);
+			
+			Map<String, Object> projectUserMap = new HashMap<>();
+			
+			
+			projectUserMap.put("projectNo", projectUser.get("projectNo"));
+			projectUserMap.put("userNo", projectUser.get("userNo"));
+			
+			result = userProjectRepository.transferRoleAndDelete(projectUserMap);
+			if(result != 1) {
+				return false;
+			}
+		}
+		
+		int delete = userProjectRepository.userDelete(userNo);
+		return result == 1;
 	}
 }

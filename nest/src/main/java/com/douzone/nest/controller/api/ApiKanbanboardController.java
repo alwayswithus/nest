@@ -6,13 +6,13 @@ import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
@@ -20,15 +20,26 @@ import com.douzone.nest.service.KanbanBoardService;
 import com.douzone.nest.vo.CopyTaskVo;
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskReOrderVo;
-import com.douzone.nest.vo.TaskUserVo;
 import com.douzone.nest.vo.TaskVo;
 
 @CrossOrigin(origins = { "http://localhost:3000" })
 @RestController
-
 public class ApiKanbanboardController {
 	@Autowired
 	private KanbanBoardService kanbanboardService;
+	
+	private final SimpMessagingTemplate template;
+	
+	@Autowired
+	public ApiKanbanboardController(SimpMessagingTemplate template) {
+		this.template = template;
+	}
+	@MessageMapping("/all") // react -> spring 송신
+//	@SendTo("/topic/all")	// spring -> react 송신
+	public void send(Map<Object, Object> socketData) {
+		System.out.println(socketData);
+		template.convertAndSend("/topic/all", socketData);
+	}
 
 	/*
 	 * 작성자 : 최인효

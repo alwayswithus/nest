@@ -3,6 +3,7 @@ package com.douzone.nest.controller.api;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,4 +34,14 @@ public class ApiUserProjectController {
 		boolean result = userProjectService.roleChange(userProjectVo);
 		return JsonResult.success(result ? userProjectVo : -1);
 	}
+	
+	@PostMapping("api/userproject/transferrole/{authUserNo}")
+	public JsonResult transferRole(
+			@RequestBody JSONObject projectUserJson, 
+			@PathVariable("authUserNo") Long userNo) {
+	
+		boolean result = userProjectService.transferRoleAndDelete(projectUserJson, userNo);
+		return null;
+	}
+	
 }

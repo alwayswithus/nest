@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="history">
+	<select id="selectHistory" parameterType="long" resultType="historyvo">
+		 <![CDATA[
+			select log_no as logNo, 
+				   log_date as logDate,
+				   log_contents as logContents,
+				   project_no as ProjectNo
+		    from history
+		    where project_no=#{projectNo}
+	    ]]>
+	</select>
+	
+	<insert id="insertHistory" parameterType="map">
+		<![CDATA[ 
+			insert into history values(null, #{logDate}, #{logContents}, #{projectNo})
+		]]>
+	<selectKey resultType="long" keyProperty="logNo" order="AFTER">
+	        SELECT LAST_INSERT_ID()
+	    </selectKey>
+	</insert>
+</mapper>
