@@ -38,11 +38,14 @@ public class ApiKanbanboardController {
 	@MessageMapping("/all") // react -> spring 송신
 //	@SendTo("/topic/all")	// spring -> react 송신
 	public void send(Map<Object, Object> socketData) {
-		List mamberList = (List) socketData.get("members");
-		for(int i=0; i < mamberList.size();i++) {
-			template.convertAndSend("/topic/all/"+mamberList.get(i), socketData);
-		}
-//		template.convertAndSend("/topic/all", socketData);
+//		System.out.println(socketData);
+//		System.out.println( socketData.get("members"));
+//		List mamberList = (List) socketData.get("members");
+//		System.out.println(mamberList);
+//		for(int i=0; i < mamberList.size();i++) {
+//			template.convertAndSend("/topic/all/"+mamberList.get(i), socketData);
+//		}
+		template.convertAndSend("/topic/all", socketData);
 	}
 
 	/*
@@ -52,6 +55,7 @@ public class ApiKanbanboardController {
 	@GetMapping("/api/kanbanMain/{projectNo}/{authUserNo}")
 	public JsonResult kanbanMain(@PathVariable("projectNo") Long projectNo,@PathVariable("authUserNo") Long authUserNo) {
 		JSONObject kanbanJson = kanbanboardService.selectKanbanBoard(projectNo,authUserNo);
+		System.out.println(kanbanJson);
 		return JsonResult.success(kanbanJson);
 	}
 	
