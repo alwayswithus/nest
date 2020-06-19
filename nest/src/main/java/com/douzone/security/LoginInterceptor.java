@@ -32,7 +32,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		UserVo authUser = userService.getUser(vo);
 		if(authUser == null) {
 			// System.out.println("로그인 실패");
-			response.sendRedirect(PathSetting.PATH_AND_PORT+"?error");
+			response.sendRedirect(PathSetting.PATH_AND_PORT+"/login?error");
 			return false;
 		}
 		
