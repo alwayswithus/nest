@@ -3,10 +3,13 @@ package com.douzone.nest.config;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -19,11 +22,13 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.tags.Param;
 
 import com.douzone.security.AuthInterceptor;
 import com.douzone.security.AuthUserHandlerMethodArgumentResolver;
@@ -140,5 +145,15 @@ public class WebConfig implements WebMvcConfigurer {
 		return sender;
 	}
 	
-	
+//	@Bean
+//    public ServletRegistrationBean<DispatcherServlet> communityServlet() {
+//		ServletRegistrationBean<DispatcherServlet> result = new ServletRegistrationBean<DispatcherServlet>();
+//		Map<String,String> params = new HashMap<String, String>();
+//		params.put("param-name", "contextConfigLocation");
+//		params.put("param-value", "/WEB-INF/servlet-config/community-servlet-context.xml");
+//		result.setInitParameters(params);
+//		result.setLoadOnStartup(1);
+//		result.setAsyncSupported(true);
+//		return result;
+//	}
 }
