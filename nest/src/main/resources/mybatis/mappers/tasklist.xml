@@ -9,6 +9,7 @@
 	   			project_no as projectNo 
   			 from tasklist 
   			 where project_no = #{projectNo}
+  			 and tasklist_state != "F"
   		]]>
 	</select>
 </mapper>
