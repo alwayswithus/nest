@@ -369,5 +369,14 @@
          and e.tag_name like CONCAT('%',#{keyword},'%')
   	]]>
   </select>
+  
+  <select id="selectTaskOrderNo" resultType="Long" parameterType="int">
+	  	<![CDATA[
+  		    select ifnull(max(task_order), 0)
+		    from task t
+		    join tasklist tl using(tasklist_no)
+		    where tasklist_no = #{taskListNo}
+	  	]]>
+  </select>
 
 </mapper>

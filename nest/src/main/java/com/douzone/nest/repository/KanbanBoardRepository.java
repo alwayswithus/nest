@@ -251,4 +251,10 @@ public class KanbanBoardRepository {
 		return sqlSession.update("kanbanBoard.taskListInDelete", taskListNo);
 	}
 
+
+	public Long selectTaskOrderNo(int taskListNo) {
+		return sqlSession.selectOne("kanbanBoard.selectTaskOrderNo", taskListNo);
+		
+	}
+
 }
