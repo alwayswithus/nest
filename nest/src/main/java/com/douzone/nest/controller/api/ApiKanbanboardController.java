@@ -1,6 +1,5 @@
 package com.douzone.nest.controller.api;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +38,7 @@ public class ApiKanbanboardController {
 	@MessageMapping("/all") // react -> spring 송신
 //	@SendTo("/topic/all")	// spring -> react 송신
 	public void send(Map<Object, Object> socketData) {
-//		System.out.println(socketData.get("members"));
+
 		List memberList = (List) socketData.get("members");
 		 
 		System.out.println(memberList.get(0));
@@ -48,7 +47,6 @@ public class ApiKanbanboardController {
 			
 			template.convertAndSend("/topic/all/"+member.get("userNo"), socketData);
 		}
-//		template.convertAndSend("/topic/all", socketData);
 	}
 
 	/*
@@ -58,6 +56,7 @@ public class ApiKanbanboardController {
 	@GetMapping("/api/kanbanMain/{projectNo}/{authUserNo}")
 	public JsonResult kanbanMain(@PathVariable("projectNo") Long projectNo,@PathVariable("authUserNo") Long authUserNo) {
 		JSONObject kanbanJson = kanbanboardService.selectKanbanBoard(projectNo,authUserNo);
+		System.out.println(kanbanJson);
 		return JsonResult.success(kanbanJson);
 	}
 	

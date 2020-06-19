@@ -5,7 +5,7 @@
    <!-- 테스크 리스트 select -->
    <select id="selectAllTaskList" resultType="tasklistvo">
       <![CDATA[
-         select tl.tasklist_no as tasklistNo, tl.tasklist_name as taskListName, tl.tasklist_order as tasklistOrder, tl.project_no projectNo
+         select tl.tasklist_no as tasklistNo, tl.tasklist_name as taskListName, tl.tasklist_order as tasklistOrder, tl.project_no projectNo, tl.tasklist_state taskListState
          from project p
          join tasklist tl on(p.project_no = tl.project_no)
          where p.project_no = #{projectNo}
@@ -368,6 +368,15 @@
          where a.project_no = #{projectNo}
          and e.tag_name like CONCAT('%',#{keyword},'%')
   	]]>
+  </select>
+  
+  <select id="selectTaskOrderNo" resultType="Long" parameterType="int">
+	  	<![CDATA[
+  		    select ifnull(max(task_order), 0)
+		    from task t
+		    join tasklist tl using(tasklist_no)
+		    where tasklist_no = #{taskListNo}
+	  	]]>
   </select>
 
 </mapper>
