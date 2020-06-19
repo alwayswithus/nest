@@ -23,7 +23,7 @@ public class HistoryService {
 
 	/*
 	 * 작성자:김우경
-	 * 설명:히스토리추가
+	 * 설명:히스토리추가 
 	 */
 	public boolean insertHistory(JSONObject historyJson) {
 		Map<String, Object> map = new HashMap<>();

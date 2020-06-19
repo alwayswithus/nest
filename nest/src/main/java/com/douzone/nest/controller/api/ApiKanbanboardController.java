@@ -41,7 +41,7 @@ public class ApiKanbanboardController {
 	public void send(Map<Object, Object> socketData) {
 //		System.out.println(socketData.get("members"));
 		List memberList = (List) socketData.get("members");
-		
+		 
 		System.out.println(memberList.get(0));
 		for(int i=0; i < memberList.size();i++) {
 			HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
