@@ -139,11 +139,8 @@ public class ApiDashboardController {
 //	@SendTo("/topic/all")	// spring -> react 송신
 	@SuppressWarnings("unchecked")
 	public void send(Map<Object, Object> socketData) {
-		System.out.println(socketData.get("completedTask"));
-		System.out.println(socketData.get("taskCount"));
 		List<Object> list = (List<Object>) socketData.get("membersNo");
 		for(int i=0; i<list.size(); i++) {
-//			System.out.print(list.get(i) + " ");
 			template.convertAndSend("/topic/dashboard/all/" + list.get(i), socketData);
 		}
 	}
