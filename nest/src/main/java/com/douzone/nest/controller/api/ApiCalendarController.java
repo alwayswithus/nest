@@ -54,10 +54,9 @@ public class ApiCalendarController {
 //	@SendTo("/topic/all")	// spring -> react 송신
 	@SuppressWarnings("unchecked")
 	public void send(Map<Object, Object> eventSocketData) {
-		System.out.println("123123");
-		List<Object> list = (List<Object>) eventSocketData.get("membersNo");
-		for(int i=0; i<list.size(); i++) {
-			template.convertAndSend("/topic/calendar/all/" + list.get(i), eventSocketData);
+		List memberList = (List) eventSocketData.get("members");
+		for(int i=0; i < memberList.size();i++) {
+			template.convertAndSend("/topic/calendar/all/"+memberList.get(i), eventSocketData);
 		}
 	}
 }

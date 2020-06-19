@@ -1,7 +1,5 @@
 package com.douzone.nest.controller.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +38,7 @@ public class ApiKanbanboardController {
 	public void send(Map<Object, Object> socketData) {
 		List memberList = (List) socketData.get("members");
 		for(int i=0; i < memberList.size();i++) {
-			HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
-			template.convertAndSend("/topic/all/"+member.get("userNo"), socketData);
+			template.convertAndSend("/topic/all/"+memberList.get(i), socketData);
 		}
 	}
 
