@@ -2,6 +2,7 @@ package com.douzone.nest.controller.api;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,9 +39,14 @@ public class ApiKanbanboardController {
 	@MessageMapping("/all") // react -> spring 송신
 //	@SendTo("/topic/all")	// spring -> react 송신
 	public void send(Map<Object, Object> socketData) {
-		List mamberList = (List) socketData.get("members");
-		for(int i=0; i < mamberList.size();i++) {
-			template.convertAndSend("/topic/all/"+mamberList.get(i), socketData);
+//		System.out.println(socketData.get("members"));
+		List memberList = (List) socketData.get("members");
+		
+		System.out.println(memberList.get(0));
+		for(int i=0; i < memberList.size();i++) {
+			HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
+			
+			template.convertAndSend("/topic/all/"+member.get("userNo"), socketData);
 		}
 //		template.convertAndSend("/topic/all", socketData);
 	}

@@ -61,6 +61,9 @@ public class HistoryService {
 			case "taskDragNdrop":
 				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 업무의 위치를 변경하였습니다.");
 				break;
+			case "taskListDragNdrop":
+				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 업무리스트의 위치를 변경하였습니다.");
+				break;
 			case "taskStateUpdate":
 				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 업무 상태를 변경하였습니다.");
 				break;
@@ -69,6 +72,15 @@ public class HistoryService {
 				break;
 			case "taskDelete":
 				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 업무를 삭제하였습니다.");
+				break;
+			case "projectMemberInvite":
+				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 님을 초대하였습니다.");
+				break;
+			case "projectMemberJoin":
+				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 님을 프로젝트에 참여시켰습니다.");
+				break;
+			case "projectDateUpdate":
+				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 프로젝트의 업무마감일을 수정하였습니다.");
 				break;
 		}
 		
