@@ -17,7 +17,8 @@
 					where project.project_no = userproject.project_no
 					and userproject.user_no = user.user_no
 					and user.user_no = #{authUserNo}) as b
-		where task.project_no = b.project_no;
+		where task.project_no = b.project_no
+		and task.task_state != "del"
 	]]>
 	</select>
 	

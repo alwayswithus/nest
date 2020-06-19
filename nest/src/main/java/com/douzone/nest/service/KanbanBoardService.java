@@ -239,6 +239,13 @@ public class KanbanBoardService {
 	 */
 	public TaskVo taskInsert(Map taskInfo) {
 		TaskVo task = null;
+		if(taskInfo.get("taskOrder") == null) {
+			int taskListNo =  (int) taskInfo.get("taskListNo");
+			
+			System.out.println("taskListNo : " + taskListNo);
+			Long taskListOrderNo = kanbanBoardRepository.selectTaskOrderNo(taskListNo);
+			taskInfo.put("taskOrder", taskListOrderNo + 1);
+		}
 		boolean result = 1 == kanbanBoardRepository.taskInsert(taskInfo);
 		if(result) {
 			task = kanbanBoardRepository.taskSelect(Long.parseLong(taskInfo.get("taskNo").toString()));
