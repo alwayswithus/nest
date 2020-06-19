@@ -1,7 +1,12 @@
 package com.douzone.nest.controller.api;
 
+import java.util.List;
+import java.util.Map;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +25,13 @@ public class ApiCalendarController {
 	@Autowired
 	private CalendarService calendarService;
 	
+	private final SimpMessagingTemplate template;
+	
+	@Autowired
+	public ApiCalendarController(SimpMessagingTemplate template) {
+		this.template = template;
+	}
+	
 	@GetMapping("api/calendar/{authUserNo}")
 	public JsonResult calendar(@PathVariable("authUserNo") Long authUserNo) {
 		JSONObject taskVo = calendarService.selectTask(authUserNo);
@@ -36,5 +48,16 @@ public class ApiCalendarController {
 	public JsonResult taskAdd(@RequestBody TaskVo taskVo) {
 		boolean result = calendarService.taskAdd(taskVo);
 		return JsonResult.success(result ? taskVo : -1);
+	}
+	
+	@MessageMapping("/calendar/all") // react -> spring 송신
+//	@SendTo("/topic/all")	// spring -> react 송신
+	@SuppressWarnings("unchecked")
+	public void send(Map<Object, Object> eventSocketData) {
+		System.out.println("123123");
+		List<Object> list = (List<Object>) eventSocketData.get("membersNo");
+		for(int i=0; i<list.size(); i++) {
+			template.convertAndSend("/topic/calendar/all/" + list.get(i), eventSocketData);
+		}
 	}
 }
