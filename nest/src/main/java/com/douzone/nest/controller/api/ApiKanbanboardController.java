@@ -1,5 +1,6 @@
 package com.douzone.nest.controller.api;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +39,8 @@ public class ApiKanbanboardController {
 	public void send(Map<Object, Object> socketData) {
 		List memberList = (List) socketData.get("members");
 		for(int i=0; i < memberList.size();i++) {
-			template.convertAndSend("/topic/all/"+memberList.get(i), socketData);
+			HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
+	         template.convertAndSend("/topic/all/"+member.get("userNo"), socketData);
 		}
 	}
 
@@ -49,7 +51,6 @@ public class ApiKanbanboardController {
 	@GetMapping("/api/kanbanMain/{projectNo}/{authUserNo}")
 	public JsonResult kanbanMain(@PathVariable("projectNo") Long projectNo,@PathVariable("authUserNo") Long authUserNo) {
 		JSONObject kanbanJson = kanbanboardService.selectKanbanBoard(projectNo,authUserNo);
-		System.out.println(kanbanJson);
 		return JsonResult.success(kanbanJson);
 	}
 	
@@ -160,6 +161,16 @@ public class ApiKanbanboardController {
 	@PostMapping("/api/kanbanMain/searchTag")
 	public JsonResult searchTag(@RequestBody Map tagSearch) {
 		List result = kanbanboardService.searchTag(tagSearch);
+		return  JsonResult.success(result);
+	}
+	
+	/*
+	 * 작성자 : 최인효
+	 * 설명 : 
+	 */
+	@GetMapping("/api/kanbanMain/tasksCount/{projectNo}")
+	public JsonResult tasksCount(@PathVariable("projectNo") Long projectNo) {
+		Map result = kanbanboardService.tasksCount(projectNo);
 		return  JsonResult.success(result);
 	}
 

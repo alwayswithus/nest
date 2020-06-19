@@ -378,5 +378,17 @@
 		    where tasklist_no = #{taskListNo}
 	  	]]>
   </select>
+  
+    <select id="taskCount" resultType="Long" >
+	  	<![CDATA[
+  		    select count(task_no) from task where project_no = #{projectNo} and task_state!='del'
+	  	]]>
+  </select>
+  
+    <select id="completedTask" resultType="Long">
+	  	<![CDATA[
+  		    select count(task_no) from task where project_no = #{projectNo} and task_state ='done'
+	  	]]>
+  </select>
 
 </mapper>
