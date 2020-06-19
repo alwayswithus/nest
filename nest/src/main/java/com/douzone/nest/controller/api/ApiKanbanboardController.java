@@ -38,13 +38,9 @@ public class ApiKanbanboardController {
 	@MessageMapping("/all") // react -> spring 송신
 //	@SendTo("/topic/all")	// spring -> react 송신
 	public void send(Map<Object, Object> socketData) {
-
 		List memberList = (List) socketData.get("members");
-		 
-		System.out.println(memberList.get(0));
 		for(int i=0; i < memberList.size();i++) {
 			HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
-			
 			template.convertAndSend("/topic/all/"+member.get("userNo"), socketData);
 		}
 	}
