@@ -9,6 +9,7 @@
 		   from user  
 		  where user_email = #{userEmail }    
 		    and user_password = #{userPassword }
+		    and user_grade = "정회원"
 		]]>
 	</select>
 	
