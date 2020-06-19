@@ -197,7 +197,7 @@
    <insert id="taskInsert" parameterType="HashMap">
       <![CDATA[
          insert into task 
-         values(null, now(), null, null, 'rgb(223,223,223)', 'do', #{taskContents}, #{taskOrder}, now(), #{taskListNo}, #{projectNo}, #{taskWriter});
+         values(null, #{taskStart}, #{taskEnd}, null, 'rgb(223,223,223)', 'do', #{taskContents}, #{taskOrder}, now(), #{taskListNo}, #{projectNo}, #{taskWriter});
       ]]>
    <selectKey keyProperty = "taskNo" resultType="long" order="AFTER">
       select last_insert_id()
