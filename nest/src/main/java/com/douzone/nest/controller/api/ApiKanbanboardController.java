@@ -40,7 +40,7 @@ public class ApiKanbanboardController {
 		List memberList = (List) socketData.get("members");
 		for(int i=0; i < memberList.size();i++) {
 			HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
-	         template.convertAndSend("/topic/all/"+member.get("userNo"), socketData);
+	        template.convertAndSend("/topic/all/"+member.get("userNo"), socketData);
 		}
 	}
 
