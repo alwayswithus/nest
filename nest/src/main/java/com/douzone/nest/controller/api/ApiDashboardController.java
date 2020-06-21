@@ -1,6 +1,7 @@
 package com.douzone.nest.controller.api;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,7 +114,6 @@ public class ApiDashboardController {
     public JsonResult projectFile(
     		@PathVariable("projectNo") Long projectNo) throws IOException {    
 		List <FileVo> fileVo = projectService.selectFile(projectNo);
-
 		return JsonResult.success(fileVo);
 	}
 	
@@ -142,6 +142,22 @@ public class ApiDashboardController {
 		List<Object> list = (List<Object>) socketData.get("membersNo");
 		for(int i=0; i<list.size(); i++) {
 			template.convertAndSend("/topic/dashboard/all/" + list.get(i), socketData);
+		}
+	}
+	
+	/*
+	 * 작성자:김우경
+	 * 설명:파일업로드소켓
+	 */
+	@MessageMapping("/topbar/file/all") // react -> spring 송신
+//	@SendTo("/topic/all")	// spring -> react 송신
+	@SuppressWarnings("unchecked")
+	public void socketFile(Map<Object, Object> socketData) {
+		System.out.println(socketData);
+		List memberList = (List) socketData.get("members");
+		for(int i=0; i < memberList.size();i++) {
+			HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
+			template.convertAndSend("/topic/topbar/all/"+member.get("userNo"), socketData);
 		}
 	}
 }

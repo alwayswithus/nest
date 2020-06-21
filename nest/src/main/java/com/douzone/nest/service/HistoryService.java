@@ -30,12 +30,11 @@ public class HistoryService {
 		
 		map.put("logDate", historyJson.get("historyDate"));
 		map.put("projectNo", historyJson.get("projectNo"));
-		
-		System.out.println(historyJson);
+
 		
 		switch((String) historyJson.get("historyType")) {
 			case "taskContentsUpdate":
-				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + "으로 업무이름을 수정하셨습니다.");
+				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 으로 업무이름을 수정하셨습니다.");
 				break;
 			case "taskListInsert":
 				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 업무리스트를 추가하였습니다.");

@@ -61,6 +61,7 @@
                    a.user_regdate as userRegdate,
 				   a.user_photo as userPhoto,
                    a.user_birth as userBirth,
+                   a.user_grade as userGrade,
                    b.role_no as roleNo,
 				   b.project_no as projectNo
 			from user a, userproject b
@@ -142,10 +143,12 @@
 			select distinct 
 					a.task_no as taskNo,
 					a.task_contents as taskContents,
-					b.file_no as fileNo, 
+					a.task_state as taskState,
+					b.file_no as fileNo,
 			        b.file_path as filePath, 
 			        b.origin_name as originName,
 			        b.file_regdate as fileRegdate,
+			        b.file_state as fileState,
 			        c.project_no as projectNo,
 			        c.project_title as projectTitle,
 			        e.user_no as userNo,
@@ -159,7 +162,7 @@
 			join comment d on(b.file_no = d.file_no)
 			join user e on(d.user_no = e.user_no)
 			join tasklist f on(f.tasklist_no = a.tasklist_no)
-			where a.project_no=#{projectNo}
+			where a.project_no=#{projectNo} and a.task_state!='del' and b.file_state='T'
 		]]>
 	</select>
 

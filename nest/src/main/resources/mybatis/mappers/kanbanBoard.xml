@@ -112,7 +112,8 @@
                u.user_birth userBirth,
                u.user_title userTitle, 
                u.user_dept userDept, 
-               u.user_photo userPhoto
+               u.user_photo userPhoto,
+               u.user_grade userGrade
          from user u
          join taskuser tu using(user_no)
          where task_no = #{taskNo}
