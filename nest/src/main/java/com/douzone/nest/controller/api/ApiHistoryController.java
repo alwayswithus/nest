@@ -36,8 +36,7 @@ public class ApiHistoryController {
 	public JsonResult insertHistory(@RequestBody JSONObject historyJson) {
 		boolean result = historyService.insertHistory(historyJson);
 		List<HistoryVo> log = historyService.selectHistory(Long.parseLong((String) (historyJson.get("projectNo"))));
-//		System.out.println(log);
+
 		return JsonResult.success(result ? log : -1);
-//		return null;
 	}
 }

@@ -43,6 +43,21 @@ public class ApiKanbanboardController {
 	        template.convertAndSend("/topic/all/"+member.get("userNo"), socketData);
 		}
 	}
+	
+	/*
+	 * 작성자:김우경
+	 * 설명:히스토리소켓
+	 */
+	@MessageMapping("/history/all") // react -> spring 송신
+//	@SendTo("/topic/all")	// spring -> react 송신
+	public void socketHistory(Map<Object, Object> socketData) {
+
+		List memberList = (List) socketData.get("receiver");
+		for(int i=0; i < memberList.size();i++) {
+			
+			template.convertAndSend("/topic/history/all/"+memberList.get(i), socketData);
+		}
+	}
 
 	/*
 	 * 작성자 : 최인효

@@ -155,7 +155,7 @@ public class KanbanBoardService {
 					member.put("userTitle", memberVo.getUserTitle());
 					member.put("userDept", memberVo.getUserDept());
 					member.put("userPhoto", memberVo.getUserPhoto());
-
+					member.put("userGrade", memberVo.getUserGrade());
 					memberJSONArray.add(member);
 				}
 				task.put("memberList", memberJSONArray);
