@@ -144,9 +144,7 @@ public class NotificationService {
 				}
 			}
 		}
-		
-		sse.onIssueStateChangeEvent("아무튼 뭔가 전달되는듯");
-		System.out.println("__전달되긴함?__");
+		//sse.onIssueStateChangeEvent("갱신!");
 		
 		return noticeMessageInsert != -1 && noticeMsgBoxInsert != -1;
 	}
