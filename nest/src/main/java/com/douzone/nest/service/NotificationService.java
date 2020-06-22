@@ -10,14 +10,14 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.douzone.nest.controller.api.SSEController;
+//import com.douzone.nest.controller.api.SSEController;
 import com.douzone.nest.repository.NotificationRepository;
 
 @Service
 public class NotificationService {
 
-	@Autowired
-	private SSEController sse;
+//	@Autowired
+//	private SSEController sse;
 
 	@Autowired
 	private NotificationRepository notificationRepository;
@@ -145,7 +145,7 @@ public class NotificationService {
 			}
 		}
 		
-		sse.onIssueStateChangeEvent("아무튼 뭔가 전달되는듯");
+//		sse.onIssueStateChangeEvent("아무튼 뭔가 전달되는듯");
 		System.out.println("__전달되긴함?__");
 		
 		return noticeMessageInsert != -1 && noticeMsgBoxInsert != -1;
