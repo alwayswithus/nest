@@ -49,6 +49,7 @@ public class UserService {
 			user.put("userName", userVo.getUserName());
 			user.put("userEmail", userVo.getUserEmail());
 			user.put("userPhoto", userVo.getUserPhoto());
+			user.put("userGrade", userVo.getUserGrade());
 			
 			allUserArray.add(user);
 		}

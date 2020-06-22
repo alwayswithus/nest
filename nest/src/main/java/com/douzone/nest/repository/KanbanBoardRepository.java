@@ -28,6 +28,7 @@ public class KanbanBoardRepository {
 	 * 설명 : 테스크 리스트 select
 	 */
 	public List<TaskListVo> selectAllTaskList(Long projectNo) {
+
 		return sqlSession.selectList("kanbanBoard.selectAllTaskList",projectNo);
 	}
 	

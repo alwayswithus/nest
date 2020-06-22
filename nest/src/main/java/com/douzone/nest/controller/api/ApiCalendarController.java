@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.CalendarService;
 import com.douzone.nest.vo.TaskVo;
+import com.douzone.nest.vo.UserProjectVo;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
@@ -33,6 +34,18 @@ public class ApiCalendarController {
 		this.template = template;
 	}
 	
+	/* 
+	 * 작성자:김우경
+	 * 설명:해당하는 회원의 프로젝트와 업무가져오기
+	 */
+	@GetMapping("api/calendar/alltask/{authUserNo}")
+	public JsonResult allTasks(@PathVariable("authUserNo") Long userNo) {
+		List<UserProjectVo> userProjectNo = calendarService.selectProjectNo(userNo);
+
+		JSONObject allProjects = calendarService.selectAllTasks(userProjectNo, userNo);
+		return JsonResult.success(allProjects);
+//		return null;
+	}
 	@GetMapping("api/calendar/{authUserNo}")
 	public JsonResult calendar(@PathVariable("authUserNo") Long authUserNo) {
 		JSONObject taskVo = calendarService.selectTask(authUserNo);

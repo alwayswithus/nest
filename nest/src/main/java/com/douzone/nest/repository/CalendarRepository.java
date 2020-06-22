@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.douzone.nest.vo.TaskListVo;
 import com.douzone.nest.vo.TaskVo;
+import com.douzone.nest.vo.UserProjectVo;
 
 @Repository
 public class CalendarRepository {
@@ -35,5 +36,9 @@ public class CalendarRepository {
 	
 	public int taskAdd(TaskVo taskVo) {
 		return sqlSession.insert("task.taskAdd", taskVo);
+	}
+
+	public List<UserProjectVo> selectProjectNo(Long userNo) {
+		return sqlSession.selectList("userproject.selectProjectNo", userNo);
 	}
 }
