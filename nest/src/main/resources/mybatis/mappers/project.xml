@@ -45,7 +45,12 @@
 	
 	<select id="selectUser" parameterType="map" resultType="uservo">
 	<![CDATA[
-	select userproject.user_no as userNo, role_no as roleNo, user_name as userName, user_email as userEmail, user_photo as userPhoto
+	select userproject.user_no as userNo, 
+		   role_no as roleNo, 
+		   user_name as userName, 
+		   user_email as userEmail, 
+		   user_photo as userPhoto,
+		   user_grade as userGrade
 	from project, userproject, user
 	where project.project_no = userproject.project_no
 	and userproject.user_no = user.user_no
