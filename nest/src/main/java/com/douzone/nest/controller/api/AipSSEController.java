@@ -13,21 +13,26 @@ import reactor.core.publisher.Flux;
 /// 아직 작업중 공사중 건들지마세요!!!!!!!
 @RestController
 public class AipSSEController {
-    @GetMapping("/api/sse/notice")
-    public Flux<ServerSentEvent<String>> stocks(@PathVariable("code") String code) {
-    	
-    	
-    	return Flux.interval(Duration.ofSeconds(1))
-    			.map(t -> ServerSentEvent.builder("이거 받을수 있음?").build());
-//        return Flux.interval(Duration.ofSeconds(1))
-//                .map(t -> Stock.builder()
-//                        .code(code)
-//                        .value(randomValue())
-//                        .build())
-//                .map(stock -> ServerSentEvent.builder(stock).build());
-    }
+	@GetMapping("/api/sse/notice")
+	public Flux<ServerSentEvent<String>> stocks(/*@PathVariable("code") String code*/) {
 
-//    private int randomValue() {
-//        return ThreadLocalRandom.current().nextInt(1000) + 10000;
-//    }
+		System.out.println("반응???");
+		Flux<ServerSentEvent<String>> a;
+		a = Flux.interval(Duration.ofSeconds(2))
+				.map(t -> ServerSentEvent.builder("이거 받을수 있음?").build());
+		
+		//a = Flux.
+
+		return a;
+		//        return Flux.interval(Duration.ofSeconds(1))
+		//                .map(t -> Stock.builder()
+		//                        .code(code)
+		//                        .value(randomValue())
+		//                        .build())
+		//                .map(stock -> ServerSentEvent.builder(stock).build());
+	}
+
+	//    private int randomValue() {
+	//        return ThreadLocalRandom.current().nextInt(1000) + 10000;
+	//    }
 }

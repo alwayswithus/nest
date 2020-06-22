@@ -139,9 +139,22 @@ public class ApiDashboardController {
 //	@SendTo("/topic/all")	// spring -> react 송신
 	@SuppressWarnings("unchecked")
 	public void send(Map<Object, Object> socketData) {
-		List<Object> list = (List<Object>) socketData.get("membersNo");
-		for(int i=0; i<list.size(); i++) {
-			template.convertAndSend("/topic/dashboard/all/" + list.get(i), socketData);
+		if(socketData.get("socketType").equals("taskInsert") ||
+				socketData.get("socketType").equals("taskDelete") ||
+				socketData.get("socketType").equals("taskCopy") || 
+				socketData.get("socketType").equals("taskCheck") || 
+				socketData.get("socketType").equals("taskListDelete")) {
+			List memberList = (List) socketData.get("members");
+			for(int i=0; i < memberList.size();i++) {
+				HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
+				template.convertAndSend("/topic/dashboard/all/"+member.get("userNo"), socketData);
+			}
+		}
+		else {
+			List<Object> list = (List<Object>) socketData.get("membersNo");
+			for(int i=0; i<list.size(); i++) {
+				template.convertAndSend("/topic/dashboard/all/" + list.get(i), socketData);
+			}
 		}
 	}
 	

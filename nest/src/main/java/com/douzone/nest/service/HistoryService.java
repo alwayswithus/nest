@@ -30,7 +30,6 @@ public class HistoryService {
 		
 		map.put("logDate", historyJson.get("historyDate"));
 		map.put("projectNo", historyJson.get("projectNo"));
-
 		
 		switch((String) historyJson.get("historyType")) {
 			case "taskContentsUpdate":

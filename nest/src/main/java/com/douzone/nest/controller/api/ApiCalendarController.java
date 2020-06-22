@@ -1,5 +1,6 @@
 package com.douzone.nest.controller.api;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,11 +54,11 @@ public class ApiCalendarController {
 	@MessageMapping("/calendar/all") // react -> spring 송신
 //	@SendTo("/topic/all")	// spring -> react 송신
 	@SuppressWarnings("unchecked")
-	public void send(Map<Object, Object> eventSocketData) {
-		System.out.println("123123");
-		List<Object> list = (List<Object>) eventSocketData.get("membersNo");
-		for(int i=0; i<list.size(); i++) {
-			template.convertAndSend("/topic/calendar/all/" + list.get(i), eventSocketData);
+	public void send(Map<Object, Object> socketData) {
+		List memberList = (List) socketData.get("members");
+		for(int i=0; i < memberList.size();i++) {
+			HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
+	        template.convertAndSend("/topic/calendar/all/"+member.get("userNo"), socketData);
 		}
 	}
 }

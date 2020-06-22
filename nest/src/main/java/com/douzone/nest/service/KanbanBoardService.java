@@ -346,4 +346,12 @@ public class KanbanBoardService {
 		return kanbanBoardRepository.searchTag(tagSearch);
 	}
 
+	public Map tasksCount(Long projectNo) {
+			
+		Map tasksCount = new HashMap();
+		tasksCount.put("taskCount", (Long)kanbanBoardRepository.taskCount(projectNo));
+		tasksCount.put("completedTask", (Long)kanbanBoardRepository.completedTask(projectNo));
+		return tasksCount;
+	}
+
 }

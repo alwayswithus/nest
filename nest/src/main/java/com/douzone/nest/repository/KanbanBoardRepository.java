@@ -257,4 +257,14 @@ public class KanbanBoardRepository {
 		
 	}
 
+
+	public Long taskCount(Long projectNo) {
+		return sqlSession.selectOne("kanbanBoard.taskCount", projectNo);
+	}
+
+
+	public Long completedTask(Long projectNo) {
+		return sqlSession.selectOne("kanbanBoard.completedTask", projectNo);
+	}
+
 }
