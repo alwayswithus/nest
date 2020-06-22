@@ -29,4 +29,12 @@
 			update user set user_grade="비회원" where user_no=#{userNo}
 		]]>
 	</update>
+	
+	<select id="selectProjectNo" parameterType="long" resultType="userprojectvo">
+		<![CDATA[
+		select project_no as projectNo 
+		from userproject 
+		where user_no = #{userNo}
+		]]> 
+	</select>
 </mapper>

@@ -15,7 +15,11 @@
 	
 	<select id="getAllUser" parameterType="long" resultType="uservo">
 		<![CDATA[
-		select user_no as userNo, user_name as userName, user_email as userEmail, user_photo as userPhoto 
+		select user_no as userNo, 
+		       user_name as userName, 
+		       user_email as userEmail, 
+		       user_photo as userPhoto,
+		       user_grade as userGrade
 		from user
 		where user_no != #{authUserNo}
 		]]>

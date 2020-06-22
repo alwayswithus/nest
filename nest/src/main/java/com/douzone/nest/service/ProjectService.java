@@ -73,6 +73,7 @@ public class ProjectService {
 				member.put("userName", userVo.getUserName());
 				member.put("userEmail", userVo.getUserEmail());
 				member.put("userPhoto", userVo.getUserPhoto());
+				member.put("userGrade", userVo.getUserGrade());
 
 				memberArray.add(member);
 			}
