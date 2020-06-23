@@ -139,6 +139,7 @@ public class ApiDashboardController {
 //	@SendTo("/topic/all")	// spring -> react 송신
 	@SuppressWarnings("unchecked")
 	public void send(Map<Object, Object> socketData) {
+		System.out.println(socketData);
 		if(socketData.get("socketType").equals("taskInsert") ||
 				socketData.get("socketType").equals("taskDelete") ||
 				socketData.get("socketType").equals("taskCopy") || 
