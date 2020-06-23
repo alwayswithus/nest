@@ -121,6 +121,7 @@ public class WebConfig implements WebMvcConfigurer {
 					"file:" + env.getProperty("fileupload.uploadLocation"));
 	}
 	
+	// email sender
 	@Bean
 	public JavaMailSender javaMailSender() {
 		JavaMailSenderImpl sender = new JavaMailSenderImpl();
