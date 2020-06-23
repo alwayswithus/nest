@@ -10,14 +10,15 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import com.douzone.nest.controller.api.SSEController;
+import com.douzone.nest.controller.api.ApiNoticeSocket;
 import com.douzone.nest.repository.NotificationRepository;
 
 @Service
 public class NotificationService {
 
-//	@Autowired
-//	private SSEController sse;
+	
+	@Autowired // 소켓관련
+	private ApiNoticeSocket ans; 
 
 	@Autowired
 	private NotificationRepository notificationRepository;
@@ -143,9 +144,12 @@ public class NotificationService {
 					return false;
 				}
 			}
+			
 		}
-		//sse.onIssueStateChangeEvent("갱신!");
-
+		// 소켓으로 데이터 전달
+		Object[] arr = {receiverList, noticeMessageMap};
+		ans.send(arr);
+		//ans.send(noticeMessageMap);
 		
 		return noticeMessageInsert != -1 && noticeMsgBoxInsert != -1;
 	}
