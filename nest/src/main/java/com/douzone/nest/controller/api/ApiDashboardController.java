@@ -139,7 +139,6 @@ public class ApiDashboardController {
 //	@SendTo("/topic/all")	// spring -> react 송신
 	@SuppressWarnings("unchecked")
 	public void send(Map<Object, Object> socketData) {
-		System.out.println(socketData);
 		if(socketData.get("socketType").equals("taskInsert") ||
 				socketData.get("socketType").equals("taskDelete") ||
 				socketData.get("socketType").equals("taskCopy") || 
@@ -167,7 +166,6 @@ public class ApiDashboardController {
 //	@SendTo("/topic/all")	// spring -> react 송신
 	@SuppressWarnings("unchecked")
 	public void socketFile(Map<Object, Object> socketData) {
-		System.out.println(socketData);
 		List memberList = (List) socketData.get("members");
 		for(int i=0; i < memberList.size();i++) {
 			HashMap<String, Object> member = (HashMap<String, Object>) memberList.get(i);
