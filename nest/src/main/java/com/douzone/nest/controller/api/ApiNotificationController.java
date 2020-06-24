@@ -26,9 +26,15 @@ public class ApiNotificationController {
 		return JsonResult.success(notificationJson);
 	}
 	
-	@PostMapping("/api/notification/update/{noticeNo}")
-	public JsonResult notificationMessageCheck(@PathVariable("noticeNo") Long noticeNo) {
-		boolean result = notificationService.notificationMessageCheck(noticeNo);
+	@GetMapping("/api/notification/new/{authUserNo}")
+	public JsonResult newNotification(@PathVariable("authUserNo") Long authUserNo) {
+		JSONObject notificationJson = notificationService.selectNewNotification(authUserNo);
+		return JsonResult.success(notificationJson);
+	}
+	
+	@PostMapping("/api/notification/update/{noticeNo}/{userNo}")
+	public JsonResult notificationMessageCheck(@PathVariable("noticeNo") Long noticeNo, @PathVariable("userNo") Long userNo) {
+		boolean result = notificationService.notificationMessageCheck(noticeNo,userNo);
 		return  JsonResult.success(result ? noticeNo : -1);
 	}
 	
