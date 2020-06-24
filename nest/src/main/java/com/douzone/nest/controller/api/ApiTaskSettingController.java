@@ -125,7 +125,6 @@ public class ApiTaskSettingController {
 			@PathVariable("taskNo") Long taskNo,
 			@RequestBody String color) {
 		
-		System.out.println(taskNo + " : " + color);
 		
 		boolean result = taskSettingService.updateTaskLabel(taskNo, color);
 		return JsonResult.success(result ? taskNo : -1);

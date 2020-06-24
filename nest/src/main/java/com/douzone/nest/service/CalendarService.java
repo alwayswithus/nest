@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.douzone.nest.repository.CalendarRepository;
 import com.douzone.nest.repository.KanbanBoardRepository;
+import com.douzone.nest.repository.ProjectRepository;
 import com.douzone.nest.vo.CheckListVo;
 import com.douzone.nest.vo.CommentVo;
 import com.douzone.nest.vo.FileVo;
@@ -28,6 +29,8 @@ public class CalendarService {
 	
 	@Autowired
 	private KanbanBoardRepository kanbanBoardRepository;
+	
+	@Autowired ProjectRepository projectRepository;
 	
 	@SuppressWarnings("unchecked")
 	public JSONObject selectTask(Long authUserNo) {
@@ -261,6 +264,46 @@ public class CalendarService {
 		
 		testobj.put("allProjects",objArray);
 
+		return testobj;
+		
+	}
+
+	public JSONObject selectAllProjectMembers(List<UserProjectVo> userProjectNo, Long userNo) {
+		// {}
+		JSONObject testobj = new JSONObject();
+		JSONArray objArray = new JSONArray();
+		
+		for(UserProjectVo projectNo : userProjectNo) {
+			JSONObject allProjects = new JSONObject();
+
+			//allProjectMembers []
+			JSONArray allTaskLsitJSONArray = new JSONArray();
+			
+			List<UserVo> userList = projectRepository.projectMemberSelect(projectNo.getProjectNo());
+			for(UserVo userVo : userList) {
+				JSONObject members = new JSONObject();
+				
+				members.put("userNo", userVo.getUserNo());
+				members.put("userName", userVo.getUserName());
+				members.put("userEmail", userVo.getUserEmail());
+				members.put("userTitle", userVo.getUserTitle());
+				members.put("userDept", userVo.getUserDept());
+				members.put("userRegdate", userVo.getUserRegdate());
+				members.put("userPhoto", userVo.getUserPhoto());
+				members.put("userBirth", userVo.getUserBirth());
+				members.put("userGrade", userVo.getUserGrade());
+				members.put("roleNo", userVo.getRoleNo());
+				members.put("projectNo", userVo.getProjectNo());
+				
+				allTaskLsitJSONArray.add(members);
+			}
+			allProjects.put("members", allTaskLsitJSONArray);
+			allProjects.put("projectNo", projectNo.getProjectNo());
+			
+			objArray.add(allProjects);
+			testobj.put("allProjectMembers", objArray);
+		}
+		
 		return testobj;
 		
 	}

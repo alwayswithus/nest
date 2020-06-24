@@ -46,6 +46,20 @@ public class ApiCalendarController {
 		return JsonResult.success(allProjects);
 //		return null;
 	}
+	
+	/* 
+	 * 작성자:김우경
+	 * 설명:모든 프로젝트의 멤버
+	 */
+	@GetMapping("api/calendar/allProjectMembers/{authUserNo}")
+	public JsonResult allProjectMembers(@PathVariable("authUserNo") Long userNo) {
+		List<UserProjectVo> userProjectNo = calendarService.selectProjectNo(userNo);
+
+		JSONObject allProjectMembers = calendarService.selectAllProjectMembers(userProjectNo, userNo);
+		return JsonResult.success(allProjectMembers);
+//		return null;
+	}
+	
 	@GetMapping("api/calendar/{authUserNo}")
 	public JsonResult calendar(@PathVariable("authUserNo") Long authUserNo) {
 		JSONObject taskVo = calendarService.selectTask(authUserNo);
@@ -74,4 +88,5 @@ public class ApiCalendarController {
 	        template.convertAndSend("/topic/calendar/all/"+member.get("userNo"), socketData);
 		}
 	}
+
 }
