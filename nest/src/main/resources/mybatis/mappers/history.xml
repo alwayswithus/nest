@@ -9,6 +9,7 @@
 				   project_no as ProjectNo
 		    from history
 		    where project_no=#{projectNo}
+		    order by log_no desc
 	    ]]>
 	</select>
 	
