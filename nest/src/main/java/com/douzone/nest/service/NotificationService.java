@@ -81,8 +81,13 @@ public class NotificationService {
 	/*
 	 * 작성자 : 최인효 설명 : 알림 읽음 표시
 	 */
-	public boolean notificationMessageCheck(Long noticeNo) {
-		return notificationRepository.notificationMessageCheck(noticeNo);
+	public boolean notificationMessageCheck(Long noticeNo, Long userNo) {
+		// 소켓으로 데이터 전달
+		Map<String, Object> o = new HashMap<String, Object>();
+		o.put("del",noticeNo);
+		o.put("target",userNo);
+		ans.send(o);
+		return notificationRepository.notificationMessageCheck(noticeNo,userNo);
 	}
 
 	/*
@@ -152,6 +157,39 @@ public class NotificationService {
 		//ans.send(noticeMessageMap);
 		
 		return noticeMessageInsert != -1 && noticeMsgBoxInsert != -1;
+	}
+	
+	// 강조표시만 가져오기
+	@SuppressWarnings("unchecked")
+	public JSONObject selectNewNotification(Long authUserNo) {
+		// 메인 {}
+		JSONObject obj = new JSONObject();
+		
+		// 알림 JSON Array
+		JSONArray noticeSendJSONArray = new JSONArray();
+
+		List<Map<String,Object>> noticeSendList = notificationRepository.selectNewNotice(authUserNo);
+
+		for (Map<String,Object> noticeMap : noticeSendList) {
+			JSONObject notice = new JSONObject();
+			notice.put("noticeNo", noticeMap.get("noticeNo"));
+			notice.put("messageCheck", noticeMap.get("messageCheck"));
+			notice.put("userPhoto", noticeMap.get("userPhoto"));
+			notice.put("userName", noticeMap.get("userName"));
+			notice.put("userNo", noticeMap.get("userNo"));
+			notice.put("noticeMessage", noticeMap.get("noticeMessage"));
+			notice.put("noticeDate", noticeMap.get("noticeDate") + "");
+			notice.put("projectNo", noticeMap.get("projectNo"));
+			notice.put("projectTitle", noticeMap.get("projectTitle"));
+			notice.put("taskNo", noticeMap.get("taskNo"));
+			notice.put("taskContents", noticeMap.get("taskContents"));
+			notice.put("noticeType", noticeMap.get("noticeType"));
+			notice.put("taskListNo", noticeMap.get("taskListNo"));
+			noticeSendJSONArray.add(notice);
+		}
+		obj.put("notice", noticeSendJSONArray);
+
+		return obj;
 	}
 
 }

@@ -22,17 +22,17 @@ public class ApiNoticeSocket {
 //	@SendTo("topic/asnotice")	// spring -> react 송신
 	public void send(Object socketData) {
 		try{
-			System.out.println("작동");
-			System.out.println(socketData);
+//			System.out.println("작동");
+//			System.out.println(socketData);
 			template.convertAndSend("/topic/asnotice", socketData);
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
 		}
 	}
 	
-	@EventListener
-	public void connt(SessionDisconnectEvent e) {
-		System.out.println(e);
-		System.out.println("소켓 종료");
-	}
+//	@EventListener
+//	public void connt(SessionDisconnectEvent e) {
+//		System.out.println(e);
+//		System.out.println("소켓 종료");
+//	}
 }

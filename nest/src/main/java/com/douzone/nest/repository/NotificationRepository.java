@@ -1,5 +1,6 @@
 package com.douzone.nest.repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +20,16 @@ public class NotificationRepository {
 	public List<Map> selectNotice(Long authUserNo) {
 		return sqlSession.selectList("notification.selectNotice",authUserNo);
 	}
+	
+	public List<Map<String,Object>> selectNewNotice(Long authUserNo) {
+		return sqlSession.selectList("notification.selectNewNotice",authUserNo);
+	}
 
-	public boolean notificationMessageCheck(Long noticeNo) {
-		return -1 != sqlSession.update("notification.messageCheck",noticeNo);
+	public boolean notificationMessageCheck(Long noticeNo, Long userNo) {
+		HashMap<String, Long> map = new HashMap<String, Long>();
+		map.put("noticeNo", noticeNo);
+		map.put("userNo",userNo);
+		return -1 != sqlSession.update("notification.messageCheck",map);
 	}
 
 	public int insertNoticeMessage(Map noticeMessageMap) {
