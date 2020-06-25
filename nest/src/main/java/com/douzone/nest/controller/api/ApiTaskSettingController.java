@@ -117,6 +117,16 @@ public class ApiTaskSettingController {
 	}
 	
 	/*
+	 * 작성자 : 한해용
+	 * 설명 : 업무 멤버 삭제하기
+	 */
+	@PostMapping("/api/task/member/{userNo}")
+	public JsonResult taskMemberDelete(@PathVariable("userNo") Long userNo, @RequestBody TaskUserVo taskUserVo) {
+		boolean result = taskSettingService.taskMemberDelete(userNo, taskUserVo);
+		return JsonResult.success(result ? taskUserVo : -1);
+	}
+	
+	/*
 	 * 작성자:김우경
 	 * 설명: 업무 라벨 색상 수정
 	 */

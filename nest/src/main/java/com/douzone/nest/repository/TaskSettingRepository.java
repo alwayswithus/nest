@@ -78,4 +78,11 @@ public class TaskSettingRepository {
 	public int updateTag(TagListVo taglistVo) {
 		return sqlSession.update("tasksetting.updateTag", taglistVo);
 	}
+	
+	public int taskMemberDelete(Long userNo, Long taskNo) {
+		Map<Object, Long> map = new HashMap<>();
+		map.put("userNo", userNo);
+		map.put("taskNo", taskNo);
+		return sqlSession.delete("kanbanBoard.deleteTaskMember", map);
+	}
 }
