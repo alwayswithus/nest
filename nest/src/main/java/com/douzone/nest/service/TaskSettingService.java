@@ -1,5 +1,7 @@
 package com.douzone.nest.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,6 +77,15 @@ public class TaskSettingService {
 	public boolean updateTag(TagListVo taglistVo) {
 		
 		return 1 == taskSettingRepository.updateTag(taglistVo);
+	}
+	
+	public boolean taskMemberDelete(Long userNo, TaskUserVo taskUserVo) {
+		List<Long> multiTask = taskUserVo.getMultiTask();
+		int count = 0;
+		for(int i=0; i<multiTask.size(); i++) {
+			count = taskSettingRepository.taskMemberDelete(userNo, multiTask.get(i));
+		}
+		return 1 == count;
 	}
 	
 }

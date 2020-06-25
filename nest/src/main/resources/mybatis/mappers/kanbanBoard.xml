@@ -323,6 +323,12 @@
       ]]>
    </delete>  
    
+   <delete id="deleteTaskMember" parameterType="taskuservo">
+		<![CDATA[ 
+	         delete from taskuser
+	         where task_no = #{taskNo} and user_no = #{userNo}
+	      ]]>
+   </delete>
    
    <!-- 간트차트용 selectAllTasksByProjectNo -->
       <select id="selectAllTasksByProjectNo" resultType="taskvo">
