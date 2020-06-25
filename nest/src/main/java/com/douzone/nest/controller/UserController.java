@@ -24,10 +24,18 @@ public class UserController {
 	private UserService userService;
 	
 	//로그인...
-//	@RequestMapping("/login")
-//	public String login() {
-//		return "/login";
-//	}
+	@RequestMapping("/login")
+	public void login() {
+	}
+	
+	// 이메일
+	@RequestMapping("/pwfind/emailConfirm/{key}")
+	public void pfemail() {
+	}
+	// 이메일
+	@RequestMapping("/signup/emailConfirm/{key}")
+	public void suemail() {
+	}
 	
 	// 비밀번호 찾기
 	@RequestMapping("/pwfind")
