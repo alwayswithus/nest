@@ -25,25 +25,28 @@ public class UserController {
 	
 	//로그인...
 	@RequestMapping("/login")
-	public void login() {
+	public String login() {
+		return "index";
 	}
 	
 	// 이메일
 	@RequestMapping("/pwfind/emailConfirm/{key}")
-	public void pfemail() {
+	public String pfemail() {
+		return "index";
 	}
 	// 이메일
 	@RequestMapping("/signup/emailConfirm/{key}")
-	public void suemail() {
+	public String suemail() {
+		return "index";
 	}
 	
 	// 비밀번호 찾기
 	@RequestMapping("/pwfind")
-	public void pwFind() {}
+	public String pwFind() { return "index"; }
 	
 	// 회원 가입
 	@RequestMapping("/signup")
-	public void signUp() {}
+	public String signUp() { return "index"; }
 	
 	// 로그인
 	@PostMapping("/auth")
