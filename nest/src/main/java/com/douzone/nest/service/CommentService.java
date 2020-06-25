@@ -92,13 +92,13 @@ public class CommentService {
 			commentRepository.insertLikeUser(map);
 			commentVo.setCommentLike(commentLike + 1);
 			map.put("commentLike", commentVo.getCommentLike());
-			System.out.println("insert + " + commentVo.getCommentLike());
+
 		} else {
 			//코멘트 수 감소하기
 			commentRepository.deleteLikeUser(map);
 			commentVo.setCommentLike(commentLike - 1);
 			map.put("commentLike", commentVo.getCommentLike());
-			System.out.println("delete + " + commentVo.getCommentLike());
+
 		}
 		result = 1 == commentRepository.updateCommentLike(map);
 		
