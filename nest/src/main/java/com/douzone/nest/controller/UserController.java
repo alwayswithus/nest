@@ -39,13 +39,18 @@ public class UserController {
 	public String suemail() {
 		return "index";
 	}
+	// 이메일 보내기 완료
+	@RequestMapping("/sendmail/{mode}")
+	public String sendEmail() {
+		return "index";
+	}
 	
 	// 비밀번호 찾기
-	@RequestMapping("/pwfind")
+	@RequestMapping({"/pwfind","/pwfinddone"})
 	public String pwFind() { return "index"; }
 	
 	// 회원 가입
-	@RequestMapping("/signup")
+	@RequestMapping({"/signup","/signupdone"})
 	public String signUp() { return "index"; }
 	
 	// 로그인
@@ -64,7 +69,7 @@ public class UserController {
 	
 	// 회원가입 이메일 발송...
 	@PostMapping("/sendmail")
-	public void sendToMailSignUp(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void sendToMail(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		
 		String mode = request.getParameter("mode");
