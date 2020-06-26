@@ -27,17 +27,17 @@ public class MainController {
 		
 		return "index";
 	}
-
+	@Auth
 	@RequestMapping("/dashboard")
 	public String dashboard() {
 		return "index";
 	}
-
+	@Auth
 	@RequestMapping("/profile")
 	public String profile() {
 		return "index";
 	}
-	
+	@Auth
 	@RequestMapping("/profileset")
 	public String profileset() {
 		return "index";
@@ -47,9 +47,14 @@ public class MainController {
 	public String notification() {
 		return "index";
 	}
-	
+	@Auth
 	@RequestMapping("/dashboard/{projectNo}/kanbanboard/**")
 	public String setting() {
+		return "index";
+	}
+	@Auth
+	@RequestMapping("/calendar/**")
+	public String calendarSetting() {
 		return "index";
 	}
 	
@@ -61,7 +66,7 @@ public class MainController {
 //	public String file() {
 //		return "index";
 //	}
-	
+	@Auth
 	@RequestMapping("/projectset")
 	public String projectset() {
 		return "index";
@@ -80,7 +85,7 @@ public class MainController {
 	public String errors() {
 		return "index";
 	}
-	
+	@Auth
 	@RequestMapping("/calendar")
 	public String calendar() {
 		return "index";

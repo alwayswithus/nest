@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.douzone.nest.dto.JsonResult;
 import com.douzone.nest.service.UserService;
 import com.douzone.nest.vo.UserVo;
+import com.douzone.security.Auth;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
@@ -153,7 +154,7 @@ public class ApiUserController {
 		}
 	}
 	
-	
+	@Auth
 	// 백 그라운드 적용
 	@PostMapping("/api/user/backgroundChange")
 	public JsonResult backgroundChange(@RequestBody UserVo userVo) {
