@@ -52,6 +52,13 @@ public class MainController {
 	public String setting() {
 		return "index";
 	}
+	
+	@Auth
+	@RequestMapping("/dashboard/{projectNo}/file/**")
+	public String file() {
+		return "index";
+	}
+	
 	@Auth
 	@RequestMapping("/calendar/**")
 	public String calendarSetting() {
