@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -69,7 +70,7 @@ public class CommentController {
 	 * 작성자 : 김우경
 	 * comment delete
 	 */
-	@PostMapping("/api/comment/{commentNo}/{fileNo}")
+	@DeleteMapping("/api/comment/{commentNo}/{fileNo}")
 	public JsonResult commentDelete(
 			@PathVariable("commentNo") Long commentNo,
 			@PathVariable("fileNo") Long fileNo) {
