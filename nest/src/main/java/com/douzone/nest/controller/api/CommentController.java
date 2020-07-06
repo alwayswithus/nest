@@ -74,8 +74,9 @@ public class CommentController {
 	public JsonResult commentDelete(
 			@PathVariable("commentNo") Long commentNo,
 			@PathVariable("fileNo") Long fileNo) {
-
+		System.out.println("??????");
 		boolean result = commentService.deleteComment(fileNo, commentNo);
+		System.out.println(result);
 		return JsonResult.success(result ? commentNo : -1);
 	}
 
