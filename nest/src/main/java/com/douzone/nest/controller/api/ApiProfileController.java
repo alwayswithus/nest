@@ -47,7 +47,6 @@ public class ApiProfileController {
 	 */
 	@PostMapping("/api/profile/update")
 	public JsonResult updateUser(@RequestBody UserVo userVo) {
-		System.out.println(userVo);
 		
 		profileService.updateUser(userVo);
 		
