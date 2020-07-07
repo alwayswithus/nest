@@ -90,8 +90,10 @@ public class MainController {
 	
 	@RequestMapping("/errors")
 	public String errors() {
+		System.out.println("???");
 		return "index";
 	}
+	
 	@Auth
 	@RequestMapping("/calendar")
 	public String calendar() {
