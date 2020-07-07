@@ -60,6 +60,15 @@ public class ApiKanbanboardController {
 			template.convertAndSend("/topic/history/all/"+memberList.get(i), socketData);
 		}
 	}
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 테스크 리스트 체크
+	 */
+	@GetMapping("/api/kanbanck/{projectNo}/{authUserNo}")
+	public JsonResult kanbanCK(@PathVariable("projectNo") Long projectNo,@PathVariable("authUserNo") Long authUserNo) {
+		JSONObject kanbanJson = kanbanboardService.ckKanbanBoard(projectNo,authUserNo);
+		return JsonResult.success(kanbanJson);
+	}
 
 	/*
 	 * 작성자 : 최인효

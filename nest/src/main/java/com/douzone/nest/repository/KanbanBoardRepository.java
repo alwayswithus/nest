@@ -1,5 +1,6 @@
 package com.douzone.nest.repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -266,6 +267,13 @@ public class KanbanBoardRepository {
 
 	public Long completedTask(Long projectNo) {
 		return sqlSession.selectOne("kanbanBoard.completedTask", projectNo);
+	}
+
+	public String ckboard(Long projectNo, Long authUserNo) {
+		HashMap<String, Long> input = new HashMap<String, Long>();
+		input.put("projectNo", projectNo);
+		input.put("authUserNo", authUserNo);
+		return sqlSession.selectOne("kanbanBoard.ckboard", input);
 	}
 
 }
