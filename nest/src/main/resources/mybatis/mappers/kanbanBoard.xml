@@ -398,4 +398,10 @@
 	  	]]>
   </select>
 
+	<select id="ckboard" parameterType="HashMap" resultType="String">
+	  	<![CDATA[
+  		     select user_no from userproject where user_no = #{authUserNo} and project_no = #{projectNo};
+	  	]]>
+	</select>
+
 </mapper>

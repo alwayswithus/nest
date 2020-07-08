@@ -354,4 +354,19 @@ public class KanbanBoardService {
 		return tasksCount;
 	}
 
+	/*
+	 * 작성자 : 허길행
+	 * 설명 : 칸반 보드 체크
+	 */
+	@SuppressWarnings("unchecked")
+	public JSONObject ckKanbanBoard(Long projectNo, Long authUserNo) {
+		JSONObject obj = new JSONObject();
+		
+		boolean ck = (null != kanbanBoardRepository.ckboard(projectNo, authUserNo));
+		
+		obj.put("ck", ck);
+		
+		return obj;
+	}
+
 }
