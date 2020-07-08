@@ -94,6 +94,12 @@ public class MainController {
 		return "index";
 	}
 	
+	@RequestMapping("/404")
+	public String notFound() {
+		System.out.println("???");
+		return "index";
+	}
+	
 	@Auth
 	@RequestMapping("/calendar")
 	public String calendar() {

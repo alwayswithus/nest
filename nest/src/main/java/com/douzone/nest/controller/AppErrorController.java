@@ -21,7 +21,7 @@ public class AppErrorController implements ErrorController {
             Integer statusCode = Integer.valueOf(status.toString());
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
             	System.out.println("!!!");
-                return "redirect:/errors";
+                return "redirect:/404";
             }
         }
         return "error";
