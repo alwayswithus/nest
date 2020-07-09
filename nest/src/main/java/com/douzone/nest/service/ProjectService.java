@@ -143,15 +143,15 @@ public class ProjectService {
 	 */
 	public UserVo userCk(UserVo userVo) {
 		UserVo cc = projectRepository.userCC(userVo);
+		System.out.println("CC= "+cc);
 		if(null!=cc) {
+			System.out.println("이미있음");
 			cc.setProjectNo(userVo.getProjectNo());
 			return cc;
 		}
 		else {
-			if(1==projectRepository.userInsert(userVo))
-				return userVo;
-			else
-				return null;
+			System.out.println("없다고");
+			return userVo;
 		}
 	}
 	
@@ -160,25 +160,39 @@ public class ProjectService {
 	 * 설명 : 멤버 초대
 	 */
 	public boolean userInvite(UserVo userVo) {
-		int userProjectJoin = projectRepository.userProjectJoin(userVo);
 		
-		/* 인증 이메일 발송 코드...*/
-		// 인증키 생성
-        String key = new TempKey().getKey(50, false);
-        // 데이터 베이스에 인증키 세팅
-        userVo.setUserKey(key);
-        userRepository.setEmailConfirm(userVo);
-        // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
-        try {
-        	MailController mailController = new MailController(new MailHandler(mailSender));
-        	mailController.userInviteMailSend(userVo.getUserEmail(), key);
-		} catch (MessagingException e) {
-			e.printStackTrace();
+		UserVo cc = projectRepository.userCC(userVo);
+		System.out.println("CC= "+cc);
+		if(null!=cc) {
+			System.out.println("이미있음");
+			cc.setProjectNo(userVo.getProjectNo());
+			int userProjectJoin = projectRepository.userProjectJoin(cc);
+			
+			return (userProjectJoin) == 1;
 		}
-        //이메일 발송 확인
-        System.out.println("프로젝트 멤버 초대 메일발송!");
-		
-		return (userProjectJoin) == 1;
+		else {
+			System.out.println("없다고");
+			int userInvite = projectRepository.userInsert(userVo);
+			int userProjectJoin = projectRepository.userProjectJoin(userVo);
+			
+			/* 인증 이메일 발송 코드...*/
+			// 인증키 생성
+	        String key = new TempKey().getKey(50, false);
+	        // 데이터 베이스에 인증키 세팅
+	        userVo.setUserKey(key);
+	        userRepository.setEmailConfirm(userVo);
+	        // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
+	        try {
+	        	MailController mailController = new MailController(new MailHandler(mailSender));
+	        	mailController.userInviteMailSend(userVo.getUserEmail(), key);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+	        //이메일 발송 확인
+	        System.out.println("프로젝트 멤버 초대 메일발송!");
+			
+			return (userInvite + userProjectJoin) == 2;
+		}
 	}
 	
 	/*

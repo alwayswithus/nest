@@ -168,10 +168,8 @@ public class ApiUserController {
 	
 	@PostMapping("api/user/invite")
 	public JsonResult userInvite(@RequestBody UserVo userVo) {
-		userVo = projectService.userCk(userVo);
-		boolean result = projectService.userInvite(userVo);
-		return JsonResult.success(result ? userVo : -1);
-//		boolean result = userService.userInvite(userVo);
-//		return JsonResult.success(result ? userVo : -1);
+		UserVo exUser = projectService.userCk(userVo);
+		boolean result = userService.userInvite(userVo);
+		return JsonResult.success(result ? userVo : exUser);
 	}
 }
