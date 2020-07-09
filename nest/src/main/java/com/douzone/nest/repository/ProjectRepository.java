@@ -146,4 +146,8 @@ public class ProjectRepository {
 	public int foreverdelete(ProjectVo projectVo) {
 		return sqlSession.delete("project.foreverdelete", projectVo);
 	}
+
+	public UserVo userCC(UserVo userVo) {
+		return sqlSession.selectOne("project.usercc", userVo);
+	}
 }

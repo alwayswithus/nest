@@ -75,6 +75,7 @@ public class ApiDashboardController {
 	
 	@PostMapping("api/settinguser/invite")
 	public JsonResult userInvite(@RequestBody UserVo userVo) {
+		userVo = projectService.userCk(userVo);
 		boolean result = projectService.userInvite(userVo);
 		return JsonResult.success(result ? userVo : -1);
 	}
