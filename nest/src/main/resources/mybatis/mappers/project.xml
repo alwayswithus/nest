@@ -208,4 +208,12 @@
 		]]>
 	</select>
 	
+	<select id="userproject" parameterType="uservo" resultType="uservo">
+		<![CDATA[
+			select user_no as userNo 
+			from userproject
+			where user_no = #{userNo} and project_no = #{projectNo}
+		]]>
+	</select>
+	
 </mapper>

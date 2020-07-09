@@ -143,14 +143,11 @@ public class ProjectService {
 	 */
 	public UserVo userCk(UserVo userVo) {
 		UserVo cc = projectRepository.userCC(userVo);
-		System.out.println("CC= "+cc);
 		if(null!=cc) {
-			System.out.println("이미있음");
 			cc.setProjectNo(userVo.getProjectNo());
 			return cc;
 		}
 		else {
-			System.out.println("없다고");
 			return userVo;
 		}
 	}
@@ -162,16 +159,19 @@ public class ProjectService {
 	public boolean userInvite(UserVo userVo) {
 		
 		UserVo cc = projectRepository.userCC(userVo);
-		System.out.println("CC= "+cc);
 		if(null!=cc) {
-			System.out.println("이미있음");
 			cc.setProjectNo(userVo.getProjectNo());
-			int userProjectJoin = projectRepository.userProjectJoin(cc);
 			
+			int userProjectJoin = 0;
+			if(projectRepository.userProject(cc) == null) {
+				userProjectJoin = projectRepository.userProjectJoin(cc);
+			}
+			else {
+				return true;
+			}
 			return (userProjectJoin) == 1;
 		}
 		else {
-			System.out.println("없다고");
 			int userInvite = projectRepository.userInsert(userVo);
 			int userProjectJoin = projectRepository.userProjectJoin(userVo);
 			
