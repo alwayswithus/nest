@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.douzone.nest.repository.ProjectRepository;
 import com.douzone.nest.repository.UserRepository;
 import com.douzone.nest.vo.UserVo;
 import com.douzone.util.MailController;
@@ -24,6 +25,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private ProjectRepository projectRepository;
 	
 	// DB에서 유저 가저오기
 	public UserVo getUser(UserVo vo) {
@@ -72,23 +76,30 @@ public class UserService {
 	 * 설명 : 멤버 초대
 	 */
 	public boolean userInvite(UserVo userVo) {
-		int userInvite = userRepository.userInvite(userVo);
-		
-		/* 인증 이메일 발송 코드...*/
-		// 인증키 생성
-        String key = new TempKey().getKey(50, false);
-        // 데이터 베이스에 인증키 세팅
-        userVo.setUserKey(key);
-        userRepository.setEmailConfirm(userVo);
-        // 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
-        try {
-        	MailController mailController = new MailController(new MailHandler(mailSender));
-        	mailController.userInviteMailSend(userVo.getUserEmail(), key);
-		} catch (MessagingException e) { e.printStackTrace(); }
-        //이메일 발송 확인
-        System.out.println("새 프로젝트 맴버 초대 메일발송!");
-        
-		return userInvite == 1;
+		UserVo cc = projectRepository.userCC(userVo);
+		System.out.println("CC= "+cc);
+		if(null!=cc) {
+			return false;
+		}
+		else {
+			int userInvite = userRepository.userInvite(userVo);
+
+			/* 인증 이메일 발송 코드...*/
+			// 인증키 생성
+			String key = new TempKey().getKey(50, false);
+			// 데이터 베이스에 인증키 세팅
+			userVo.setUserKey(key);
+			userRepository.setEmailConfirm(userVo);
+			// 메일 발송용 컨트롤러 생성 및 발송 메서드 실행...
+			try {
+				MailController mailController = new MailController(new MailHandler(mailSender));
+				mailController.userInviteMailSend(userVo.getUserEmail(), key);
+			} catch (MessagingException e) { e.printStackTrace(); }
+			//이메일 발송 확인
+			System.out.println("새 프로젝트 맴버 초대 메일발송!");
+
+			return userInvite == 1;
+		}
 	}
 
 	/*
