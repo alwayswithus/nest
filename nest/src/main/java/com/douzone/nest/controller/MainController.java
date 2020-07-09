@@ -90,13 +90,11 @@ public class MainController {
 	
 	@RequestMapping("/errors")
 	public String errors() {
-		System.out.println("???");
 		return "index";
 	}
 	
 	@RequestMapping("/404")
 	public String notFound() {
-		System.out.println("???");
 		return "index";
 	}
 	
