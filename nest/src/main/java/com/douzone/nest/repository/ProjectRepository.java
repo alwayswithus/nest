@@ -150,4 +150,8 @@ public class ProjectRepository {
 	public UserVo userCC(UserVo userVo) {
 		return sqlSession.selectOne("project.usercc", userVo);
 	}
+
+	public UserVo userProject(UserVo userVo) {
+		return sqlSession.selectOne("project.userproject", userVo);
+	}
 }
