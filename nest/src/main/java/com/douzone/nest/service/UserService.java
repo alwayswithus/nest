@@ -72,6 +72,7 @@ public class UserService {
 	 * 설명 : 멤버 초대
 	 */
 	public boolean userInvite(UserVo userVo) {
+		
 		int userInvite = userRepository.userInvite(userVo);
 		
 		/* 인증 이메일 발송 코드...*/

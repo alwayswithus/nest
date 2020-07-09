@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.douzone.nest.dto.JsonResult;
+import com.douzone.nest.service.ProjectService;
 import com.douzone.nest.service.UserService;
 import com.douzone.nest.vo.UserVo;
 import com.douzone.security.Auth;
@@ -21,6 +22,9 @@ import com.douzone.security.Auth;
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class ApiUserController {
+	
+	@Autowired
+	private ProjectService projectService;
 
 	@Autowired
 	private UserService userService;
@@ -164,7 +168,10 @@ public class ApiUserController {
 	
 	@PostMapping("api/user/invite")
 	public JsonResult userInvite(@RequestBody UserVo userVo) {
-		boolean result = userService.userInvite(userVo);
+		userVo = projectService.userCk(userVo);
+		boolean result = projectService.userInvite(userVo);
 		return JsonResult.success(result ? userVo : -1);
+//		boolean result = userService.userInvite(userVo);
+//		return JsonResult.success(result ? userVo : -1);
 	}
 }
