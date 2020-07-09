@@ -15,13 +15,19 @@
 	
 	<select id="getAllUser" parameterType="long" resultType="uservo">
 		<![CDATA[
-		select user_no as userNo, 
-		       user_name as userName, 
-		       user_email as userEmail, 
-		       user_photo as userPhoto,
-		       user_grade as userGrade
-		from user
-		where user_no != #{authUserNo}
+		select distinct user.user_no as userNo, 
+						user_name as userName, 
+                        user_email as userEmail,  
+                        user_photo as userPhoto,
+                        user_grade as userGrade
+        from (select project.project_no 
+				from project, userproject, user
+				where project.project_no = userproject.project_no 
+				and userproject.user_no = user.user_no
+				and user.user_no = #{authUserNo}) as b, userproject, user
+		where b.project_no = userproject.project_no
+        and userproject.user_no = user.user_no
+        and user.user_no != #{authUserNo}
 		]]>
 	</select>
 
