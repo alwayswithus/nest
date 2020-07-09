@@ -138,11 +138,28 @@ public class ProjectService {
 	}
 	
 	/*
+	 * 작성자 : 허길행
+	 * 설명 : 맴버 체크
+	 */
+	public UserVo userCk(UserVo userVo) {
+		UserVo cc = projectRepository.userCC(userVo);
+		if(null!=cc) {
+			cc.setProjectNo(userVo.getProjectNo());
+			return cc;
+		}
+		else {
+			if(1==projectRepository.userInsert(userVo))
+				return userVo;
+			else
+				return null;
+		}
+	}
+	
+	/*
 	 * 작성자 : 한해용
 	 * 설명 : 멤버 초대
 	 */
 	public boolean userInvite(UserVo userVo) {
-		int userInsert = projectRepository.userInsert(userVo);
 		int userProjectJoin = projectRepository.userProjectJoin(userVo);
 		
 		/* 인증 이메일 발송 코드...*/
@@ -161,7 +178,7 @@ public class ProjectService {
         //이메일 발송 확인
         System.out.println("프로젝트 멤버 초대 메일발송!");
 		
-		return (userInsert + userProjectJoin) == 2;
+		return (userProjectJoin) == 1;
 	}
 	
 	/*
