@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,8 @@ public class HistoryService {
 		
 		map.put("logDate", historyJson.get("historyDate"));
 		map.put("projectNo", historyJson.get("projectNo"));
-		
+		HashMap memberInfo = (HashMap) historyJson.get("actionName");
+	
 		switch((String) historyJson.get("historyType")) {
 			case "taskContentsUpdate":
 				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 으로 업무이름을 수정하셨습니다.");
@@ -72,10 +74,14 @@ public class HistoryService {
 				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 업무를 삭제하였습니다.");
 				break;
 			case "projectMemberInvite":
-				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 님을 초대하였습니다.");
+				if(memberInfo.get("memberName") == "") {
+					map.put("logContents", historyJson.get("senderName") +" 님이 " + memberInfo.get("memberEmail") + " 님을 초대하였습니다.");
+				} else {
+					map.put("logContents", historyJson.get("senderName") +" 님이 " + memberInfo.get("memberName") + " 님을 초대하였습니다.");
+				}
 				break;
 			case "projectMemberJoin":
-				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 님을 프로젝트에 참여시켰습니다.");
+				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 님을 프로젝트에 참여시켰습니다.");				
 				break;
 			case "projectDateUpdate":
 				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 프로젝트의 업무마감일을 수정하였습니다.");
