@@ -127,6 +127,7 @@ public class UserController {
 		userVo.setUserNo(no);
 		userVo.setUserName(name);
 		userVo.setUserPassword(password);
+		userVo.setUserPhoto("/nest/assets/images/unnamed.jpg");
 		
 		userService.signUserUpdate(userVo);
 		

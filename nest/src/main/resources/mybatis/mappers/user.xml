@@ -84,7 +84,8 @@
 		   set user_name = #{userName },
 		       user_password = #{userPassword },
 			   user_grade = "정회원",
-               user_key = null
+               user_key = null,
+               user_photo = #{userPhoto}
 		 where user_no = #{userNo };
 		]]>
 	</update>
