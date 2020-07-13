@@ -1,9 +1,11 @@
 package com.douzone.nest.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.javassist.expr.Instanceof;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +31,17 @@ public class HistoryService {
 	public boolean insertHistory(JSONObject historyJson) {
 		Map<String, Object> map = new HashMap<>();
 		
+		HashMap memberInfo = new HashMap<>();
+		
 		map.put("logDate", historyJson.get("historyDate"));
 		map.put("projectNo", historyJson.get("projectNo"));
-		HashMap memberInfo = (HashMap) historyJson.get("actionName");
-	
+		System.out.println(historyJson.get("actionName"));
+		if(historyJson.get("actionName") instanceof String == false) {
+			memberInfo = (HashMap) historyJson.get("actionName");			
+			System.err.println(memberInfo);
+		}
+		
+		
 		switch((String) historyJson.get("historyType")) {
 			case "taskContentsUpdate":
 				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 으로 업무이름을 수정하셨습니다.");
@@ -81,6 +90,7 @@ public class HistoryService {
 				}
 				break;
 			case "projectMemberJoin":
+				System.err.println(historyJson.get("actionName"));
 				map.put("logContents", historyJson.get("senderName") +" 님이 " + historyJson.get("actionName") + " 님을 프로젝트에 참여시켰습니다.");				
 				break;
 			case "projectDateUpdate":
@@ -90,6 +100,11 @@ public class HistoryService {
 		
 		int result = historyRepository.insertHistory(map);
 		return result == 1;
+	}
+
+	private char[] Instanceof(Object object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
