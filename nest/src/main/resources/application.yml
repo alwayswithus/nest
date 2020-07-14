@@ -55,7 +55,7 @@ spring:
 # datasource
    datasource:
       driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://192.168.1.223:3307/nest
+      url: jdbc:mysql://192.168.0.223:3307/nest
       username: nest
       password: nest
       initialSize: 10
