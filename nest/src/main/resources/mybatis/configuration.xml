@@ -6,7 +6,7 @@
 <configuration>
 	<typeAliases>
     	<typeAlias alias="uservo" type="com.douzone.nest.vo.UserVo" />
-		<typeAlias alias="projectvo" type="com.douzone.nest.vo.ProjectVo" />
+ 		<typeAlias alias="projectvo" type="com.douzone.nest.vo.ProjectVo" />
 		<typeAlias alias="tasklistvo" type="com.douzone.nest.vo.TaskListVo" />
 		<typeAlias alias="taskvo" type="com.douzone.nest.vo.TaskVo" />
 		<typeAlias alias="taskuservo" type="com.douzone.nest.vo.TaskUserVo" />
@@ -22,10 +22,10 @@
 		<typeAlias alias="historyvo" type="com.douzone.nest.vo.HistoryVo" />
 	</typeAliases>
 	<mappers>
-		<mapper resource="mybatis/mappers/project.xml" />
+<!-- 		<mapper resource="mybatis/mappers/project.xml" />
 		<mapper resource="mybatis/mappers/profile.xml" />
 		<mapper resource="mybatis/mappers/kanbanBoard.xml" />
-    	<mapper resource="mybatis/mappers/user.xml" />
+    		<mapper resource="mybatis/mappers/user.xml" />
 		<mapper resource="mybatis/mappers/taglist.xml" />
 		<mapper resource="mybatis/mappers/userproject.xml" />
 		<mapper resource="mybatis/mappers/file.xml" />
@@ -34,7 +34,9 @@
 		<mapper resource="mybatis/mappers/task.xml" />
 		<mapper resource="mybatis/mappers/notification.xml" />
 		<mapper resource="mybatis/mappers/tasklist.xml" />
-		<mapper resource="mybatis/mappers/history.xml" />
+		<mapper resource="mybatis/mappers/history.xml" /> -->
+		<!-- mybatis 하위 경로의 모든 xml -->
+		<mapper resource="classpath:mybatis/**/*.xml" />
 	</mappers>
 
 </configuration>
